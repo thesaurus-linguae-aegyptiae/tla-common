@@ -7,7 +7,8 @@
  */
 
 plugins {
-    // Apply the java-library plugin to add support for Java Library
+    id 'jacoco'
+    id 'checkstyle'
     id 'java-library'
     id 'maven-publish'
     id 'com.github.ben-manes.versions' version '0.27.0'
@@ -45,4 +46,24 @@ dependencies {
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion '8.29'
+    configFile file("config/checkstyle/checkstyle.xml")
+    ignoreFailures = true
+    maxErrors = 100
+}
+checkstyleMain {
+    configProperties += [
+        'checkstyle.header.file': file('config/checkstyle/java.header'),
+        'checkstyle.regexp.header.file': file('config/checkstyle/java_regexp.header')
+    ]
+}
+checkstyleTest {
+    configFile file("config/checkstyle/checkstyle-tests.xml")
+    configProperties += [
+        'checkstyle.header.file': file('config/checkstyle/java.header'),
+        'checkstyle.regexp.header.file': file('config/checkstyle/java_regexp.header')
+    ]
 }
