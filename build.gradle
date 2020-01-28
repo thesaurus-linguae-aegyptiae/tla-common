@@ -9,6 +9,7 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+    id 'maven-publish'
     id 'com.github.ben-manes.versions' version '0.27.0'
 }
 
@@ -16,6 +17,13 @@ group = 'org.bbaw.aaew.tla'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
 
 repositories {
     mavenCentral()
