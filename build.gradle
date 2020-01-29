@@ -46,6 +46,11 @@ dependencies {
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
+    finalizedBy 'jacocoTestReport'
+}
+
+check {
+    dependsOn 'jacocoTestCoverageVerification'
 }
 
 checkstyle {
@@ -66,4 +71,17 @@ checkstyleTest {
         'checkstyle.header.file': file('config/checkstyle/java.header'),
         'checkstyle.regexp.header.file': file('config/checkstyle/java_regexp.header')
     ]
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.1
+           }
+        }
+    }
 }
