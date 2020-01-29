@@ -33,15 +33,6 @@ public class Passport {
         this.leafNodeValue = value;
     }
 
-    public boolean isLeafNode() {
-        if (this.leafNodeValue != null) {
-            return true;
-        } else if (this.id != null && this.type != null && this.eclass != null && this.name != null) {
-            return true;
-        }
-        return false;
-    }
-
     /**
      * Determine whether this node has no contents at all.
      */

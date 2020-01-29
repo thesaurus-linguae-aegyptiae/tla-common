@@ -102,10 +102,23 @@ class PassportTest {
     @Test
     void deserializeFromString_reference_level0() throws Exception {
         Passport pp = mapper.readValue(
-            "{\"id\": \"ID\", \"eclass\": \"BTSThsEntry\"}",
+            "{\"id\": \"ID\", \"eclass\": \"BTSThsEntry\", \"type\": \"date\"}",
             Passport.class
         );
         assertTrue(pp != null, "deserialized thesaurus reference passport leaf should not be null");
+    }
+
+    @Test
+    void deserializeFromString_equals() throws Exception {
+        Passport p1 = mapper.readValue(
+            "{\"a\": [{\"b\": [\"c\"]}]}",
+            Passport.class
+        );
+        Passport p2 = new Passport();
+        Passport p2b = new Passport();
+        p2b.add("b", new Passport("c"));
+        p2.add("a", p2b);
+        assertEquals(p1, p2, "passport objects should be equivalents");
     }
 
     @Test
