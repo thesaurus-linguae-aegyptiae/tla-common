@@ -1,0 +1,82 @@
+{
+  "eclass": "BTSLemmaEntry",
+  "editors": {
+    "author": "Altägyptisches Wörterbuch",
+    "contributors": null,
+    "type": "user",
+    "updated": "2015-06-26 16:14:04"
+  },
+  "externalReferences": {
+    "aaew_wcn": [
+      {
+        "id": "10070"
+      }
+    ]
+  },
+  "id": "10070",
+  "name": "=n",
+  "passport": {
+    "bibliography": [
+      {
+        "bibliographical_text_field": [
+          "Wb 2, 194; EAG § 159; Schenkel, Einf., 105; ENG § 75; Junge, Näg. Gr., 53"
+        ]
+      }
+    ],
+    "lemma": [
+      {
+        "main_group": [
+          {
+            "lsort": [
+              "1Z"
+            ],
+            "wclassnum": [
+              "6020"
+            ],
+            "woart": [
+              "7100"
+            ],
+            "word_class": [
+              "WN"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "relations": {
+    "successor": [
+      {
+        "eclass": "BTSLemmaEntry",
+        "id": "d2866",
+        "name": "=n",
+        "type": "pronoun"
+      }
+    ]
+  },
+  "revisionState": "published",
+  "sort_string": "1L",
+  "subtype": "personal_pronoun",
+  "time_span": {
+    "begin": -2686,
+    "end": -30
+  },
+  "translations": {
+    "de": [
+      "[Suffix Pron. pl.1.c.]"
+    ],
+    "en": [
+      "we; us; our (suffix pron., 1st per. pl.)"
+    ]
+  },
+  "type": "pronoun",
+  "words": [
+    {
+      "glyphs": "N35:Z2",
+      "transcription": {
+        "mdc": "=n",
+        "unicode": "=n"
+      }
+    }
+  ]
+}
