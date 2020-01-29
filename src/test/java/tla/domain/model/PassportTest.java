@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 class PassportTest {
 
@@ -20,7 +21,7 @@ class PassportTest {
         mapper = new ObjectMapper();
     }
 
-    private Passport loadFromFile(String filename) throws Exception {
+    public Passport loadFromFile(String filename) throws Exception {
         return mapper.readValue(
             new File(
                 String.format("src/test/resources/sample/passport/%s", filename)
@@ -68,7 +69,7 @@ class PassportTest {
             "{\"key\": [{\"subkey\": []}]}", 
             Passport.class
         );
-        assertEquals(pp.getProperties().keySet().size(), 1, "passport size should be 1");
+        assertEquals(pp.getProperties().size(), 1, "passport size should be 1");
         assertTrue(pp.getProperties().containsKey("key"), "passport should contain key 'key'");
 
         List<Passport> children = pp.getProperties().get("key");
@@ -95,6 +96,11 @@ class PassportTest {
         Passport pp = mapper.readValue(
             "{\"key\": [\"val\"]}",
             Passport.class
+        );
+        assertAll("deserialized passport instance should contain non-null properties map and nothing else",
+            () -> assertTrue(pp.getProperties() != null, "properties map is not to be null"),
+            () -> assertEquals(null, pp.getLeafNodeValue(), "no leaf node value should be set"),
+            () -> assertEquals(null, pp.getId(), "no thesaurus reference should be set")
         );
         assertEquals("val", pp.getProperties().get("key").get(0).toString(), "first value should be 'val'");
     }
@@ -221,10 +227,14 @@ class PassportTest {
     @Test
     void extractProperty_singleValue_level2() throws Exception {
         Passport pp = mapper.readValue(
-            "{\"key1\": [{\"key2\": [\"val\"]}]}",
+            "{\"key1\": [{\"key2\": [\"val1\", \"val2\"]}]}",
             Passport.class
         );
-        // TODO
+        List<Passport> values = pp.extractProperty("key1", "key2");
+        assertAll("should be able to extract 2 values",
+            () -> assertEquals(2, values.size(), "extracted value list should contain 2 elements"),
+            () -> assertEquals("val1, val2", values.stream().map(Passport::toString).collect(Collectors.joining(", ")), "both values should have been extracted")
+        );
     }
 
     @Test

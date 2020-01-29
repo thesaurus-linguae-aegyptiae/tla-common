@@ -142,8 +142,8 @@ public class Passport {
 
     /**
      * Required for Jackson to be able to deserialize arbitrary passport fields.
-     * @param key
-     * @param children
+     * @param key field name
+     * @param children list of subnodes
      */
     @JsonAnySetter
     public void setProperty(String key, List<Passport> children) {
