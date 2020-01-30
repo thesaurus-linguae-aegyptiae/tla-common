@@ -1,18 +1,24 @@
 package tla.domain.model;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 class PassportTest {
+
+    static final String RESOURCE_PATH = "src/test/resources/sample/passport/";
 
     private ObjectMapper mapper;
 
@@ -24,9 +30,18 @@ class PassportTest {
     public Passport loadFromFile(String filename) throws Exception {
         return mapper.readValue(
             new File(
-                String.format("src/test/resources/sample/passport/%s", filename)
+                String.format(RESOURCE_PATH + "%s", filename)
             ),
             Passport.class
+        );
+    }
+
+    public String loadFromFileAsString(String filename) throws Exception {
+        return Files.readString(
+            new File(
+                String.format(RESOURCE_PATH + "%s", filename)
+            ).toPath(),
+            StandardCharsets.UTF_8
         );
     }
 
@@ -288,6 +303,45 @@ class PassportTest {
             Map.of("c", List.of("f")).toString(),
             leafs.get(0).toString(),
             "extracted value list should contain map object"
+        );
+    }
+
+
+    @Test
+    void serialize_singleValue() throws Exception {
+        Passport p = new Passport();
+        p.add("key", new Passport("val"));
+        String out = mapper.writeValueAsString(p);
+        assertEquals("{\"key\":[\"val\"]}", out, "serialized passport should only contain key and value");
+    }
+
+    @Test
+    void serialize_singleThsRef() throws Exception {
+        Passport p = new Passport();
+        Passport q = new Passport();
+        q.setId("THSID");
+        q.setEclass("BTSThsEntry");
+        q.setType("place");
+        p.add("key", q);
+        String out = mapper.writeValueAsString(p);
+        assertEquals(
+            "{\"key\":[{\"eclass\":\"BTSThsEntry\",\"id\":\"THSID\",\"type\":\"place\"}]}",
+            out,
+            "serialized passport should terminate in single thesaurus reference"
+        );
+    }
+
+    @Test
+    void serialize_complexFromFile() throws Exception {
+        mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
+        DefaultPrettyPrinter printer = DtoPrettyPrinter.create();
+        Passport p = loadFromFile("2BJVOCJBVVFEZHGYWNX4J5VYGI.json");
+        String in = loadFromFileAsString("2BJVOCJBVVFEZHGYWNX4J5VYGI.json");
+        String out = mapper.writer(printer).writeValueAsString(p);
+        assertAll("input and output should be the same",
+            () -> assertEquals(in.length(), out.length(), "input and output string length should be same"),
+            () -> assertEquals(in.charAt(in.length()-1), out.charAt(out.length()-1), "last character should match"),
+            () -> assertEquals(in, out, "serialized passport should be same as input source")
         );
     }
 

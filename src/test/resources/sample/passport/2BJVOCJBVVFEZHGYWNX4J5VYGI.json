@@ -1,0 +1,91 @@
+{
+  "bibliography": [
+    {
+      "bibliographical_text_field": [
+        "A. B. Lloyd, A. J. Spencer, A. el-Khouli, Saqqara Tombs III: The Mastaba of Neferseshemptah, London 2008 (ASE 41), 19-20, Taf. 19, 40-42\n[F, H, Ü, K, L]"
+      ]
+    }
+  ],
+  "date": [
+    {
+      "date": [
+        {
+          "date": [
+            {
+              "eclass": "BTSThsEntry",
+              "id": "JDHTPUAWMZBCZJDBBD2JP4PAD4",
+              "name": "Teti",
+              "type": "date"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "definition": [
+    {
+      "main_group": [
+        {
+          "definition": [
+            "PM III 515-516"
+          ],
+          "protocol": [
+            "aufgenommen April 2009"
+          ]
+        }
+      ]
+    }
+  ],
+  "find_spot": [
+    {
+      "find_spot": [
+        {
+          "place": [
+            {
+              "place": [
+                {
+                  "eclass": "BTSThsEntry",
+                  "id": "EWXT4Q4QYBAOHELCDQ5VPXNRXQ",
+                  "name": "Nekropolen",
+                  "type": "findSpot"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "object": [
+    {
+      "description_of_object": [
+        {
+          "component": [
+            {
+              "eclass": "BTSThsEntry",
+              "id": "DZAW646H4ZBQHEEZZHLE24VR4M",
+              "name": "Raum",
+              "type": "component"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "text": [
+    {
+      "textual_metadata": [
+        {
+          "script": [
+            {
+              "eclass": "BTSThsEntry",
+              "id": "TYXKD55ZDRB5NAWUTC7YWWJQRQ",
+              "name": "reguläre Hieroglyphenschrift",
+              "type": "script"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

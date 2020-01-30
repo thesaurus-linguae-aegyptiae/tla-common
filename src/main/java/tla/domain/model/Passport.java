@@ -10,9 +10,14 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import lombok.Data;
 
 @Data
+@JsonInclude(Include.NON_NULL)
 public class Passport {
 
     private String leafNodeValue = null;
@@ -23,6 +28,9 @@ public class Passport {
     private String type = null;
     private String eclass = null;
     private String name = null;
+
+    private ThsRef thesaurusValue;
+
 
     public Passport() {
         super();
@@ -164,6 +172,17 @@ public class Passport {
             ).toString();
         } else {
             return this.properties.toString();
+        }
+    }
+
+    @JsonValue
+    public Object get() {
+        if (this.leafNodeValue != null) {
+            return this.leafNodeValue;
+        } else if (this.id != null) {
+            return new ThsRef(this.id, this.eclass, this.type, this.name);
+        } else {
+            return this.properties;
         }
     }
 
