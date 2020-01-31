@@ -2,8 +2,10 @@ package tla.domain.model.dto;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,10 +54,15 @@ public class LemmaTest {
         LemmaDto l = loadFromFile("10070.json");
 
         assertTrue(l.getEditors() != null, "editor info should not be null");
-        LocalDate updated = l.getEditors().getUpdated().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate updated = l.getEditors().getUpdated().toInstant().atZone(ZoneId.of("UTC+01:00")).toLocalDate();
         String year = DateTimeFormatter.ofPattern("yyyy").format(updated);
         assertEquals("2015", year, "latest change should have occured in 2015");
         assertTrue(l.getEditors().getContributors() == null, "there should be no contributing editors");
+
+        EditorInfo e = EditorInfo.builder().author("Altägyptisches Wörterbuch")
+            .updated(Date.from(LocalDateTime.of(2015, 6, 26, 16, 14, 4).atZone(ZoneId.systemDefault()).toInstant()))
+            .type("user").build();
+        assertEquals(e, l.getEditors(), "deserialized should equal procedural build");
     }
 
     @Test
