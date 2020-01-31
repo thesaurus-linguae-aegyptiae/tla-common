@@ -12,6 +12,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Singular;
+import tla.domain.model.ExternalReference;
 import tla.domain.model.Language;
 
 /**
@@ -31,4 +32,6 @@ public class LemmaDto extends DocumentDto {
     @Singular
     private SortedMap<Language, List<String>> translations;
 
+    @Singular
+    private SortedMap<String, List<ExternalReference>> externalReferences;
 }

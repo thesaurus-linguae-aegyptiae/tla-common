@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
 
+import tla.domain.model.EditorInfo;
+import tla.domain.model.ExternalReference;
 import tla.domain.model.Language;
 import tla.domain.model.Passport;
 
@@ -70,21 +72,37 @@ public class LemmaTest {
 
     @Test
     void deserializeFromFile_testPassport() throws Exception {
-        LemmaDto l = mapper.readValue(
-            new File("src/test/resources/sample/lemma/10070.json"),
-            LemmaDto.class
-        );
+        LemmaDto l = loadFromFile("10070.json");
         assertTrue(l.getPassport() != null, "lemma passport should not be null");
         Passport p = l.getPassport();
         assertTrue(p.extractPaths().contains("bibliography.bibliographical_text_field"), "passport should contain path to bibl text field");
         assertTrue(p.extractPaths().contains("lemma.main_group.lsort"), "passport should contain path to legacy lsort value");
         Passport leaf = p.getProperties().get("bibliography").get(0).getProperties().get("bibliographical_text_field").get(0);
-        assertTrue(leaf != null, "passport bibl text field leaf node should not be null");
-        assertEquals("Wb 2, 194; EAG § 159; Schenkel, Einf., 105; ENG § 75; Junge, Näg. Gr., 53", leaf.getLeafNodeValue(), "bibl text value should be correct");
         List<Passport> values = p.extractProperty("bibliography.bibliographical_text_field");
-        assertTrue(values != null, "extracted bibl text field value list should not be null");
-        assertEquals(1, values.size(), "number of bibl text fields should be 1");
-        assertEquals("Wb 2, 194; EAG § 159; Schenkel, Einf., 105; ENG § 75; Junge, Näg. Gr., 53", values.get(0).getLeafNodeValue(), "bibl text value should be correct");
+        assertAll("should be able to extract bibliographical information",
+            () -> assertTrue(leaf != null, "passport bibl text field leaf node should not be null"),
+            () -> assertEquals("Wb 2, 194; EAG § 159; Schenkel, Einf., 105; ENG § 75; Junge, Näg. Gr., 53", leaf.getLeafNodeValue(), "bibl text value should be correct"),
+            () -> assertTrue(values != null, "extracted bibl text field value list should not be null"),
+            () -> assertEquals(1, values.size(), "number of bibl text fields should be 1"),
+            () -> assertEquals("Wb 2, 194; EAG § 159; Schenkel, Einf., 105; ENG § 75; Junge, Näg. Gr., 53", values.get(0).getLeafNodeValue(), "bibl text value should be correct")
+        );
     }
-    
+
+    @Test
+    void deserializeFromFile_testExternalReferences() throws Exception {
+        LemmaDto l = loadFromFile("10070.json");
+        assertAll("should contain external references",
+            () -> assertTrue(l.getExternalReferences() != null, "external references should not be null"),
+            () -> assertEquals(1, l.getExternalReferences().size(), "should contain exactly 1 references provider"),
+            () -> assertTrue(l.getExternalReferences().containsKey("aaew_wcn"), "should contain provider 'aaew_wcn'"),
+            () -> assertEquals(1, l.getExternalReferences().get("aaew_wcn").size(), "provider should provide exactly 1 reference")
+        );
+        ExternalReference e1 = l.getExternalReferences().get("aaew_wcn").get(0);
+        ExternalReference e2 = ExternalReference.builder().id("10070").build();
+        assertAll("external reference should be as expected",
+            () -> assertEquals("10070", e1.getId(), "ref ID should be 10070"),
+            () -> assertTrue(e1.getType() == null, "no type should be provided"),
+            () -> assertEquals(e2, e1, "deserialized reference should equal procedural build")
+        );
+    }
 }
