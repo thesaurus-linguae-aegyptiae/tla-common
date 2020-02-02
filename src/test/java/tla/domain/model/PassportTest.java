@@ -240,7 +240,7 @@ class PassportTest {
     }
 
     @Test
-    void extractProperty_singleValue_level2() throws Exception {
+    void extractProperty_twoValues_level2() throws Exception {
         Passport pp = mapper.readValue(
             "{\"key1\": [{\"key2\": [\"val1\", \"val2\"]}]}",
             Passport.class
@@ -248,7 +248,8 @@ class PassportTest {
         List<Passport> values = pp.extractProperty("key1", "key2");
         assertAll("should be able to extract 2 values",
             () -> assertEquals(2, values.size(), "extracted value list should contain 2 elements"),
-            () -> assertEquals("val1, val2", values.stream().map(Passport::toString).collect(Collectors.joining(", ")), "both values should have been extracted")
+            () -> assertEquals("val1, val2", values.stream().map(Passport::toString).collect(Collectors.joining(", ")), "both values should have been extracted"),
+            () -> assertEquals(values, pp.extractValues(), "extractValues() should return those those exact 2 values.")
         );
     }
 
@@ -286,9 +287,17 @@ class PassportTest {
             () -> {p.extractProperty("a.e.c");},
             "dead end in legal selector lookup should not throw exception"
         );
-        List<Passport> leafs = p.extractProperty("a.e.c");
-        assertEquals(1, leafs.size(), "number of extracted values should be 1");
-        assertEquals("f", leafs.get(0).toString(), "extracted value should be 'f'");
+        List<Passport> values = p.extractProperty("a.e.c");
+        assertAll("single value 'f' should be extracted at given path",
+            () -> assertEquals(1, values.size(), "number of extracted values should be 1"),
+            () -> assertEquals("f", values.get(0).toString(), "extracted value should be 'f'")
+        );
+        List<Passport> leafs = p.extractValues();
+        assertAll("2 leaf values should be extractable from passport in total",
+            () -> assertEquals(2, leafs.size(), "extractable leaf count should be 2"),
+            () -> assertTrue(List.of("d", "f").contains(leafs.get(0).get()), "value 'f' should be among extracted values"),
+            () -> assertTrue(List.of("d", "f").contains(leafs.get(1).get()), "value 'd' should be among extracted values")
+        );
     }
 
     @Test

@@ -149,6 +149,25 @@ public class Passport {
 
 
     /**
+     * Walks down tree and collects leaf node values.
+     */
+    public List<Passport> extractValues() {
+        List<Passport> values = new LinkedList<Passport>();
+        Object value = this.get();
+        if (value != null) {
+            return List.of(this);
+        } else {
+            for (Entry<String, List<Passport>> e : this.properties.entrySet()) {
+                for (Passport child : e.getValue()) {
+                    values.addAll(child.extractValues());
+                }
+            }
+        }
+        return values;
+    }
+
+
+    /**
      * Required for Jackson to be able to deserialize arbitrary passport fields.
      * @param key field name
      * @param children list of subnodes
@@ -159,8 +178,8 @@ public class Passport {
     }
 
 
-	@Override
-	public String toString() {
+    @Override
+    public String toString() {
         if (this.leafNodeValue != null) {
             return this.leafNodeValue;
         } else if (this.id != null) {
@@ -175,15 +194,21 @@ public class Passport {
         }
     }
 
-    @JsonValue
+
     public Object get() {
         if (this.leafNodeValue != null) {
             return this.leafNodeValue;
         } else if (this.id != null) {
             return new ThsRef(this.id, this.eclass, this.type, this.name);
-        } else {
-            return this.properties;
         }
+        return null;
+    }
+
+
+    @JsonValue
+    public Object getContents() {
+        Object value = this.get();
+        return (value != null) ? value : this.properties;
     }
 
 }
