@@ -7,10 +7,10 @@ import java.util.SortedMap;
 import com.fasterxml.jackson.annotation.JsonAlias;
 
 import lombok.AllArgsConstructor;
+import lombok.Singular;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Singular;
 import tla.domain.model.Language;
 
 /**

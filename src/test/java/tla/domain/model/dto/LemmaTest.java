@@ -114,4 +114,16 @@ public class LemmaTest {
             () -> assertEquals(e2, e1, "deserialized reference should equal procedural build")
         );
     }
+
+    @Test
+    void deserializeFromFile_testRelations() throws Exception {
+        LemmaDto l = loadFromFile("10070.json");
+        assertAll("test relations",
+            () -> assertTrue(l.getRelations() != null, "relations should not be null"),
+            () -> assertEquals(1, l.getRelations().size(), "expect exactly 1 relations type"),
+            () -> assertEquals("successor", l.getRelations().firstKey(), "relation type expected to be 'successor'"),
+            () -> assertEquals(1, l.getRelations().get("successor").size(), "exactly 1 relation expected"),
+            () -> assertEquals("BTSLemmaEntry", l.getRelations().get("successor").get(0).getEclass(), "relation points to other lemma")
+        );
+    }
 }

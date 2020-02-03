@@ -8,13 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonValue;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @JsonInclude(Include.NON_NULL)
@@ -29,7 +35,11 @@ public class Passport {
     private String eclass = null;
     private String name = null;
 
-    private ObjectReference thesaurusValue;
+    @Getter(value=AccessLevel.NONE)
+    @Setter(value=AccessLevel.NONE)
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    private ObjectReference thesaurusValue = null;
 
 
     public Passport() {
@@ -48,13 +58,7 @@ public class Passport {
         if (this.properties != null && this.properties.size() > 0) {
             return false;
         }
-        if (this.leafNodeValue != null) {
-            return false;
-        }
-        if (this.id != null || this.name != null || this.eclass != null || this.type != null) {
-            return false;
-        }
-        return true;
+        return this.get() == null;
     }
 
     /**
@@ -85,7 +89,7 @@ public class Passport {
      * gets provided, the method will try and split this string argument along the "<code>.</code>" delimiter
      * and use the result as the path segments list.
      */
-    public List<Passport> extractProperty(String ... path) throws Exception {
+    public List<Passport> extractProperty(String... path) throws Exception {
         if (path.length == 1) {
             path = path[0].split("\\.");
         }
@@ -102,7 +106,7 @@ public class Passport {
                 }
                 return recursionResults;
             } else {
-                throw new Exception("path segment not in passport: "+segment);
+                throw new Exception("path segment not in passport: " + segment);
             }
         } else {
             recursionResults.add(this);
@@ -168,6 +172,20 @@ public class Passport {
 
 
     /**
+     * Extract object reference values, i.e. usually references to thesaurus entries.
+     * 
+     * @return list of all object references found in this passport
+     */
+    public List<ObjectReference> extractObjectReferences() {
+        List<ObjectReference> refs = this.extractValues().stream()
+            .filter(leaf -> leaf.get() instanceof ObjectReference)
+            .map(leaf -> (ObjectReference)leaf.get())
+            .collect(Collectors.toList());
+        return refs;
+    }
+
+
+    /**
      * Required for Jackson to be able to deserialize arbitrary passport fields.
      * @param key field name
      * @param children list of subnodes
@@ -199,7 +217,10 @@ public class Passport {
         if (this.leafNodeValue != null) {
             return this.leafNodeValue;
         } else if (this.id != null) {
-            return new ObjectReference(this.id, this.eclass, this.type, this.name);
+            if (this.thesaurusValue == null) {
+                this.thesaurusValue = new ObjectReference(this.id, this.eclass, this.type, this.name);
+            }
+            return this.thesaurusValue;
         }
         return null;
     }
@@ -212,4 +233,3 @@ public class Passport {
     }
 
 }
-

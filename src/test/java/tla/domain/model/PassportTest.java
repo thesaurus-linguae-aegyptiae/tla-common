@@ -263,6 +263,10 @@ class PassportTest {
         assertEquals(1, leafs.size(), "number of leaf nodes under selector should be 1");
         Passport leaf = leafs.get(0);
         assertEquals("FCJURX24JZGXZEKP3TW36U3ZFA", leaf.getId(), "ID value of only ref leaf under selector should be 'FCJURX24JZGXZEKP3TW36U3ZFA'");
+        assertAll("number of thesaurus references found amongst leafes should be 1",
+            () -> assertEquals(1, pp.extractObjectReferences().size(), "exactly 1 thesaurus references should be extractable from entire passport"),
+            () -> assertEquals(leaf.get(), pp.extractObjectReferences().get(0), "only thesaurus reference found should be the one under selector 'date.date.date'")
+        );
     }
 
     @Test
