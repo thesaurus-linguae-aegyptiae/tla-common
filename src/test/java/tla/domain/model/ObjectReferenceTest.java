@@ -5,15 +5,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ThsRefTest {
+public class ObjectReferenceTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
     @Test
     void deserialize_partial_id_eclass() throws Exception {
-        ThsRef ref = mapper.readValue(
+        ObjectReference ref = mapper.readValue(
             "{\"id\": \"ID\", \"eclass\": \"eclass\"}",
-            ThsRef.class
+            ObjectReference.class
         );
         assertAll("should deserialize ths ref with id value set",
             () -> assertTrue(ref != null, "result should not be null"),

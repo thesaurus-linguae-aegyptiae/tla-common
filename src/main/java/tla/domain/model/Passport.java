@@ -29,7 +29,7 @@ public class Passport {
     private String eclass = null;
     private String name = null;
 
-    private ThsRef thesaurusValue;
+    private ObjectReference thesaurusValue;
 
 
     public Passport() {
@@ -199,7 +199,7 @@ public class Passport {
         if (this.leafNodeValue != null) {
             return this.leafNodeValue;
         } else if (this.id != null) {
-            return new ThsRef(this.id, this.eclass, this.type, this.name);
+            return new ObjectReference(this.id, this.eclass, this.type, this.name);
         }
         return null;
     }

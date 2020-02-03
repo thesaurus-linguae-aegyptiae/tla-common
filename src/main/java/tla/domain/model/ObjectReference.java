@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder(alphabetic = true)
-public class ThsRef {
+public class ObjectReference {
 
     private String id;
     private String eclass;
@@ -20,7 +20,7 @@ public class ThsRef {
     private String name;
 
     @JsonCreator
-    public ThsRef(
+    public ObjectReference(
         @JsonProperty(value = "id", required = true) String id,
         @JsonProperty(value = "eclass", required = true) String eclass,
         @JsonProperty(value = "type", required = false) String type,
