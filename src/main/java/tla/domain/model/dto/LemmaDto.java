@@ -1,18 +1,16 @@
 package tla.domain.model.dto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.SortedMap;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.Singular;
-import tla.domain.model.ExternalReference;
 import tla.domain.model.Language;
 
 /**
@@ -20,9 +18,7 @@ import tla.domain.model.Language;
  */
 @Data
 @SuperBuilder
-@NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode(callSuper = true)
 public class LemmaDto extends DocumentDto {
 
@@ -32,6 +28,8 @@ public class LemmaDto extends DocumentDto {
     @Singular
     private SortedMap<Language, List<String>> translations;
 
-    @Singular
-    private SortedMap<String, List<ExternalReference>> externalReferences;
+    public LemmaDto() {
+        translations = Collections.emptySortedMap();
+    }
+
 }

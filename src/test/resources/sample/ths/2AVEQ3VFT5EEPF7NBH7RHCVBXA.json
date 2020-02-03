@@ -1,0 +1,147 @@
+{
+  "eclass": "BTSThsEntry",
+  "editors": {
+    "author": "Altägyptisches Wörterbuch",
+    "contributors": [
+      "L. Popko"
+    ],
+    "type": "user",
+    "updated": "2018-05-18 17:57:16"
+  },
+  "externalReferences": {
+    "aaew_1": [
+      {
+        "id": "9/116"
+      }
+    ],
+    "thot": [
+      {
+        "id": "http://thot.philo.ulg.ac.be/concept/thot-513"
+      }
+    ]
+  },
+  "id": "2AVEQ3VFT5EEPF7NBH7RHCVBXA",
+  "name": "27. Dynastie",
+  "passport": {
+    "synonyms": [
+      {
+        "synonym_group": [
+          {
+            "language": [
+              "en"
+            ],
+            "synonym": [
+              "27th Dynasty"
+            ]
+          },
+          {
+            "language": [
+              "fr"
+            ],
+            "synonym": [
+              "27ème dynastie"
+            ]
+          }
+        ]
+      }
+    ],
+    "thesaurus": [
+      {
+        "main_group": [
+          {
+            "old_id": [
+              "116"
+            ],
+            "old_thesaurus_number": [
+              "9"
+            ],
+            "termsort": [
+              "27. dyn."
+            ]
+          }
+        ]
+      }
+    ],
+    "thesaurus_date": [
+      {
+        "main_group": [
+          {
+            "beginning": [
+              "-526"
+            ],
+            "end": [
+              "-402"
+            ],
+            "reference": [
+              "Anfangsdatum nach Quack, J. F., Zum Datum der persischen Eroberung Ägyptens, in: JEgH 4, 2011, 228-246. Enddatum nach Schneider, Th., Lexikon der Pharaonen, 2. Auflage, München 1996, 124 und 500."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "relations": {
+    "contains": [
+      {
+        "eclass": "BTSThsEntry",
+        "id": "7MP3UDFCTNH7HPPCH3RRJGEUOI",
+        "name": "Kambyses Mestiure",
+        "type": "date"
+      },
+      {
+        "eclass": "BTSThsEntry",
+        "id": "AY5C3JQWXNAM5NIBQVZFPAU7OU",
+        "name": "Artaxerxes I.",
+        "type": "date"
+      },
+      {
+        "eclass": "BTSThsEntry",
+        "id": "CX7WTFO76NEIREYNBAZEMCKZJA",
+        "name": "Artaxerxes II.",
+        "type": "date"
+      },
+      {
+        "eclass": "BTSThsEntry",
+        "id": "DFOATHXUQJFSJLTVPASC3TQF7M",
+        "name": "Xerxes II.",
+        "type": "date"
+      },
+      {
+        "eclass": "BTSThsEntry",
+        "id": "DHKNUBJOYVE4DNGXMYMVUFJHTU",
+        "name": "Dareios II.",
+        "type": "date"
+      },
+      {
+        "eclass": "BTSThsEntry",
+        "id": "LG2ZONR34VEQROX4FJ7MTCXKLM",
+        "name": "Dareios I. Setutre",
+        "type": "date"
+      },
+      {
+        "eclass": "BTSThsEntry",
+        "id": "MJ3WULDBQVD3NJM4NFJQWMAYWI",
+        "name": "Xerxes I.",
+        "type": "date"
+      },
+      {
+        "eclass": "BTSThsEntry",
+        "id": "QCUPBNRZUFHWLACD5CIDPKFIW4",
+        "name": "Sogdianos",
+        "type": "date"
+      }
+    ],
+    "partOf": [
+      {
+        "eclass": "BTSThsEntry",
+        "id": "UGTUTKXZHBDYLG7YJZ5AGOJXQY",
+        "name": "Spätzeit",
+        "type": "date"
+      }
+    ]
+  },
+  "revisionState": "published",
+  "sortkey": null,
+  "subtype": null,
+  "type": "date"
+}

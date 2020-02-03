@@ -29,8 +29,10 @@ public class LemmaTest {
             .translation(Language.DE, List.of("value1"))
             .translation(Language.DE, List.of("value2"))
             .build();
-        assertEquals(1, l.getTranslations().size(), "exactly 1 translation language should be provided");
-        assertEquals(1, l.getTranslations().get(Language.DE).size(), "exactly 1 german translation should be accessible");
+        assertAll("translations should be built correctly",
+            () -> assertEquals(1, l.getTranslations().size(), "exactly 1 translation language should be provided"),
+            () -> assertEquals(1, l.getTranslations().get(Language.DE).size(), "exactly 1 german translation should be accessible")
+        );
     }
 
     private LemmaDto loadFromFile(String filename) throws Exception {
