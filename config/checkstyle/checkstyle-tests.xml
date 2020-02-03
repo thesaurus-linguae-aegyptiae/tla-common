@@ -162,7 +162,7 @@
   </module>
   <module name="LineLength">
     <property name="fileExtensions" value="java"/>
-    <property name="max" value="100"/>
+    <property name="max" value="200"/>
     <property name="ignorePattern" value="^ *\* *([^ ]+|\{@code .*|&lt;a href=&quot;[^&quot;]+&quot;&gt;)$"/>
   </module>
 
@@ -299,7 +299,6 @@
     <module name="EqualsHashCode"/>
     <module name="ExplicitInitialization"/>
     <module name="FallThrough"/>
-    <module name="FinalLocalVariable"/>
     <module name="HiddenField">
         <property name="ignoreConstructorParameter" value="true"/>
         <property name="ignoreSetter" value="true"/>
@@ -607,7 +606,9 @@
     <module name="MemberName">
       <property name="format" value="^(id)|([a-z][a-z0-9][a-zA-Z0-9]+)$"/>
     </module>
-    <module name="MethodName"/>
+    <module name="MethodName">
+      <property name="format" value="^[a-z][a-zA-Z0-9_]*$"/>
+    </module>
     <module name="MethodTypeParameterName"/>
     <module name="PackageName"/>
     <module name="ParameterName">
