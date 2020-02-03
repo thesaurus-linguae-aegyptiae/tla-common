@@ -21,6 +21,8 @@ sourceCompatibility = '11'
 publishing {
     publications {
         maven(MavenPublication) {
+            artifactId = 'tla-common'
+
             from components.java
         }
     }
