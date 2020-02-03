@@ -1,4 +1,4 @@
-package tla.domain.model.dto;
+package tla.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

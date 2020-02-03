@@ -1,4 +1,4 @@
-package tla.domain.model;
+package tla.domain.util;
 
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;

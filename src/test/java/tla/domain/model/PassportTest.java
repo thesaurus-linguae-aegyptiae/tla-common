@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import tla.domain.util.DtoPrettyPrinter;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
