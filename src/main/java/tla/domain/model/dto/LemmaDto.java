@@ -12,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import tla.domain.model.Language;
+import tla.domain.model.LemmaWord;
 
 /**
  * DTO Model for serial transfer of TLA lemma entry objects.
@@ -28,8 +29,12 @@ public class LemmaDto extends DocumentDto {
     @Singular
     private SortedMap<Language, List<String>> translations;
 
+    @Singular
+    private List<LemmaWord> words;
+
     public LemmaDto() {
-        translations = Collections.emptySortedMap();
+        this.translations = Collections.emptySortedMap();
+        this.words = Collections.emptyList();
     }
 
 }

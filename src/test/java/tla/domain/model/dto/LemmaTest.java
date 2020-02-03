@@ -15,7 +15,9 @@ import org.junit.jupiter.api.Test;
 import tla.domain.model.EditorInfo;
 import tla.domain.model.ExternalReference;
 import tla.domain.model.Language;
+import tla.domain.model.LemmaWord;
 import tla.domain.model.Passport;
+import tla.domain.model.Transcription;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -126,4 +128,18 @@ public class LemmaTest {
             () -> assertEquals("BTSLemmaEntry", l.getRelations().get("successor").get(0).getEclass(), "relation points to other lemma")
         );
     }
+
+    @Test
+    void deserializeFromFile_testWords() throws Exception {
+        LemmaDto l = loadFromFile("10070.json");
+        LemmaWord w = LemmaWord.builder().glyphs("N35:Z2")
+            .transcription(new Transcription("=n", "=n"))
+            .build();
+        assertAll("check lemma tokens",
+            () -> assertEquals(1, l.getWords().size(), "should contain exactly 1 word"),
+            () -> assertEquals(w, l.getWords().get(0), "should equal procedurally built word"),
+            () -> assertEquals("=n", l.getWords().get(0).getTranscription().getUnicode(), "unicode transcription should be '=n'")
+        );
+    }
+
 }
