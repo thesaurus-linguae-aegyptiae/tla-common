@@ -2,6 +2,7 @@ package tla.domain.dto;
 
 import java.io.File;
 import java.util.List;
+import java.util.TreeSet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -65,7 +66,7 @@ public class ThsEntryTest {
             ThsEntryDto.class
         );
         ThsEntryDto t2 = ThsEntryDto.builder().id("1")
-            .externalReference("thot", List.of(ExternalReference.builder().id("ID").type("TYPE").build()))
+            .externalReference("thot", new TreeSet<>(List.of(ExternalReference.builder().id("ID").type("TYPE").build())))
             .build();
         assertAll("deserialized thesaurus entry should be equal to procedurally built",
             () -> assertTrue(List.of(t1).contains(t2), "asserting equality"),

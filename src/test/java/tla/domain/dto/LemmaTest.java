@@ -108,12 +108,17 @@ public class LemmaTest {
             () -> assertTrue(l.getExternalReferences().containsKey("aaew_wcn"), "should contain provider 'aaew_wcn'"),
             () -> assertEquals(1, l.getExternalReferences().get("aaew_wcn").size(), "provider should provide exactly 1 reference")
         );
-        ExternalReference e1 = l.getExternalReferences().get("aaew_wcn").get(0);
+        ExternalReference e1 = l.getExternalReferences().get("aaew_wcn").first();
         ExternalReference e2 = ExternalReference.builder().id("10070").build();
         assertAll("external reference should be as expected",
             () -> assertEquals("10070", e1.getId(), "ref ID should be 10070"),
             () -> assertTrue(e1.getType() == null, "no type should be provided"),
             () -> assertEquals(e2, e1, "deserialized reference should equal procedural build")
+        );
+        l.getExternalReferences().get("aaew_wcn").add(e2);
+        assertAll("adding the same external reference again should make no difference",
+            () -> assertEquals(1, l.getExternalReferences().get("aaew_wcn").size(), "number of 'aaew_wcn' references expected to have stayed the same"),
+            () -> assertTrue(l.getExternalReferences().get("aaew_wcn").contains(e2), "reference object being among references nonetheless")
         );
     }
 
@@ -125,7 +130,7 @@ public class LemmaTest {
             () -> assertEquals(1, l.getRelations().size(), "expect exactly 1 relations type"),
             () -> assertEquals("successor", l.getRelations().firstKey(), "relation type expected to be 'successor'"),
             () -> assertEquals(1, l.getRelations().get("successor").size(), "exactly 1 relation expected"),
-            () -> assertEquals("BTSLemmaEntry", l.getRelations().get("successor").get(0).getEclass(), "relation points to other lemma")
+            () -> assertEquals("BTSLemmaEntry", l.getRelations().get("successor").first().getEclass(), "relation points to other lemma")
         );
     }
 

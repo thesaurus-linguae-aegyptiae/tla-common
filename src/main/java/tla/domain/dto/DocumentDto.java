@@ -1,8 +1,8 @@
 package tla.domain.dto;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.SortedMap;
+import java.util.SortedSet;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -36,10 +36,10 @@ public class DocumentDto {
     private Passport passport;
 
     @Singular
-    private SortedMap<String, List<ExternalReference>> externalReferences;
+    private SortedMap<String, SortedSet<ExternalReference>> externalReferences;
 
     @Singular
-    private SortedMap<String, List<ObjectReference>> relations;
+    private SortedMap<String, SortedSet<ObjectReference>> relations;
 
     /**
      * This no arguments constructor is required so that instances deserialized by jackson

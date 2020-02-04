@@ -7,14 +7,19 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 
 @Data
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder(alphabetic = true)
-public class ObjectReference {
+public class ObjectReference implements Comparable<ObjectReference> {
 
+    @NonNull
     private String id;
+    @NonNull
     private String eclass;
     private String type;
     private String name;
@@ -41,5 +46,13 @@ public class ObjectReference {
             "eclass", eclass
         ).toString();
     }
-    
+
+    @Override
+    public int compareTo(ObjectReference arg0) {
+        if (this.getEclass().equals(arg0.getEclass())) {
+            return this.getId().compareTo(arg0.getId());
+        }
+        return this.getEclass().compareTo(arg0.getEclass());
+    }
+
 }
