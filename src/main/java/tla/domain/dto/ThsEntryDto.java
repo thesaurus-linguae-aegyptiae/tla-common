@@ -21,4 +21,8 @@ public class ThsEntryDto extends DocumentDto {
     @JsonAlias("sortkey")
     private String sortKey;
 
+    public String getEclass() {
+        return "BTSThsEntry";
+    }
+
 }

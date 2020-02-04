@@ -37,4 +37,8 @@ public class LemmaDto extends DocumentDto {
         this.words = Collections.emptyList();
     }
 
+    public String getEclass() {
+        return "BTSLemmaEntry";
+    }
+
 }

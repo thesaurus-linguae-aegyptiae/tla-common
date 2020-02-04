@@ -4,8 +4,11 @@ import java.util.Collections;
 import java.util.SortedMap;
 import java.util.SortedSet;
 
+import javax.naming.InvalidNameException;
+
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +29,6 @@ import tla.domain.model.Passport;
 public abstract class DocumentDto {
 
     private String id;
-    private String eclass;
     private String name;
     private String type;
     private String subtype;
@@ -51,6 +53,21 @@ public abstract class DocumentDto {
     public DocumentDto() {
         this.externalReferences = Collections.emptySortedMap();
         this.relations = Collections.emptySortedMap();
+    }
+
+    @JsonInclude
+    public abstract String getEclass();
+
+    public void setEclass(String eclass) throws Exception {
+        if (!eclass.equals(getEclass())) {
+            throw new InvalidNameException(
+                String.format(
+                    "wrong eClass. Expected %s, got %s!",
+                    getEclass(),
+                    eclass
+                )
+            );
+        }
     }
 
 }

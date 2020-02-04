@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DocumentTest {
@@ -27,5 +28,14 @@ public class DocumentTest {
         );
     }
 
-    
+    @Test
+    void instantiateWrongEclass() {
+        assertThrows(
+            JsonMappingException.class,
+            () -> {mapper.readValue(
+                "{\"id\":\"1\",\"eclass\":\"BTSLemmaEntry\"}",
+                ThsEntryDto.class
+            );}
+        );
+    }
 }

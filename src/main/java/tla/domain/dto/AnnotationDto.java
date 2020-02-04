@@ -13,4 +13,8 @@ public class AnnotationDto extends DocumentDto {
 
     private String corpus;
 
+    public String getEclass() {
+        return "BTSAnnotation";
+    }
+
 }

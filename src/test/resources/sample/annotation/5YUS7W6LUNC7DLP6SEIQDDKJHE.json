@@ -1,6 +1,6 @@
 {
   "corpus": "leipzig_wlist",
-  "eclass": "http://btsCorpusModel/1.0#//BTSAnnotation",
+  "eclass": "BTSAnnotation",
   "editors": {
     "author": "Strukturen und Transformationen des Wortschatzes der ägyptischen Sprache",
     "contributors": null,
