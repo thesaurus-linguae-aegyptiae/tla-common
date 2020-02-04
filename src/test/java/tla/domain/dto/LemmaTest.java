@@ -8,16 +8,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import org.junit.jupiter.api.Test;
 
+import tla.domain.Util;
 import tla.domain.model.EditorInfo;
 import tla.domain.model.ExternalReference;
 import tla.domain.model.Language;
 import tla.domain.model.LemmaWord;
 import tla.domain.model.Passport;
 import tla.domain.model.Transcription;
+import tla.domain.util.DtoPrettyPrinter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -147,4 +151,20 @@ public class LemmaTest {
         );
     }
 
+    @Test
+    void serialize_complexFromFile() throws Exception {
+        mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
+        DefaultPrettyPrinter printer = DtoPrettyPrinter.create();
+        LemmaDto p = loadFromFile("10070.json");
+        String in = Util.loadFromFileAsString("lemma", "10070.json");
+        String out = mapper.writer(printer).writeValueAsString(p);
+        assertAll("input and output should differ in specific details",
+            () -> assertTrue(in.contains("revisionState"), "input contains revisionState field"),
+            () -> assertTrue(!out.contains("revisionState"), "output does not contain revisionState field"),
+            () -> assertTrue(out.contains("reviewState"), "output contains reviewState field"),
+            () -> assertTrue(in.contains("contributors"), "input contains contributors field"),
+            () -> assertTrue(!out.contains("contributors"), "output does not contain contributors field"),
+            () -> assertTrue(out.contains("2015-06-26\"\n"), "output contains shortened time value")
+        );
+    }
 }

@@ -7,13 +7,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import tla.domain.Util;
 import tla.domain.util.DtoPrettyPrinter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -36,15 +35,6 @@ class PassportTest {
                 String.format(RESOURCE_PATH + "%s", filename)
             ),
             Passport.class
-        );
-    }
-
-    public String loadFromFileAsString(String filename) throws Exception {
-        return Files.readString(
-            new File(
-                String.format(RESOURCE_PATH + "%s", filename)
-            ).toPath(),
-            StandardCharsets.UTF_8
         );
     }
 
@@ -352,7 +342,7 @@ class PassportTest {
         mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
         DefaultPrettyPrinter printer = DtoPrettyPrinter.create();
         Passport p = loadFromFile("2BJVOCJBVVFEZHGYWNX4J5VYGI.json");
-        String in = loadFromFileAsString("2BJVOCJBVVFEZHGYWNX4J5VYGI.json");
+        String in = Util.loadFromFileAsString("passport", "2BJVOCJBVVFEZHGYWNX4J5VYGI.json");
         String out = mapper.writer(printer).writeValueAsString(p);
         assertAll("input and output should be the same",
             () -> assertEquals(in.length(), out.length(), "input and output string length should be same"),
