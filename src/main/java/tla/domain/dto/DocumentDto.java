@@ -16,11 +16,14 @@ import tla.domain.model.ExternalReference;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.Passport;
 
+/**
+ * TLA base class
+ */
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DocumentDto {
+public abstract class DocumentDto {
 
     private String id;
     private String eclass;
