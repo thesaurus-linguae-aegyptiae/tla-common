@@ -12,6 +12,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'com.github.ben-manes.versions' version '0.27.0'
+    id 'com.github.dawnwords.jacoco.badge' version '0.2.0'
 }
 
 group = 'org.bbaw.aaew.tla'
@@ -49,6 +50,14 @@ test {
     // Use junit platform for unit tests
     useJUnitPlatform()
     finalizedBy 'jacocoTestReport'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+    finalizedBy 'generateJacocoBadge'
 }
 
 check {
