@@ -23,6 +23,10 @@ publishing {
     publications {
         maven(MavenPublication) {
             artifactId = 'tla-common'
+            pom {
+                name = 'TLA Commons'
+                description = 'DTO model and utility functions for the Thesaurus Linguae Aegyptiae web publication components'
+            }
 
             from components.java
         }
@@ -34,15 +38,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.10'
-    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
     api 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
 
-    // Use JUnit Jupiter API for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-
-    // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
 }
 
