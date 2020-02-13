@@ -22,6 +22,7 @@ sourceCompatibility = '11'
 publishing {
     publications {
         maven(MavenPublication) {
+            groupId = 'com.github.jkatzwinkel'
             artifactId = 'tla-common'
             pom {
                 name = 'TLA Commons'
