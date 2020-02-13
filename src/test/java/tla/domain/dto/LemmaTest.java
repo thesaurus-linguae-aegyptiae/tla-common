@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -32,8 +33,8 @@ public class LemmaTest {
     @Test
     void builder() {
         LemmaDto l = LemmaDto.builder()
-            .translation(Language.DE, List.of("value1"))
-            .translation(Language.DE, List.of("value2"))
+            .translation(Language.DE, Arrays.asList("value1"))
+            .translation(Language.DE, Arrays.asList("value2"))
             .build();
         assertAll("translations should be built correctly",
             () -> assertEquals(1, l.getTranslations().size(), "exactly 1 translation language should be provided"),

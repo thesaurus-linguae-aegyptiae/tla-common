@@ -1,6 +1,8 @@
 package tla.domain.model;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -9,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,8 +29,10 @@ import lombok.Setter;
 @JsonInclude(Include.NON_NULL)
 public class Passport {
 
+    @JsonIgnore
     private String leafNodeValue = null;
 
+    @JsonIgnore
     private Map<String, List<Passport>> properties = null;
 
     private String id = null;
@@ -76,7 +81,7 @@ public class Passport {
         } else {
             this.properties.put(
                 key, 
-                new LinkedList<>(List.of(child))
+                new LinkedList<>(Arrays.asList(child))
             );
         }
     }
@@ -159,7 +164,7 @@ public class Passport {
         List<Passport> values = new LinkedList<Passport>();
         Object value = this.get();
         if (value != null) {
-            return List.of(this);
+            return Arrays.asList(this);
         } else {
             for (Entry<String, List<Passport>> e : this.properties.entrySet()) {
                 for (Passport child : e.getValue()) {
@@ -201,11 +206,18 @@ public class Passport {
         if (this.leafNodeValue != null) {
             return this.leafNodeValue;
         } else if (this.id != null) {
-            return Map.of(
-                "id", this.id,
-                "eclass", this.eclass,
-                "type", this.type,
-                "name", this.name
+            return Collections.unmodifiableMap(
+                Stream.of(
+                    new SimpleEntry<>("id", id),
+                    new SimpleEntry<>("name", name),
+                    new SimpleEntry<>("type", type),
+                    new SimpleEntry<>("eclass", eclass)
+                ).collect(
+                    Collectors.toMap(
+                        (e) -> e.getKey(),
+                        (e) -> e.getValue()
+                    )
+                )
             ).toString();
         } else {
             return this.properties.toString();
