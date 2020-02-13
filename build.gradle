@@ -15,14 +15,13 @@ plugins {
     id 'com.github.dawnwords.jacoco.badge' version '0.2.0'
 }
 
-group = 'org.bbaw.aaew.tla'
+group = 'com.github.jkatzwinkel'
 version = '0.0.2-SNAPSHOT'
 sourceCompatibility = '11'
 
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'com.github.jkatzwinkel'
             artifactId = 'tla-common'
             pom {
                 name = 'TLA Commons'
