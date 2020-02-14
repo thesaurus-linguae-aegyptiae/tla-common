@@ -13,12 +13,10 @@ import tla.domain.util.DtoPrettyPrinter;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class PassportTest {
 
@@ -294,8 +292,8 @@ class PassportTest {
         List<Passport> leafs = p.extractValues();
         assertAll("2 leaf values should be extractable from passport in total",
             () -> assertEquals(2, leafs.size(), "extractable leaf count should be 2"),
-            () -> assertTrue(Arrays.asList("d", "f").contains(leafs.get(0).get()), "value 'f' should be among extracted values"),
-            () -> assertTrue(Arrays.asList("d", "f").contains(leafs.get(1).get()), "value 'd' should be among extracted values")
+            () -> assertTrue(List.of("d", "f").contains(leafs.get(0).get()), "value 'f' should be among extracted values"),
+            () -> assertTrue(List.of("d", "f").contains(leafs.get(1).get()), "value 'd' should be among extracted values")
         );
     }
 
@@ -308,17 +306,7 @@ class PassportTest {
         List<Passport> leafs = p.extractProperty("a.e");
         assertEquals(1, leafs.size(), "number of selected nodes should be 1");
         assertEquals(
-            Collections.unmodifiableMap(
-                Stream.of(
-                    new SimpleEntry<>("c", Arrays.asList("f"))
-                )
-                .collect(
-                    Collectors.toMap(
-                        (e) -> e.getKey(),
-                        (e) -> e.getValue()
-                    )
-                )
-            ).toString(),
+            Map.of("c", List.of("f")).toString(),
             leafs.get(0).toString(),
             "extracted value list should contain map object"
         );

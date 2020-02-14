@@ -1,9 +1,6 @@
 package tla.domain.model;
 
-import java.util.Collections;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.AbstractMap.SimpleEntry;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -42,18 +39,11 @@ public class ObjectReference implements Comparable<ObjectReference> {
 
     @Override
     public String toString() {
-        return Collections.unmodifiableMap(
-            Stream.of(
-                new SimpleEntry<>("id", id),
-                new SimpleEntry<>("name", name),
-                new SimpleEntry<>("type", type),
-                new SimpleEntry<>("eclass", eclass)
-            ).collect(
-                Collectors.toMap(
-                    (e) -> e.getKey(),
-                    (e) -> e.getValue()
-                )
-            )
+        return Map.of(
+            "id", id,
+            "name", name,
+            "type", type,
+            "eclass", eclass
         ).toString();
     }
 
