@@ -25,8 +25,8 @@ import tla.domain.model.LemmaWord;
 @JsonPropertyOrder(alphabetic = true)
 public class LemmaDto extends DocumentDto {
 
-    @JsonAlias("sort_string")
-    private String sortString;
+    @JsonAlias({"sortString", "sort_string", "sort_key"})
+    private String sortKey;
 
     @Singular
     private SortedMap<Language, List<String>> translations;
