@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ import tla.domain.model.LemmaWord;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @JsonPropertyOrder(alphabetic = true)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class LemmaDto extends DocumentDto {
 
     @JsonAlias({"sortString", "sort_string", "sort_key"})

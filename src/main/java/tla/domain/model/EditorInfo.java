@@ -3,6 +3,7 @@ package tla.domain.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,6 +28,9 @@ import lombok.NoArgsConstructor;
 public class EditorInfo {
 
     public static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+    static {
+        dateFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+    }
 
     @EqualsAndHashCode.Include
     private String author;
@@ -37,7 +41,7 @@ public class EditorInfo {
     @EqualsAndHashCode.Include
     private List<String> contributors;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
     private Date updated;
 
     @EqualsAndHashCode.Include

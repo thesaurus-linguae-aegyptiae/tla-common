@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -149,6 +150,22 @@ public class LemmaTest {
             () -> assertEquals(w, l.getWords().get(0), "should equal procedurally built word"),
             () -> assertEquals("=n", l.getWords().get(0).getTranscription().getUnicode(), "unicode transcription should be '=n'")
         );
+    }
+
+    @Test
+    void serialize_emptyPropertiesShouldBeOmitted() throws Exception {
+        LemmaDto l = LemmaDto.builder()
+            .id("id")
+            .translation(Language.EN, Arrays.asList("meaning"))
+            .build();
+        String out = mapper.writeValueAsString(l);
+        assertAll("empty properties should be omitted in serialization",
+            () -> assertTrue(out.contains("\"en\""), "english translation should be included"),
+            () -> assertTrue(!out.contains("\"fr\""), "french translation should be omitted"),
+            () -> assertTrue(!out.contains("\"externalReferences\""), "externalReferences field should not be present"),
+            () -> assertTrue(!out.contains("\"words\""), "words field should not be present")
+        );
+
     }
 
     @Test
