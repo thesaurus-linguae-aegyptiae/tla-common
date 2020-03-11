@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import tla.domain.model.meta.BTSeClass;
 
 /**
  * DTO Model for serial transfer of TLA thesaurus entry objects.
@@ -15,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@BTSeClass("BTSThsEntry")
 @EqualsAndHashCode(callSuper = true)
 public class ThsEntryDto extends DocumentDto {
 

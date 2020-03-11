@@ -15,6 +15,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import tla.domain.model.Language;
 import tla.domain.model.LemmaWord;
+import tla.domain.model.meta.BTSeClass;
 
 /**
  * DTO Model for serial transfer of TLA lemma entry objects.
@@ -22,6 +23,7 @@ import tla.domain.model.LemmaWord;
 @Data
 @SuperBuilder
 @AllArgsConstructor
+@BTSeClass("BTSLemmaEntry")
 @EqualsAndHashCode(callSuper = true)
 @JsonPropertyOrder(alphabetic = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -39,10 +41,6 @@ public class LemmaDto extends DocumentDto {
     public LemmaDto() {
         this.translations = Collections.emptySortedMap();
         this.words = Collections.emptyList();
-    }
-
-    public String getEclass() {
-        return "BTSLemmaEntry";
     }
 
 }

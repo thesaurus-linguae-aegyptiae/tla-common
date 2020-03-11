@@ -28,7 +28,8 @@ public class AnnotationTest {
         assertAll("should be able to deserialize annotation",
             () -> assertTrue(a != null, "should not be null"),
             () -> assertEquals("leipzig_wlist", a.getCorpus(), "corpus value should be set"),
-            () -> assertEquals("annotation.lemma", a.getPassport().extractPaths().get(0), "lemma annotation field should exist in passport")
+            () -> assertEquals("annotation.lemma", a.getPassport().extractPaths().get(0), "lemma annotation field should exist in passport"),
+            () -> assertEquals("BTSAnnotation", a.getEclass(), "eclass must be `BTSAnnotation`")
         );
 
     }

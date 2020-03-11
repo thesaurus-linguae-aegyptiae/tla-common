@@ -1,5 +1,6 @@
 package tla.domain.dto;
 
+import java.lang.annotation.Annotation;
 import java.util.Collections;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -15,15 +16,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Singular;
 import lombok.experimental.SuperBuilder;
+import lombok.extern.slf4j.Slf4j;
+
 import tla.domain.model.EditorInfo;
 import tla.domain.model.ExternalReference;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.Passport;
+import tla.domain.model.meta.BTSeClass;
 
 /**
  * TLA base class
  */
 @Data
+@Slf4j
 @SuperBuilder
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -57,8 +62,22 @@ public abstract class DocumentDto {
         this.relations = Collections.emptySortedMap();
     }
 
+    /**
+     * Returns the object's <code>eClass</code> value specified via the {@link BTSeClass} annotation.
+     */
     @JsonInclude
-    public abstract String getEclass();
+    public String getEclass() {
+        for (Annotation annotation : this.getClass().getAnnotations()) {
+            if (annotation instanceof BTSeClass) {
+                return ((BTSeClass) annotation).value();
+            }
+        }
+        log.warn(
+            "eClass of {} instance not specified via @BTSeClass annotation. Returning class name",
+            this.getClass().getName()
+        );
+        return this.getClass().getName();
+    }
 
     public void setEclass(String eclass) throws Exception {
         if (!eclass.equals(getEclass())) {

@@ -54,8 +54,11 @@ public class LemmaTest {
     @Test
     void deserializeFromFile() throws Exception {
         LemmaDto l = loadFromFile("10070.json");
-        assertTrue(l != null, "deserialized lemma DTO should not be null");
-        assertTrue(l.getSortKey() != null, "lemma sort string should not be null");
+        assertAll("deserialization from file should return correct values",
+            () -> assertTrue(l != null, "deserialized lemma DTO should not be null"),
+            () -> assertTrue(l.getSortKey() != null, "lemma sort string should not be null"),
+            () -> assertEquals("BTSLemmaEntry", l.getEclass(), "eclass must be `BTSLemmaEntry")
+        );
     }
 
     @Test

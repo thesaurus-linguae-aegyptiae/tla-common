@@ -40,7 +40,8 @@ public class ThsEntryTest {
             () -> assertTrue(t.getId() != null, "id should not be null"),
             () -> assertTrue(t.getReviewState() != null, "review state should not be null"),
             () -> assertEquals(null, t.getSortKey(), "sort key should be null"),
-            () -> assertEquals(null, t.getSubtype(), "subtype should be null")
+            () -> assertEquals(null, t.getSubtype(), "subtype should be null"),
+            () -> assertEquals("BTSThsEntry", t.getEclass(), "eclass must be `BTSThsEntry`")
         );
         assertAll("external references should be deserialized correctly",
             () -> assertEquals(2, t.getExternalReferences().size(), "2 providers should be present"),
