@@ -37,8 +37,8 @@ public class Passport {
     private String eclass = null;
     private String name = null;
 
-    @Getter(value=AccessLevel.NONE)
-    @Setter(value=AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     @JsonIgnore
     @EqualsAndHashCode.Exclude
     private ObjectReference thesaurusValue = null;
