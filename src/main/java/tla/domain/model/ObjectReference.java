@@ -24,6 +24,7 @@ public class ObjectReference implements Comparable<ObjectReference> {
     private String type;
     private String name;
 
+
     @JsonCreator
     public ObjectReference(
         @JsonProperty(value = "id", required = true) String id,
@@ -37,6 +38,7 @@ public class ObjectReference implements Comparable<ObjectReference> {
         this.name = name;
     }
 
+
     @Override
     public String toString() {
         return Map.of(
@@ -46,6 +48,7 @@ public class ObjectReference implements Comparable<ObjectReference> {
             "eclass", eclass
         ).toString();
     }
+
 
     @Override
     public int compareTo(ObjectReference arg0) {

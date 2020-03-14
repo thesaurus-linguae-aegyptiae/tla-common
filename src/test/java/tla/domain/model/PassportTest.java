@@ -107,8 +107,8 @@ class PassportTest {
         );
         assertAll("deserialized passport instance should contain non-null properties map and nothing else",
             () -> assertTrue(pp.getProperties() != null, "properties map is not to be null"),
-            () -> assertEquals(null, pp.getLeafNodeValue(), "no leaf node value should be set"),
-            () -> assertEquals(null, pp.getId(), "no thesaurus reference should be set")
+            () -> assertEquals(null, pp.getLeafNodeValue(), "no leaf node value should be set")
+            //() -> assertEquals(null, pp.getId(), "no thesaurus reference should be set")
         );
         assertEquals("val", pp.getProperties().get("key").get(0).toString(), "first value should be 'val'");
     }
@@ -125,14 +125,21 @@ class PassportTest {
     @Test
     void deserializeFromString_equals() throws Exception {
         Passport p1 = mapper.readValue(
-            "{\"a\": [{\"b\": [\"c\"]}]}",
+            "{\"a\": [{\"b\": [\"c\"], \"d\": [{\"id\":\"1\",\"eclass\":\"c\",\"type\":\"t\",\"name\":\"n\"}]}]}",
             Passport.class
         );
         Passport p2 = new Passport();
         Passport p2b = new Passport();
         p2b.add("b", new Passport("c"));
+        p2b.add("d", Passport.of(
+            ObjectReference.builder().id("1").eclass("c").type("t").name("n").build()
+        ));
         p2.add("a", p2b);
-        assertEquals(p1, p2, "passport objects should be equivalents");
+        assertAll("two passports should be equal",
+            () -> assertEquals(p1, p2, "passport objects should be equivalents"),
+            () -> assertEquals(p1.hashCode(), p2.hashCode(), "hashcodes should match"),
+            () -> assertEquals(p1.toString(), p2.toString(), "toString should match")
+        );
     }
 
     @Test
@@ -255,10 +262,32 @@ class PassportTest {
         List<Passport> leafs = pp.extractProperty("date", "date", "date");
         assertEquals(1, leafs.size(), "number of leaf nodes under selector should be 1");
         Passport leaf = leafs.get(0);
-        assertEquals("FCJURX24JZGXZEKP3TW36U3ZFA", leaf.getId(), "ID value of only ref leaf under selector should be 'FCJURX24JZGXZEKP3TW36U3ZFA'");
+        assertEquals(
+            "FCJURX24JZGXZEKP3TW36U3ZFA",
+            ((ObjectReference)leaf.get()).getId(),
+            "ID value of only ref leaf under selector should be 'FCJURX24JZGXZEKP3TW36U3ZFA'"
+        );
         assertAll("number of thesaurus references found amongst leafes should be 1",
             () -> assertEquals(1, pp.extractObjectReferences().size(), "exactly 1 thesaurus references should be extractable from entire passport"),
             () -> assertEquals(leaf.get(), pp.extractObjectReferences().get(0), "only thesaurus reference found should be the one under selector 'date.date.date'")
+        );
+    }
+
+    @Test
+    void extractProperty_reference_ominous_key() throws Exception {
+        Passport pp = mapper.readValue(
+            "{\"type\":[{\"id\":\"1\",\"eclass\":\"c\",\"type\":\"t\",\"name\":\"n\"}]}",
+            Passport.class
+        );
+        assertAll("ominous key value should be deserialized",
+            () -> assertEquals(1, pp.size(), "node size should be 1"),
+            () -> assertTrue(pp.containsKey("type"), "key `type` expected")
+        );
+        List<Passport> leafs = pp.extractProperty("type");
+        assertAll("thesaurus reference leaf node expected",
+            () -> assertEquals(1, leafs.size(), "exactly 1 leaf node expected"),
+            () -> assertTrue(leafs.get(0).get() instanceof ObjectReference, "leaf is thesaurus ref"),
+            () -> assertEquals("1", ((ObjectReference) leafs.get(0).get()).getId(), "check ths ref ID")
         );
     }
 
@@ -328,10 +357,11 @@ class PassportTest {
         q.setId("THSID");
         q.setEclass("BTSThsEntry");
         q.setType("place");
+        q.setName("memphis");
         p.add("key", q);
         String out = mapper.writeValueAsString(p);
         assertEquals(
-            "{\"key\":[{\"eclass\":\"BTSThsEntry\",\"id\":\"THSID\",\"type\":\"place\"}]}",
+            "{\"key\":[{\"eclass\":\"BTSThsEntry\",\"id\":\"THSID\",\"name\":\"memphis\",\"type\":\"place\"}]}",
             out,
             "serialized passport should terminate in single thesaurus reference"
         );
