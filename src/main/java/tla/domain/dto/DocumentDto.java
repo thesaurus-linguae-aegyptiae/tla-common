@@ -1,11 +1,8 @@
 package tla.domain.dto;
 
-import java.lang.annotation.Annotation;
 import java.util.Collections;
 import java.util.SortedMap;
 import java.util.SortedSet;
-
-import javax.naming.InvalidNameException;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -14,26 +11,26 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Singular;
 import lombok.experimental.SuperBuilder;
-import lombok.extern.slf4j.Slf4j;
 
 import tla.domain.model.EditorInfo;
 import tla.domain.model.ExternalReference;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.Passport;
-import tla.domain.model.meta.BTSeClass;
+import tla.domain.model.meta.AbstractBTSBaseClass;
 
 /**
  * TLA base class
  */
 @Data
-@Slf4j
 @SuperBuilder
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
-public abstract class DocumentDto {
+public abstract class DocumentDto extends AbstractBTSBaseClass {
 
     private String id;
     private String name;
@@ -60,35 +57,6 @@ public abstract class DocumentDto {
     public DocumentDto() {
         this.externalReferences = Collections.emptySortedMap();
         this.relations = Collections.emptySortedMap();
-    }
-
-    /**
-     * Returns the object's <code>eClass</code> value specified via the {@link BTSeClass} annotation.
-     */
-    @JsonInclude
-    public String getEclass() {
-        for (Annotation annotation : this.getClass().getAnnotations()) {
-            if (annotation instanceof BTSeClass) {
-                return ((BTSeClass) annotation).value();
-            }
-        }
-        log.warn(
-            "eClass of {} instance not specified via @BTSeClass annotation. Returning class name",
-            this.getClass().getName()
-        );
-        return this.getClass().getName();
-    }
-
-    public void setEclass(String eclass) throws Exception {
-        if (!eclass.equals(getEclass())) {
-            throw new InvalidNameException(
-                String.format(
-                    "wrong eClass. Expected %s, got %s!",
-                    getEclass(),
-                    eclass
-                )
-            );
-        }
     }
 
 }

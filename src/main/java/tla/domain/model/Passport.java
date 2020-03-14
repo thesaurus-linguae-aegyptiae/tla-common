@@ -39,8 +39,8 @@ public class Passport {
     @JsonIgnore
     private Map<String, String> thsValueCache = null;
 
-    @Getter(value=AccessLevel.NONE)
-    @Setter(value=AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     @JsonIgnore
     @EqualsAndHashCode.Exclude
     private ObjectReference thesaurusValue = null;
