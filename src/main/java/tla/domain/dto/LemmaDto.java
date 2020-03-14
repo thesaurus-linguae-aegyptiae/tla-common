@@ -15,6 +15,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import tla.domain.model.Language;
 import tla.domain.model.LemmaWord;
+import tla.domain.model.extern.AttestedTimespan;
 import tla.domain.model.meta.BTSeClass;
 
 /**
@@ -38,9 +39,13 @@ public class LemmaDto extends DocumentDto {
     @Singular
     private List<LemmaWord> words;
 
+    @Singular
+    private List<AttestedTimespan> attestations;
+
     public LemmaDto() {
         this.translations = Collections.emptySortedMap();
         this.words = Collections.emptyList();
+        this.attestations = Collections.emptyList();
     }
 
 }
