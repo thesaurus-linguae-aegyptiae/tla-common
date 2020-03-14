@@ -1,8 +1,12 @@
 # Ignore Gradle project-specific cache directory
 .gradle
 .settings
+.gradletasknamecache
 
-# Ignore Gradle build output directory
+# ignore build directories
 build
-
 bin
+
+.gitattributes
+.project
+.vscode/
