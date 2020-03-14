@@ -1,0 +1,200 @@
+{
+  "corpus": "tlademotic",
+  "eclass": "BTSText",
+  "editors": {
+    "author": "G. Vittmann",
+    "contributors": [
+      "Altägyptisches Wörterbuch"
+    ],
+    "type": "user",
+    "updated": "2019-11-14 22:58:58"
+  },
+  "externalReferences": null,
+  "id": "A2HWO5CX6RCQ5IBSV2MHAAIYA4",
+  "name": "〈Berlin P 11824 (= Möller, Mumienschilder, Nr. 28)〉",
+  "passport": {
+    "bibliography": [
+      {
+        "bibliographical_text_field": [
+          "Möller, Mumienschilder, Berlin 1913, 9, Nr. 28; \nVleeming, Short Texts II, 2011, 349f., Nr. 719."
+        ]
+      }
+    ],
+    "date": [
+      {
+        "date": [
+          {
+            "comment": [
+              "(nach Vleeming)"
+            ],
+            "date": [
+              {
+                "eclass": "BTSThsEntry",
+                "id": "ZDX4UT6C7NGQZEUL55SAXFWDIQ",
+                "name": "1. Viertel 3. Jhdt. n.Chr.",
+                "type": "date"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "find_spot": [
+      {
+        "find_spot": [
+          {
+            "place": [
+              {
+                "comment": [
+                  "(Bompae)"
+                ],
+                "place": [
+                  {
+                    "eclass": "BTSThsEntry",
+                    "id": "C2Z63NXQFBBFNLB3RZEJJQTBVQ",
+                    "name": "Achmim",
+                    "type": "findSpot"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "object": [
+      {
+        "description_of_object": [
+          {
+            "comment": [
+              "Mumienschild"
+            ],
+            "type": [
+              {
+                "eclass": "BTSThsEntry",
+                "id": "ALBHSJGZ5JA6VMMRPTA6KVMUDI",
+                "name": "Mumienetikett",
+                "type": "objecttype"
+              }
+            ],
+            "undefined": [
+              {
+                "eclass": "BTSThsEntry",
+                "id": "3NHNBPVU3VF2RERSPPZ46ELQHE",
+                "name": "Holz",
+                "type": "material"
+              }
+            ]
+          }
+        ],
+        "technical_details": [
+          {
+            "material": [
+              {
+                "eclass": "BTSThsEntry",
+                "id": "3NHNBPVU3VF2RERSPPZ46ELQHE",
+                "name": "Holz",
+                "type": "material"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "present_location": [
+      {
+        "location": [
+          {
+            "inventory_number": [
+              "Berlin P 11824"
+            ],
+            "location": [
+              {
+                "eclass": "BTSThsEntry",
+                "id": "GOUD7BQ5DBCENBWBR4KFWDW5SI",
+                "name": "Ägyptisches Museum und Papyrussammlung",
+                "type": "location"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "text": [
+      {
+        "textual_metadata": [
+          {
+            "egytextname": [
+              "Objektaufschriften, Mumienschilder, Berlin, Berlin P 11824 (= Möller, Mumienschilder, Nr. 28)"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "paths": [
+    [
+      {
+        "eclass": "BTSTCObject",
+        "id": "6WFOSXHVQRGGNAG5FCM6QEXWR4",
+        "name": "〈Demotische Textdatenbank〉",
+        "type": "Caption"
+      },
+      {
+        "eclass": "BTSTCObject",
+        "id": "66MQS3OR2ZBZPDXLO3NH3VR5ZY",
+        "name": "Objektaufschriften",
+        "type": "Caption"
+      },
+      {
+        "eclass": "BTSTCObject",
+        "id": "2267VKNGSJG37OP2AE4DSXFZK4",
+        "name": "Mumienschilder",
+        "type": "Caption"
+      },
+      {
+        "eclass": "BTSTCObject",
+        "id": "YWPKRIBLIJB75HEFXWMDASCIPY",
+        "name": "Berlin",
+        "type": "Caption"
+      },
+      {
+        "eclass": "BTSTCObject",
+        "id": "OGMXYM35NZEMTF6RT3HDCPHG5E",
+        "name": "Berlin P 11824 (= Möller, Mumienschilder, Nr. 28)",
+        "type": "TCObject"
+      },
+      {
+        "eclass": "BTSText",
+        "id": "A2HWO5CX6RCQ5IBSV2MHAAIYA4",
+        "name": "〈Berlin P 11824 (= Möller, Mumienschilder, Nr. 28)〉",
+        "type": "Text"
+      }
+    ]
+  ],
+  "relations": {
+    "contains": [
+      {
+        "eclass": "BTSComment",
+        "id": "IBUBdWfrKJnF3UdViTuVTBjDrLM",
+        "name": null,
+        "type": null
+      }
+    ],
+    "partOf": [
+      {
+        "eclass": "BTSTCObject",
+        "id": "OGMXYM35NZEMTF6RT3HDCPHG5E",
+        "name": "Berlin P 11824 (= Möller, Mumienschilder, Nr. 28)",
+        "type": "TCObject"
+      }
+    ]
+  },
+  "revisionState": "published",
+  "sentences": [
+    "IBUBdwPpXNzleUQQnQWjzTNBKwo",
+    "IBUBd2OZkP0t7UtjohK1qQKiDhM"
+  ],
+  "subtype": null,
+  "type": "Text"
+}
