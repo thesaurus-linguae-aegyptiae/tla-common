@@ -120,7 +120,7 @@ public class Passport {
      * gets provided, the method will try and split this string argument along the "<code>.</code>" delimiter
      * and use the result as the path segments list.
      */
-    public List<Passport> extractProperty(String... path) throws Exception {
+    public List<Passport> extractProperty(String... path) {
         if (path.length == 1) {
             path = path[0].split("\\.");
         }
@@ -128,23 +128,16 @@ public class Passport {
         if (path.length > 0) {
             String segment = path[0];
             if (this.properties.containsKey(segment)) {
-                try {
-                    for (Passport child : this.properties.get(segment)) {
-                        recursionResults.addAll(
-                            child.extractProperty(
-                                Arrays.copyOfRange(path, 1, path.length)
-                            )
-                        );
-                    }
-                } catch (Exception e) {
-                    throw new Exception(
-                        String.format("Traversal error at path segment `%s`", segment),
-                        e
+                for (Passport child : this.properties.get(segment)) {
+                    recursionResults.addAll(
+                        child.extractProperty(
+                            Arrays.copyOfRange(path, 1, path.length)
+                        )
                     );
                 }
                 return recursionResults;
             } else {
-                throw new Exception("path segment not in passport: " + segment);
+                log.warn("path segment not in passport: {}", segment);
             }
         } else {
             recursionResults.add(this);

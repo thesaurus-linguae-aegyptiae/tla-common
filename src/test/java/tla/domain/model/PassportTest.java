@@ -297,10 +297,8 @@ class PassportTest {
             "{\"a\": [{\"b\": [{\"c\": [\"d\"]}]}]}",
             Passport.class
         );
-        assertThrows(
-            Exception.class,
-            () -> {p.extractProperty("a.b.f");}
-        );
+        List<Passport> nodes = p.extractProperty("a.b.f");
+        assertEquals(0, nodes.size(), "expect no results");
     }
 
     @Test
