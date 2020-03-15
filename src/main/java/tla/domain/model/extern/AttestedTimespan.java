@@ -33,7 +33,6 @@ public class AttestedTimespan {
 
     private List<AttestedTimespan> contains;
 
-
     /**
      * Return an instance's attestation stats unlesz those can be
      * calculated from its children.
