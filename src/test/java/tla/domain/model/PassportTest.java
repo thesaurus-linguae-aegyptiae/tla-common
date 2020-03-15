@@ -236,7 +236,7 @@ class PassportTest {
         Passport leaf = new Passport("val");
         pp.add("key", leaf);
         List<Passport> values = pp.extractProperty("key");
-        assertTrue(values.contains(leaf), "extracted leaf values for key 'key' should contain "+leaf);
+        assertTrue(values.contains(leaf), "extracted leaf values for key 'key' should contain " + leaf);
     }
 
     @Test
@@ -308,7 +308,7 @@ class PassportTest {
             Passport.class
         );
         assertDoesNotThrow(
-            () -> {p.extractProperty("a.e.c");},
+            () -> { p.extractProperty("a.e.c"); },
             "dead end in legal selector lookup should not throw exception"
         );
         List<Passport> values = p.extractProperty("a.e.c");
@@ -374,7 +374,7 @@ class PassportTest {
         String out = mapper.writer(printer).writeValueAsString(p);
         assertAll("input and output should be the same",
             () -> assertEquals(in.length(), out.length(), "input and output string length should be same"),
-            () -> assertEquals(in.charAt(in.length()-1), out.charAt(out.length()-1), "last character should match"),
+            () -> assertEquals(in.charAt(in.length() - 1), out.charAt(out.length() - 1), "last character should match"),
             () -> assertEquals(in, out, "serialized passport should be same as input source")
         );
     }
