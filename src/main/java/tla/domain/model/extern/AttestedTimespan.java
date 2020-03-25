@@ -52,6 +52,17 @@ public class AttestedTimespan {
     }
 
     /**
+     * Checks whether another instance's duration lies within the period covered by this
+     * instance.
+     *
+     * @param timespan
+     * @return
+     */
+    public boolean contains(AttestedTimespan timespan) {
+        return this.period.contains(timespan.period);
+    }
+
+    /**
      * Container for document counts.
      */
     @Getter
@@ -59,11 +70,11 @@ public class AttestedTimespan {
     @EqualsAndHashCode
     @AllArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    static class AttestationStats {
+    public static class AttestationStats {
 
-        private int texts;
-        private int sentences;
-        private int objects;
+        private long texts;
+        private long sentences;
+        private long objects;
 
         /**
          * Create an instance with all counts set to zero.
@@ -93,7 +104,7 @@ public class AttestedTimespan {
     @Getter
     @Builder
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    static class Period implements Comparable<Period> {
+    public static class Period implements Comparable<Period> {
 
         private int begin;
         private int end;
@@ -104,6 +115,13 @@ public class AttestedTimespan {
         @Override
         public int compareTo(Period arg0) {
             return this.begin - arg0.begin;
+        }
+
+        /**
+         * Returns true if another period lies within this one.
+         */
+        public boolean contains(Period period) {
+            return (period.begin >= this.begin) && (period.end <= this.end);
         }
     }
 
