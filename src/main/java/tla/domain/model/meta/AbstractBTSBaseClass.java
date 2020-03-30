@@ -29,17 +29,14 @@ public abstract class AbstractBTSBaseClass {
      * Returns the object's <code>eClass</code> value specified via the {@link BTSeClass} annotation.
      */
     public String getEclass() {
-        for (Annotation annotation : this.getClass().getAnnotations()) {
-            if (annotation instanceof BTSeClass) {
-                return ((BTSeClass) annotation).value();
-            }
+        String eclass = getTypesEclass(this.getClass());
+        if (eclass != null) {
+            return eclass;
+        } else {
+            return this.getClass().getName();
         }
-        log.warn(
-            "eClass of {} instance not specified via @BTSeClass annotation. Returning class name",
-            this.getClass().getName()
-        );
-        return this.getClass().getName();
     }
+
 
     /**
      * Throws an exception if the value passed doesn't match the one specified via {@link BTSeClass} annotation.
@@ -54,6 +51,22 @@ public abstract class AbstractBTSBaseClass {
                 )
             );
         }
+    }
+
+    /**
+     * extract a model class's <code>eClass</code> from its {@link @BTSeClass} annotation.
+     */
+    public static String getTypesEclass(Class<? extends AbstractBTSBaseClass> modelClass) {
+        for (Annotation annotation : modelClass.getAnnotations()) {
+            if (annotation instanceof BTSeClass) {
+                return ((BTSeClass) annotation).value();
+            }
+        }
+        log.warn(
+            "eClass of {} instance not specified via @BTSeClass annotation. Returning class name",
+            modelClass.getName()
+        );
+        return null;
     }
 
 }
