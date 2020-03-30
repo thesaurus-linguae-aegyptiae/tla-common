@@ -72,6 +72,7 @@ public class AttestedTimespan {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class AttestationStats {
 
+        private long count;
         private long texts;
         private long sentences;
         private long objects;
@@ -80,6 +81,7 @@ public class AttestedTimespan {
          * Create an instance with all counts set to zero.
          */
         public AttestationStats() {
+            this.count = 0;
             this.texts = 0;
             this.sentences = 0;
             this.objects = 0;
@@ -89,6 +91,7 @@ public class AttestedTimespan {
          * Add another instance's stats to own.
          */
         public AttestationStats add(AttestationStats summand) {
+            this.count += summand.count;
             this.texts += summand.texts;
             this.sentences += summand.sentences;
             this.objects += summand.objects;
