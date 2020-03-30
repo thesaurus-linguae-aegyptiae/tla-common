@@ -3,16 +3,19 @@ package tla.domain.dto.extern;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import tla.domain.dto.DocumentDto;
 
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SingleDocumentWrapper {
-    
+
     private DocumentDto doc;
 
     private Map<String, Map<String, DocumentDto>> related;

@@ -63,7 +63,7 @@ public class ThsEntryTest {
     @Test
     void equality() throws Exception {
         ThsEntryDto t1 = mapper.readValue(
-            "{\"id\":\"1\",\"externalReferences\":{\"thot\":[{\"id\":\"ID\",\"type\":\"TYPE\"}]}}",
+            "{\"eclass\":\"BTSThsEntry\",\"id\":\"1\",\"externalReferences\":{\"thot\":[{\"id\":\"ID\",\"type\":\"TYPE\"}]}}",
             ThsEntryDto.class
         );
         ThsEntryDto t2 = ThsEntryDto.builder().id("1")

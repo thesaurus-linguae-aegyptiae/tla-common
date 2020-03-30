@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DocumentTest {
@@ -20,7 +19,7 @@ public class DocumentTest {
             () -> assertEquals(d1.getId(), d2.getId(), "equal ID however")
         );
         DocumentDto d = mapper.readValue(
-            "{\"id\":\"1\"}",
+            "{\"id\":\"1\",\"eclass\":\"BTSLemmaEntry\"}",
             LemmaDto.class
         );
         assertAll("deserialized document should be equal to procedural build",
@@ -30,12 +29,14 @@ public class DocumentTest {
 
     @Test
     void instantiateWrongEclass() {
-        assertThrows(
-            JsonMappingException.class,
-            () -> {mapper.readValue(
-                "{\"id\":\"1\",\"eclass\":\"BTSLemmaEntry\"}",
-                ThsEntryDto.class
-            );}
+        assertAll("attempt to instantiate ths entry DTO from object with eclass BTSLemmaEntry should throw illegalargumentexception",
+            () -> assertThrows(
+                java.lang.IllegalArgumentException.class,
+                () -> {mapper.readValue(
+                    "{\"id\":\"1\",\"eclass\":\"BTSLemmaEntry\"}",
+                    ThsEntryDto.class
+                );}
+            )
         );
     }
 }

@@ -7,7 +7,10 @@ import java.util.SortedSet;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +33,20 @@ import tla.domain.model.meta.AbstractBTSBaseClass;
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "eclass"
+)
+@JsonSubTypes(
+    {
+        @Type(value = LemmaDto.class, name = "BTSLemmaEntry"),
+        @Type(value = AnnotationDto.class, name = "BTSAnnotation"),
+        @Type(value = TextDto.class, name = "BTSText"),
+        @Type(value = ThsEntryDto.class, name = "BTSThsEntry"),
+        @Type(value = CorpusObjectDto.class, name = "BTSTCObject")
+    }
+)
 public abstract class DocumentDto extends AbstractBTSBaseClass {
 
     private String id;
