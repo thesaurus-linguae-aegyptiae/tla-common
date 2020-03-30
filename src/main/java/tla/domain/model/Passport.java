@@ -239,6 +239,7 @@ public class Passport {
      *
      * This helper method handles both cases.
      */
+    @SuppressWarnings("unchecked")
     private void setPossibleThesaurusReferenceValue(String key, Object value) throws Exception {
         if (value instanceof String) {
             if (this.thsValueCache == null) {
@@ -246,7 +247,7 @@ public class Passport {
             }
             this.thsValueCache.put(key, (String) value);
         } else if (value instanceof List) {
-            List<Object> objects = (List) value;
+            List<Object> objects = (List<Object>) value;
             List<Passport> children = objects.stream().map(
                 Passport::of
             ).collect(
