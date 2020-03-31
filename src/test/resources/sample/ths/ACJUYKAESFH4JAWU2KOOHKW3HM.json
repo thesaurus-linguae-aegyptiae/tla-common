@@ -1,0 +1,97 @@
+{
+  "eclass": "BTSThsEntry",
+  "editors": {
+    "author": "Altägyptisches Wörterbuch",
+    "contributors": [
+      "L. Popko"
+    ],
+    "type": "user",
+    "updated": "2019-12-19 17:54:01"
+  },
+  "externalReferences": {
+    "aaew": [
+      {
+        "id": "9/71"
+      }
+    ],
+    "thot": [
+      {
+        "id": "thot-190"
+      }
+    ]
+  },
+  "id": "ACJUYKAESFH4JAWU2KOOHKW3HM",
+  "name": "Pepi I. Merire",
+  "passport": {
+    "synonyms": [
+      {
+        "synonym_group": [
+          {
+            "language": [
+              "en"
+            ],
+            "synonym": [
+              "Pepi I Merire"
+            ]
+          },
+          {
+            "language": [
+              "fr"
+            ],
+            "synonym": [
+              "Pépi I Merirê"
+            ]
+          }
+        ]
+      }
+    ],
+    "thesaurus": [
+      {
+        "main_group": [
+          {
+            "old_id": [
+              "71"
+            ],
+            "old_thesaurus_number": [
+              "9"
+            ],
+            "termsort": [
+              "pepi i."
+            ]
+          }
+        ]
+      }
+    ],
+    "thesaurus_date": [
+      {
+        "main_group": [
+          {
+            "beginning": [
+              "-2321"
+            ],
+            "end": [
+              "-2287"
+            ],
+            "reference": [
+              "Shaw, I. (Hg.), The Oxford History of Ancient Egypt, Oxford 2000, 480."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "relations": {
+    "partOf": [
+      {
+        "eclass": "BTSThsEntry",
+        "id": "GH2RXLTQ2BCEHPQ6R2SPBER7OM",
+        "name": "6. Dynastie",
+        "type": "date"
+      }
+    ]
+  },
+  "revisionState": "published",
+  "sortkey": null,
+  "subtype": null,
+  "type": "date"
+}

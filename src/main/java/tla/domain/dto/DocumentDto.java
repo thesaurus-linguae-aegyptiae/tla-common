@@ -30,9 +30,9 @@ import tla.domain.model.meta.AbstractBTSBaseClass;
 @Data
 @SuperBuilder
 @AllArgsConstructor
+@JsonInclude(Include.NON_EMPTY)
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(Include.NON_NULL)
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
