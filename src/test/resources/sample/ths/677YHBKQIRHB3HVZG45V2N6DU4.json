@@ -1,0 +1,97 @@
+{
+  "eclass": "BTSThsEntry",
+  "editors": {
+    "author": "Altägyptisches Wörterbuch",
+    "contributors": [
+      "L. Popko"
+    ],
+    "type": "user",
+    "updated": "2019-12-19 10:48:11"
+  },
+  "externalReferences": {
+    "aaew": [
+      {
+        "id": "9/289"
+      }
+    ],
+    "thot": [
+      {
+        "id": "thot-410"
+      }
+    ]
+  },
+  "id": "677YHBKQIRHB3HVZG45V2N6DU4",
+  "name": "Siamun Netjerycheperre-Setepenamun",
+  "passport": {
+    "synonyms": [
+      {
+        "synonym_group": [
+          {
+            "language": [
+              "en"
+            ],
+            "synonym": [
+              "Siamun Netjerykheperre-Setepenamun"
+            ]
+          },
+          {
+            "language": [
+              "fr"
+            ],
+            "synonym": [
+              "Siamon Netjerykheperrê-Setepenamon"
+            ]
+          }
+        ]
+      }
+    ],
+    "thesaurus": [
+      {
+        "main_group": [
+          {
+            "old_id": [
+              "289"
+            ],
+            "old_thesaurus_number": [
+              "9"
+            ],
+            "termsort": [
+              "siamun"
+            ]
+          }
+        ]
+      }
+    ],
+    "thesaurus_date": [
+      {
+        "main_group": [
+          {
+            "beginning": [
+              "-986"
+            ],
+            "end": [
+              "-968"
+            ],
+            "reference": [
+              "Hornung, E./Krauss, R./Warburton, D. A. (Hgg.), Ancient Egyptian Chronology (HdO I.83), Leiden/Boston 2006, 493"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "relations": {
+    "partOf": [
+      {
+        "eclass": "BTSThsEntry",
+        "id": "E7YEQAEKZVEJ5PX7WKOXY2QEEM",
+        "name": "21. Dynastie",
+        "type": "date"
+      }
+    ]
+  },
+  "revisionState": "published",
+  "sortkey": null,
+  "subtype": null,
+  "type": "date"
+}

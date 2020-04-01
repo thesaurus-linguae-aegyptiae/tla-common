@@ -17,8 +17,8 @@ public class WrapperTest {
 
     @Test
     void addRelated() throws Exception {
-        LemmaDto l = (LemmaDto) Util.loadFromFile(LemmaDto.class, "10070.json");
-        ThsEntryDto t = (ThsEntryDto) Util.loadFromFile(ThsEntryDto.class, "2AVEQ3VFT5EEPF7NBH7RHCVBXA.json");
+        LemmaDto l = (LemmaDto) Util.loadFromFile("lemma", "10070.json");
+        ThsEntryDto t = (ThsEntryDto) Util.loadFromFile("ths", "2AVEQ3VFT5EEPF7NBH7RHCVBXA.json");
         SingleDocumentWrapper<LemmaDto> w = SingleDocumentWrapper.<LemmaDto>builder()
             .doc(l)
             .build();
@@ -34,7 +34,7 @@ public class WrapperTest {
         );
         w.addRelated(t);
         assertEquals(1, w.getRelated().get(t.getEclass()).size(), "number of ths entries should have stayed the same");
-        ThsEntryDto t2 = (ThsEntryDto) Util.loadFromFile(ThsEntryDto.class, "ACJUYKAESFH4JAWU2KOOHKW3HM.json");
+        ThsEntryDto t2 = (ThsEntryDto) Util.loadFromFile("ths", "ACJUYKAESFH4JAWU2KOOHKW3HM.json");
         w.addRelated(t2);
         assertAll("adding another related object of same type",
             () -> assertEquals(2, w.getRelated().get(t.getEclass()).size(), "expect 2 related ths entries now")
@@ -43,8 +43,8 @@ public class WrapperTest {
 
     @Test
     void deserialize() throws Exception {
-        LemmaDto l = (LemmaDto) Util.loadFromFile(LemmaDto.class, "10070.json");
-        ThsEntryDto t = (ThsEntryDto) Util.loadFromFile(ThsEntryDto.class, "2AVEQ3VFT5EEPF7NBH7RHCVBXA.json");
+        LemmaDto l = (LemmaDto) Util.loadFromFile("lemma", "10070.json");
+        ThsEntryDto t = (ThsEntryDto) Util.loadFromFile("ths", "2AVEQ3VFT5EEPF7NBH7RHCVBXA.json");
         SingleDocumentWrapper<LemmaDto> w = new SingleDocumentWrapper<>(l);
         w.addRelated(t);
         SingleDocumentWrapper<DocumentDto> w2 = SingleDocumentWrapper.of(mapper.writeValueAsString(w));

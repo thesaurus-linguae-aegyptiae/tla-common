@@ -1,6 +1,7 @@
 package tla.domain.dto;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -8,7 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
 
+import tla.domain.Util;
 import tla.domain.model.ExternalReference;
+import tla.domain.model.ObjectReference;
+import tla.domain.model.extern.AttestedTimespan;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,20 +20,37 @@ public class ThsEntryTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    private ThsEntryDto loadFromFile(String filename) throws Exception {
-        return mapper.readValue(
-            new File(
-                String.format("src/test/resources/sample/ths/%s", filename)
-            ),
-            ThsEntryDto.class
+    public static AttestedTimespan.Period loadThsEntryFromFileAndConvertToTimePeriod(String id) throws Exception {
+        DocumentDto term = Util.loadFromFile("ths", String.format("%s.json", id));
+        List<Integer> years = new ArrayList<>();
+        List.of(
+            "thesaurus_date.main_group.beginning",
+            "thesaurus_date.main_group.end"
+        ).stream().forEach(
+            path -> {
+                term.getPassport().extractProperty(path).stream().forEach(
+                    node -> {
+                        if (node.get() instanceof String) {
+                            years.add(Integer.valueOf((String) node.get()));
+                        }
+                    }
+                );
+            }
         );
+        Collections.sort(years);
+        return AttestedTimespan.Period.builder()
+            .begin(years.get(0))
+            .end(years.get(1))
+            .ths(ObjectReference.of(term))
+            .build();
     }
 
     @Test
     void deserializeFromFile() throws Exception {
-        ThsEntryDto t = loadFromFile("2AVEQ3VFT5EEPF7NBH7RHCVBXA.json");
+        DocumentDto t = Util.loadFromFile("ths", "2AVEQ3VFT5EEPF7NBH7RHCVBXA.json");
         assertAll("deserialized thesaurus entry and its fields should not be null",
             () -> assertTrue(t != null, "thesaurus entry itself should not be null"),
+            () -> assertTrue(t instanceof ThsEntryDto, "should be ths term instance"),
             () -> assertTrue(t.getEclass() != null, "eclass should not be null"),
             () -> assertEquals("BTSThsEntry", t.getEclass(), "eclass should be 'BTSThsEntry'"),
             () -> assertTrue(t.getEditors() != null, "editor info should not be null"),
@@ -39,7 +60,7 @@ public class ThsEntryTest {
             () -> assertTrue(t.getRelations() != null, "relations should not be null"),
             () -> assertTrue(t.getId() != null, "id should not be null"),
             () -> assertTrue(t.getReviewState() != null, "review state should not be null"),
-            () -> assertEquals(null, t.getSortKey(), "sort key should be null"),
+            () -> assertEquals(null, ((ThsEntryDto)t).getSortKey(), "sort key should be null"),
             () -> assertEquals(null, t.getSubtype(), "subtype should be null"),
             () -> assertEquals("BTSThsEntry", t.getEclass(), "eclass must be `BTSThsEntry`")
         );

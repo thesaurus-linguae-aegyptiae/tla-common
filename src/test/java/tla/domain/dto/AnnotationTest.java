@@ -11,7 +11,10 @@ public class AnnotationTest {
 
     @Test
     void deserializeFromFile() throws Exception {
-        AnnotationDto a = (AnnotationDto) Util.loadFromFile(AnnotationDto.class, "5YUS7W6LUNC7DLP6SEIQDDKJHE.json");
+        AnnotationDto a = (AnnotationDto) Util.loadFromFile(
+            Util.SAMPLE_DIR_PATHS.get(AnnotationDto.class),
+            "5YUS7W6LUNC7DLP6SEIQDDKJHE.json"
+        );
         assertAll("should be able to deserialize annotation",
             () -> assertTrue(a != null, "should not be null"),
             () -> assertEquals("leipzig_wlist", a.getCorpus(), "corpus value should be set"),

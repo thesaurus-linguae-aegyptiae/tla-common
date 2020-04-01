@@ -8,6 +8,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tla.domain.dto.AnnotationDto;
+import tla.domain.dto.CorpusObjectDto;
 import tla.domain.dto.DocumentDto;
 import tla.domain.dto.LemmaDto;
 import tla.domain.dto.TextDto;
@@ -17,11 +18,12 @@ public class Util {
 
     static final String RESOURCE_PATH = "src/test/resources/sample/";
 
-    static final Map<Class<? extends DocumentDto>, String> SAMPLE_DIR_PATHS = Map.of(
+    public static final Map<Class<? extends DocumentDto>, String> SAMPLE_DIR_PATHS = Map.of(
         LemmaDto.class, "lemma",
         TextDto.class, "text",
         ThsEntryDto.class, "ths",
-        AnnotationDto.class, "annotation"
+        AnnotationDto.class, "annotation",
+        CorpusObjectDto.class, "object"
     );
 
     private static ObjectMapper mapper = new ObjectMapper();
@@ -43,12 +45,12 @@ public class Util {
         );
     }
 
-    public static DocumentDto loadFromFile(Class<? extends DocumentDto> clazz, String filename) throws Exception {
+    public static DocumentDto loadFromFile(String path, String filename) throws Exception {
         return mapper.readValue(
             new File(
-                getSampleFileFullPath(SAMPLE_DIR_PATHS.get(clazz), filename)
+                getSampleFileFullPath(path, filename)
             ),
-            clazz
+            DocumentDto.class
         );
     }
 }

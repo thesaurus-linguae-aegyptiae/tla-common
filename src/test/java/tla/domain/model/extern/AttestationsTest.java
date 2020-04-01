@@ -2,6 +2,7 @@ package tla.domain.model.extern;
 
 import org.junit.jupiter.api.Test;
 
+import tla.domain.dto.ThsEntryTest;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.extern.AttestedTimespan.AttestationStats;
 import tla.domain.model.extern.AttestedTimespan.Period;
@@ -10,7 +11,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class AttestationsTest {
+
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Test
     void nestedTimespanSum() {
@@ -59,33 +64,31 @@ public class AttestationsTest {
     }
 
     @Test
-    void periodCompare() {
-        Period p1 = Period.builder()
-            .begin(-986)
-            .end(-968)
-            .ths(
-                ObjectReference.builder()
-                    .id("677YHBKQIRHB3HVZG45V2N6DU4")
-                    .name("Siamun Netjerycheperre-Setepenamun")
-                    .type("date")
-                    .eclass("BTSThsEntry")
-                    .build()
-            ).build();
-        Period p2 = Period.builder()
-            .begin(-1400)
-            .end(-1390)
-            .ths(
-                ObjectReference.builder()
-                    .id("WMSRSEY4LBALVAQEKU4GKNLTMU")
-                    .name("Thutmosis IV. Mencheperure")
-                    .type("date")
-                    .eclass("BTSThsEntry")
-                    .build()
-            ).build();
+    void periodCompare() throws Exception {
+        Period p1 = ThsEntryTest.loadThsEntryFromFileAndConvertToTimePeriod(
+            "677YHBKQIRHB3HVZG45V2N6DU4"
+        );
+        Period p2 = ThsEntryTest.loadThsEntryFromFileAndConvertToTimePeriod(
+            "WMSRSEY4LBALVAQEKU4GKNLTMU"
+        );
         assertAll("compare attestation periods",
             () -> assertTrue(p2.compareTo(p1) < 0, "Thutmosis earlier than siamun"),
             () -> assertTrue(p1.compareTo(p2) > 0, "siamun later than thutmosis"),
             () -> assertTrue(p2.getEnd() < p1.getBegin(), "no overlap")
+        );
+    }
+
+    @Test
+    void deserializePeriod() throws Exception {
+        Period p1 = ThsEntryTest.loadThsEntryFromFileAndConvertToTimePeriod(
+            "677YHBKQIRHB3HVZG45V2N6DU4"
+        );
+        String ser = mapper.writeValueAsString(p1);
+        Period p2 = mapper.readValue(ser, Period.class);
+        assertAll("test deserialization of time period DTO support type",
+            () -> assertNotNull(p2, "should not be null"),
+            () -> assertEquals(-986, p2.getBegin(), "first year should match"),
+            () -> assertTrue(p2.getThs() instanceof ObjectReference, "expect thesaurus reference object")
         );
     }
 

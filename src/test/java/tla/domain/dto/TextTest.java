@@ -2,36 +2,23 @@ package tla.domain.dto;
 
 import org.junit.jupiter.api.Test;
 
+import tla.domain.Util;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.Passport;
 import tla.domain.model.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TextTest {
 
-    private ObjectMapper mapper = new ObjectMapper();
-
-    private TextDto loadFromFile(String filename) throws Exception {
-        return mapper.readValue(
-            new File(
-                String.format("src/test/resources/sample/text/%s", filename)
-            ),
-            TextDto.class
-        );
-    }
-
-
     @Test
     void deserializeFromFile() throws Exception {
-        TextDto t = loadFromFile("A2HWO5CX6RCQ5IBSV2MHAAIYA4.json");
+        TextDto t = (TextDto) Util.loadFromFile("text", "A2HWO5CX6RCQ5IBSV2MHAAIYA4.json");
         assertAll("deserialization from file should preserve all contents",
             () -> assertEquals("tlademotic", t.getCorpus()),
             () -> assertTrue(t.getPaths() != null, "corpus object paths should be deserialized"),

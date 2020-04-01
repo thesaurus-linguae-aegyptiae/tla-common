@@ -1,0 +1,97 @@
+{
+  "eclass": "BTSThsEntry",
+  "editors": {
+    "author": "Altägyptisches Wörterbuch",
+    "contributors": [
+      "L. Popko"
+    ],
+    "type": "user",
+    "updated": "2019-12-19 10:49:51"
+  },
+  "externalReferences": {
+    "aaew": [
+      {
+        "id": "9/147"
+      }
+    ],
+    "thot": [
+      {
+        "id": "thot-375"
+      }
+    ]
+  },
+  "id": "WMSRSEY4LBALVAQEKU4GKNLTMU",
+  "name": "Thutmosis IV. Mencheperure",
+  "passport": {
+    "synonyms": [
+      {
+        "synonym_group": [
+          {
+            "language": [
+              "en"
+            ],
+            "synonym": [
+              "Tuthmosis IV Menkheperure"
+            ]
+          },
+          {
+            "language": [
+              "fr"
+            ],
+            "synonym": [
+              "Thoutmosis IV Menkheperourê"
+            ]
+          }
+        ]
+      }
+    ],
+    "thesaurus": [
+      {
+        "main_group": [
+          {
+            "old_id": [
+              "147"
+            ],
+            "old_thesaurus_number": [
+              "9"
+            ],
+            "termsort": [
+              "Thutmosis IV."
+            ]
+          }
+        ]
+      }
+    ],
+    "thesaurus_date": [
+      {
+        "main_group": [
+          {
+            "beginning": [
+              "-1400"
+            ],
+            "end": [
+              "-1390"
+            ],
+            "reference": [
+              "Hornung, E./Krauss, R./Warburton, D. A. (Hgg.), Ancient Egyptian Chronology (HdO I.83), Leiden/Boston 2006, 492"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "relations": {
+    "partOf": [
+      {
+        "eclass": "BTSThsEntry",
+        "id": "NUW3K7UK3BBUFDPHZDD2ZZ3LYI",
+        "name": "18. Dynastie",
+        "type": "date"
+      }
+    ]
+  },
+  "revisionState": "published",
+  "sortkey": null,
+  "subtype": null,
+  "type": "date"
+}

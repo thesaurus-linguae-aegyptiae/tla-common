@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import tla.domain.dto.DocumentDto;
 
 @Data
 @Builder
@@ -56,6 +57,15 @@ public class ObjectReference implements Comparable<ObjectReference> {
             return this.getId().compareTo(arg0.getId());
         }
         return this.getEclass().compareTo(arg0.getEclass());
+    }
+
+    public static ObjectReference of(DocumentDto object) {
+        return new ObjectReference(
+            object.getId(),
+            object.getEclass(),
+            object.getType(),
+            object.getName()
+        );
     }
 
 }
