@@ -106,6 +106,8 @@ public class AttestedTimespan {
      */
     @Getter
     @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Period implements Comparable<Period> {
 
