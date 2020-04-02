@@ -23,6 +23,25 @@ public class ObjectReferenceTest {
     }
 
     @Test
+    void equality() throws Exception {
+        ObjectReference ref1 = ObjectReference.builder()
+            .id("ID")
+            .eclass("eclass")
+            .type("type")
+            .name("name")
+            .build();
+        ObjectReference ref2 = mapper.readValue(
+            mapper.writeValueAsString(ref1),
+            ObjectReference.class
+        );
+        assertAll("test objectreference identify",
+            () -> assertEquals(ref2, ref1, "deserialized serialization should be equal"),
+            () -> assertEquals(ref2.hashCode(), ref1.hashCode(), "hashcodes should match"),
+            () -> assertEquals(ref2.toString(), ref1.toString(), "toString() should match")
+        );
+    }
+
+    @Test
     void comparison() throws Exception {
         ObjectReference ref = ObjectReference.builder().id("ID").eclass("BTSThsEntry").build();
         assertThrows(
