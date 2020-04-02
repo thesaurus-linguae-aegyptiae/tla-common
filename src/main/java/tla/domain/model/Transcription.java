@@ -1,22 +1,18 @@
 package tla.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Transcription {
 
     private String unicode;
     private String mdc;
     
-    @JsonCreator
-    public Transcription(
-        @JsonProperty(value = "unicode", required = true) String unicode,
-        @JsonProperty(value = "mdc", required = true) String mdc
-    ) {
-        this.unicode = unicode;
-        this.mdc = mdc;
-    }
 }

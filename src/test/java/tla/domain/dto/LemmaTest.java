@@ -156,6 +156,20 @@ public class LemmaTest {
     }
 
     @Test
+    void serializeWords() throws Exception {
+        LemmaDto l = LemmaDto.builder()
+            .id("id")
+            .word(new LemmaWord(new Transcription("nfr", "nfr"), "N35-Z3"))
+            .build();
+        String ser = mapper.writeValueAsString(l);
+        LemmaDto l2 = mapper.readValue(ser, LemmaDto.class);
+        assertAll("test lemma word serialization",
+            () -> assertTrue(ser.contains("\"nfr\""), "transcription should be serialized"),
+            () -> assertEquals(l, l2, "deserialized serialization should equal origin")
+        );
+    }
+
+    @Test
     void serialize_emptyPropertiesShouldBeOmitted() throws Exception {
         LemmaDto l = LemmaDto.builder()
             .id("id")
