@@ -54,7 +54,7 @@ public abstract class AbstractBTSBaseClass {
     }
 
     /**
-     * extract a model class's <code>eClass</code> from its {@link @BTSeClass} annotation.
+     * extract a model class's <code>eClass</code> from its {@link BTSeClass} annotation.
      */
     public static String getTypesEclass(Class<? extends AbstractBTSBaseClass> modelClass) {
         for (Annotation annotation : modelClass.getAnnotations()) {

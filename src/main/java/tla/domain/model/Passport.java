@@ -228,14 +228,14 @@ public class Passport {
 
 
     /**
-     * Helper method for handling values of ominous keys during deserialization.<br/>
+     * Helper method for handling values of ominous keys during deserialization.
      *
-     * Thing is, the passport data structure as optimized for ES indexing and publication
+     * <p>Thing is, the passport data structure as optimized for ES indexing and publication
      * needs to be able to store references to thesaurus entries with the attributes
      * <code>id, eclass, type</code> and <code>name</code>. In case a passport node is in
      * fact a thesaurus reference, those are expected to have string values.
      * However, because passport nodes can be stored under any key, any of these attribute
-     * names can also come with a list of passport child nodes assigned.
+     * names can also come with a list of passport child nodes assigned.</p>
      *
      * This helper method handles both cases.
      */
@@ -346,7 +346,7 @@ public class Passport {
 
 
     /**
-     * Returns this passport node's payload.<br/>
+     * Returns this passport node's payload.
      *
      * Passport node payload can come in 3 different shapes:
      *
