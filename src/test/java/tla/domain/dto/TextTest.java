@@ -39,9 +39,8 @@ public class TextTest {
     void textBuilder() {
         CorpusObjectDto parent = CorpusObjectDto.builder().id("2").name("papyrus").type("type").build();
         ObjectReference r = parent.toObjectReference();
-        Paths paths = new Paths();
         List<ObjectReference> path = List.of(r);
-        paths.add(path);
+        Paths paths = Paths.of(List.of(path));
         TextDto t1 = TextDto.builder()
             .id("1")
             .corpus("corpus")
