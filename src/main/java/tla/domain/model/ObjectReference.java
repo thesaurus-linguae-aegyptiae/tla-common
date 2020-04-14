@@ -64,8 +64,8 @@ public class ObjectReference implements Comparable<ObjectReference> {
     public String toString() {
         return Map.of(
             "id", id,
-            "name", name,
-            "type", type,
+            "name", name != null ? name : "None",
+            "type", type != null ? type : "None",
             "eclass", eclass
         ).toString();
     }
