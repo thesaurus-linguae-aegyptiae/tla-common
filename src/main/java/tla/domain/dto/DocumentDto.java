@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Singular;
@@ -29,7 +28,6 @@ import tla.domain.model.meta.AbstractBTSBaseClass;
  */
 @Data
 @SuperBuilder
-@AllArgsConstructor
 @JsonInclude(Include.NON_EMPTY)
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -74,6 +72,13 @@ public abstract class DocumentDto extends AbstractBTSBaseClass {
     public DocumentDto() {
         this.externalReferences = Collections.emptySortedMap();
         this.relations = Collections.emptySortedMap();
+    }
+
+    /**
+     * Creates a {@link ObjectReference} representation of this instance.
+     */
+    public ObjectReference toObjectReference() {
+        return ObjectReference.of(this);
     }
 
 }

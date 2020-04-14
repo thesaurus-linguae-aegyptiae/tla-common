@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import lombok.AllArgsConstructor;
 import lombok.Singular;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
@@ -23,7 +22,6 @@ import tla.domain.model.meta.BTSeClass;
  */
 @Data
 @SuperBuilder
-@AllArgsConstructor
 @BTSeClass("BTSLemmaEntry")
 @EqualsAndHashCode(callSuper = true)
 @JsonPropertyOrder(alphabetic = true)

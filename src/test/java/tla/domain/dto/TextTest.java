@@ -10,9 +10,6 @@ import tla.domain.model.Paths;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 
 public class TextTest {
 
@@ -41,15 +38,9 @@ public class TextTest {
     @Test
     void textBuilder() {
         CorpusObjectDto parent = CorpusObjectDto.builder().id("2").name("papyrus").type("type").build();
-        ObjectReference r = new ObjectReference(
-            parent.getId(),
-            parent.getEclass(),
-            parent.getType(),
-            parent.getName()
-        );
+        ObjectReference r = parent.toObjectReference();
         Paths paths = new Paths();
-        SortedSet<ObjectReference> path = new TreeSet<>();
-        path.add(r);
+        List<ObjectReference> path = List.of(r);
         paths.add(path);
         TextDto t1 = TextDto.builder()
             .id("1")

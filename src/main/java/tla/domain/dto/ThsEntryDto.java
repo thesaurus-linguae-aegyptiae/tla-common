@@ -2,7 +2,6 @@ package tla.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,6 @@ import tla.domain.model.meta.BTSeClass;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 @BTSeClass("BTSThsEntry")
 @EqualsAndHashCode(callSuper = true)
 public class ThsEntryDto extends DocumentDto {
