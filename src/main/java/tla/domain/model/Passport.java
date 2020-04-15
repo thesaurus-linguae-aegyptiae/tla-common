@@ -1,6 +1,7 @@
 package tla.domain.model;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -58,10 +59,11 @@ public class Passport {
 
 
     /** Convert any object to a Passport instance via Jackson JSON round-trip.
-     * Fails silently and returns empty Passport instance instead of throwing an exception.
+     * Fails silently and returns empty null instead of throwing an exception.
+     * Don't pass a JSON string.
      *
-     * @param object
-     * @return
+     * @param object Preferably a map or sth the jackson object mapper can serialize.
+     * @return new passport instance or null
      */
     public static Passport of(Object object) {
         try {
@@ -77,7 +79,7 @@ public class Passport {
                 ),
                 e
             );
-            return new Passport();
+            return null;
         }
     }
 
@@ -377,19 +379,40 @@ public class Passport {
         return (value != null) ? value : this.properties;
     }
 
-
+    /**
+     * Returns number of subkeys.
+     */
     public int size() {
-        if (this.getContents() instanceof Map) {
+        Object content = this.getContents();
+        if (content instanceof Map) {
             return this.properties.size();
+        } else {
+            return content != null ? 1 : 0;
         }
-        return 1;
     }
 
+    /**
+     * See if this node contains a certain key.
+     * @param key
+     * @return true if key is there
+     */
     public boolean containsKey(String key) {
         if (this.getContents() instanceof Map) {
             return this.properties.containsKey(key);
+        } else {
+            return false;
         }
-        return false;
+    }
+
+    /**
+     * Returns names of fields contained by this passport node.
+     */
+    public List<String> getFields() {
+        if (this.getContents() instanceof Map) {
+            return new LinkedList<>(this.properties.keySet());
+        } else {
+            return Collections.emptyList();
+        }
     }
 
 }

@@ -379,4 +379,27 @@ class PassportTest {
         );
     }
 
+    @Test
+    void emptyPassport() {
+        Passport p = new Passport();
+        assertAll("test assumptions about empty passport",
+            () -> assertTrue(p.isEmpty(), "isEmpty should return true"),
+            () -> assertEquals(0, p.size(), "size should be 0"),
+            () -> assertNull(p.get(), "leaf value should be null"),
+            () -> assertTrue(p.getFields().isEmpty(), "expect no fields")
+        );
+    }
+
+    @Test
+    void passportOfString() {
+        Passport p = Passport.of("{\"key\":[\"value\"]}");
+        assertAll("see if passport could be created from JSON string (assume no)",
+            () -> assertNotNull(p, "factory method should return instance"),
+            () -> assertTrue(!p.isEmpty(), "instance should not be empty"),
+            () -> assertEquals(1, p.size(), "size should be 1"),
+            () -> assertTrue(!p.containsKey("key"), "no key key should be present as this is a leaf node"),
+            () -> assertEquals(0, p.getFields().size(), "expect no fields"),
+            () -> assertEquals("{\"key\":[\"value\"]}", p.get(), "should be just leaf node")
+        );
+    }
 }
