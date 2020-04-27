@@ -254,6 +254,21 @@ class PassportTest {
     }
 
     @Test
+    void extractProperty_internalNode() throws Exception {
+        Passport pp = mapper.readValue(
+            "{\"a\": [{\"b\": [\"1\"], \"c\": [\"2\"]}]}",
+            Passport.class
+        );
+        List<Passport> nodes = pp.extractProperty("a");
+        assertAll("should extact internal node",
+            () -> assertEquals(1, nodes.size(), "expect 1 inner node"),
+            () -> assertEquals(2, nodes.get(0).size(), "expect 2 keys in inner node"),
+            () -> assertTrue(nodes.get(0).containsKey("b")),
+            () -> assertTrue(nodes.get(0).containsKey("c"))
+        );
+    }
+
+    @Test
     void extractProperty_reference_level3() throws Exception {
         Passport pp = mapper.readValue(
             "{\"date\": [{\"date\": [{\"date\": [{\"eclass\": \"BTSThsEntry\", \"type\": \"date\", \"id\": \"FCJURX24JZGXZEKP3TW36U3ZFA\", \"name\": \"Ramses II. Usermaatre-Setepenre\"}]}]}]}",
