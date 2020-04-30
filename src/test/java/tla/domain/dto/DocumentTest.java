@@ -31,7 +31,7 @@ public class DocumentTest {
     void instantiateWrongEclass() {
         assertAll("attempt to instantiate ths entry DTO from object with eclass BTSLemmaEntry should throw illegalargumentexception",
             () -> assertThrows(
-                java.lang.IllegalArgumentException.class,
+                com.fasterxml.jackson.databind.exc.InvalidTypeIdException.class,
                 () -> {mapper.readValue(
                     "{\"id\":\"1\",\"eclass\":\"BTSLemmaEntry\"}",
                     ThsEntryDto.class
