@@ -2,11 +2,15 @@ package tla.domain.dto.extern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
 
 import tla.domain.Util;
+import tla.domain.command.LemmaSearch;
 import tla.domain.dto.DocumentDto;
 import tla.domain.dto.LemmaDto;
 import tla.domain.dto.ThsEntryDto;
@@ -54,7 +58,47 @@ public class WrapperTest {
             () -> assertEquals(w.hashCode(), w2.hashCode(), "hashcodes should be same"),
             () -> assertTrue(w.getDoc() instanceof LemmaDto, "payload should be lemmadto instance")
         );
+    }
 
+    @Test
+    void searchResultsWrapperTest() throws Exception {
+        PageInfo p = new PageInfo();
+        p.setNumberOfElements(1);
+        p.setTotalElements(1);
+        p.setTotalPages(1);
+        p.setSize(20);
+        LemmaDto l = (LemmaDto) Util.loadFromFile("lemma", "10070.json");
+        SearchResultsWrapper<LemmaDto> searchResults = new SearchResultsWrapper<>(
+            List.of(l),
+            new LemmaSearch(),
+            p
+        );
+        assertAll("test paged search results wrapper",
+            () -> assertEquals(searchResults.getContent().size(), searchResults.getPage().getNumberOfElements()),
+            () -> assertTrue(searchResults.getPage().isLast()),
+            () -> assertTrue(searchResults.getPage().isFirst()),
+            () -> assertNotNull(searchResults.getQuery())
+        );
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new SearchResultsWrapper<>(List.of(l, l), null, p)
+        );
+        p.setTotalPages(2);
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new SearchResultsWrapper<>(List.of(l), null, p)
+        );
+        p.setTotalElements(0);
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new SearchResultsWrapper<>(List.of(l), null, p)
+        );
+        p.setNumberOfElements(0);
+        p.setSize(0);
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new SearchResultsWrapper<>(Collections.emptyList(), null, p)
+        );
     }
 
 }
