@@ -3,10 +3,12 @@ package tla.domain.dto.extern;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import tla.domain.command.LemmaSearch;
 import tla.domain.dto.DocumentDto;
 
 @Getter
+@NoArgsConstructor
 public class SearchResultsWrapper<T extends DocumentDto> {
 
     private List<T> content;
@@ -40,10 +42,10 @@ public class SearchResultsWrapper<T extends DocumentDto> {
         if (page.getSize() < 1) {
             throw new IllegalArgumentException("page size can't be 0");
         }
-        if (page.getTotalPages() != Math.floorDiv(page.getTotalElements(), page.getSize()) + 1) {
+        if (page.getTotalElements() > 0 && page.getTotalPages() != Math.floorDiv(page.getTotalElements(), page.getSize()) + 1) {
             throw new IllegalArgumentException(
                 String.format(
-                    "total page count can't be %s when page size is %s and total element count %s",
+                    "total page count can't be %s when page size is %s and total element count is %s",
                     page.getTotalPages(),
                     page.getSize(),
                     page.getTotalElements()

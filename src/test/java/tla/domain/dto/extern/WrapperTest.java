@@ -101,4 +101,16 @@ public class WrapperTest {
         );
     }
 
+    @Test
+    @SuppressWarnings("unchecked")
+    void searchResultsDeserialize() throws Exception {
+        SearchResultsWrapper<LemmaDto> w = mapper.readValue(
+            Util.loadFromFileAsString("lemma", "search.json"),
+            SearchResultsWrapper.class
+        );
+        assertAll("check deserialization",
+            () -> assertNotNull(w)
+        );
+    }
+
 }
