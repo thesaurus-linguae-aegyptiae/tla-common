@@ -2,10 +2,12 @@ package tla.domain.command;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import tla.domain.model.Script;
 
-@Data
+@Getter
+@Setter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class LemmaSearch {
 
@@ -13,6 +15,20 @@ public class LemmaSearch {
 
     private String transcription;
 
+    private WordClass pos;
+
+    private String root;
+
     private TranslationCriteria translation;
+
+    private String bibliography;
+
+    @Getter
+    @Setter
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    public static class WordClass {
+        private String type;
+        private String subtype;
+    }
 
 }
