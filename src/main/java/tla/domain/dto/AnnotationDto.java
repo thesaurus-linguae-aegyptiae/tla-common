@@ -16,6 +16,4 @@ public class AnnotationDto extends DocumentDto {
     @JsonAlias("title")
     private String name;
 
-    private String corpus;
-
 }

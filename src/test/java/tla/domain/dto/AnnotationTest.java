@@ -21,7 +21,6 @@ public class AnnotationTest {
         assertAll("should be able to deserialize annotation",
             () -> assertNotNull(a, "should not be null"),
             () -> assertNotNull(a.getName(), "expect name"),
-            () -> assertEquals("leipzig_wlist", a.getCorpus(), "corpus value should be set"),
             () -> assertEquals("annotation.lemma", a.getPassport().extractPaths().get(0), "lemma annotation field should exist in passport"),
             () -> assertEquals("BTSAnnotation", a.getEclass(), "eclass must be `BTSAnnotation`")
         );
@@ -30,7 +29,6 @@ public class AnnotationTest {
     @Test
     void serialize() throws Exception {
         AnnotationDto a = new AnnotationDto();
-        a.setCorpus("corpus");
         a.setEclass("BTSAnnotation");
         DocumentDto b = mapper.readValue(
             mapper.writeValueAsString(a),
