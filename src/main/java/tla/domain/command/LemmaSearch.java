@@ -15,20 +15,14 @@ public class LemmaSearch {
 
     private String transcription;
 
-    private WordClass pos;
+    private TypeSpec pos;
 
     private String root;
 
-    private TranslationCriteria translation;
+    private TypeSpec annotationType;
+
+    private TranslationSpec translation;
 
     private String bibliography;
-
-    @Getter
-    @Setter
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public static class WordClass {
-        private String type;
-        private String subtype;
-    }
 
 }

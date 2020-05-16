@@ -1,10 +1,12 @@
 package tla.domain.command;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import tla.domain.model.Language;
 
-@Data
-public class TranslationCriteria {
+@Getter
+@Setter
+public class TranslationSpec {
 
     private String text;
     private Language[] lang;
