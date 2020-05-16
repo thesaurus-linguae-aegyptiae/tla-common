@@ -20,29 +20,17 @@ public class IO {
      * Deserialize a JSON file into an object of the specified type.
      * Returns <code>null</code> if anything goes wrong.
      */
-    public static <T> T loadFromFile(String filename, Class<T> clazz) {
-        try {
-            String contents = Files.readString(
-                new File(
-                    filename
-                ).toPath(),
-                StandardCharsets.UTF_8
-            );
-            return mapper.readValue(
-                contents,
-                clazz
-            );
-        } catch (Exception e) {
-            log.error(
-                String.format(
-                    "Deserialization of %s object from file %s failed!",
-                    clazz.getName(),
-                    filename
-                ),
-                e
-            );
-            return null;
-        }
+    public static <T> T loadFromFile(String filename, Class<T> clazz) throws Exception {
+        String contents = Files.readString(
+            new File(
+                filename
+            ).toPath(),
+            StandardCharsets.UTF_8
+        );
+        return mapper.readValue(
+            contents,
+            clazz
+        );
     }
 
 }
