@@ -1,5 +1,6 @@
 package tla.domain.model;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -14,12 +15,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Holds information about a document's authoring and contributing editors, and the time of the
  * latest change.
  */
 @Data
+@Slf4j
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -48,6 +51,16 @@ public class EditorInfo {
     @JsonIgnore
     public String getDateOfLatestUpdate() {
         return dateFormatter.format(this.updated);
+    }
+
+    public void setDateOfLatestUpdate(String localDate) {
+        if (localDate != null) {
+            try {
+                this.updated = dateFormatter.parse(localDate);
+            } catch (ParseException e) {
+                log.error("could not parse local date string '{}'. edit info date not set!", localDate);
+            }
+        }
     }
 
 }

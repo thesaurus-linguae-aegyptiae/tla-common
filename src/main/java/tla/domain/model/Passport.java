@@ -139,7 +139,7 @@ public class Passport {
                 }
                 return recursionResults;
             } else {
-                log.warn("path segment not in passport: {}", segment);
+                log.debug("path segment not in passport: {}", segment);
             }
         } else {
             recursionResults.add(this);
