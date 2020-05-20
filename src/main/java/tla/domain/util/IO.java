@@ -6,12 +6,9 @@ import java.nio.file.Files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Utility class allowing for eg. deserializing a modeled object from file.
  */
-@Slf4j
 public class IO {
 
     private static ObjectMapper mapper = new ObjectMapper();

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
  * Subclasses are expected to be annotated with {@link BTSeClass}.
  */
 @Slf4j
+@ToString
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode

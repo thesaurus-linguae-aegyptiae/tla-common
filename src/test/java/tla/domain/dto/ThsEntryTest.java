@@ -21,7 +21,7 @@ public class ThsEntryTest {
     private ObjectMapper mapper = new ObjectMapper();
 
     public static AttestedTimespan.Period loadThsEntryFromFileAndConvertToTimePeriod(String id) throws Exception {
-        DocumentDto term = Util.loadFromFile("ths", String.format("%s.json", id));
+        NamedDocumentDto term = Util.loadFromFile("ths", String.format("%s.json", id));
         List<Integer> years = new ArrayList<>();
         List.of(
             "thesaurus_date.main_group.beginning",
@@ -47,7 +47,7 @@ public class ThsEntryTest {
 
     @Test
     void deserializeFromFile() throws Exception {
-        DocumentDto t = Util.loadFromFile("ths", "2AVEQ3VFT5EEPF7NBH7RHCVBXA.json");
+        NamedDocumentDto t = Util.loadFromFile("ths", "2AVEQ3VFT5EEPF7NBH7RHCVBXA.json");
         assertAll("deserialized thesaurus entry and its fields should not be null",
             () -> assertTrue(t != null, "thesaurus entry itself should not be null"),
             () -> assertTrue(t instanceof ThsEntryDto, "should be ths term instance"),

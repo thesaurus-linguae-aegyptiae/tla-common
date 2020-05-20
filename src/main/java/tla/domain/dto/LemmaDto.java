@@ -26,7 +26,7 @@ import tla.domain.model.meta.BTSeClass;
 @EqualsAndHashCode(callSuper = true)
 @JsonPropertyOrder(alphabetic = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class LemmaDto extends DocumentDto {
+public class LemmaDto extends NamedDocumentDto {
 
     @JsonAlias({"sortString", "sort_string", "sort_key"})
     private String sortKey;

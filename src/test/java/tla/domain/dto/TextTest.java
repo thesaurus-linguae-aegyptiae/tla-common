@@ -59,4 +59,5 @@ public class TextTest {
             () -> assertNotNull(t2, "instance 2 should not be null")
         );
     }
+
 }
