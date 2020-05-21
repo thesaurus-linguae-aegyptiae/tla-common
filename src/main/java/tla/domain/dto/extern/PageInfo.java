@@ -12,14 +12,29 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PageInfo {
 
+    /**
+     * number of current page
+     */
     private int number;
 
+    /**
+     * number of results on one page
+     */
     private int size;
 
+    /**
+     * number of results on this particular page
+     */
     private int numberOfElements;
 
+    /**
+     * total number of elements
+     */
     private long totalElements;
 
+    /**
+     * total number of pages
+     */
     private int totalPages;
 
     public boolean isFirst() {
