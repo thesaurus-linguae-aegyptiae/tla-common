@@ -15,12 +15,11 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Singular;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import tla.domain.model.EditorInfo;
-import tla.domain.model.ExternalReference;
 import tla.domain.model.ObjectReference;
-import tla.domain.model.Passport;
 import tla.domain.model.meta.AbstractBTSBaseClass;
 
 /**
@@ -28,6 +27,7 @@ import tla.domain.model.meta.AbstractBTSBaseClass;
  */
 @Data
 @SuperBuilder
+@ToString(callSuper = true)
 @JsonInclude(Include.NON_EMPTY)
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -42,25 +42,18 @@ import tla.domain.model.meta.AbstractBTSBaseClass;
         @Type(value = AnnotationDto.class, name = "BTSAnnotation"),
         @Type(value = TextDto.class, name = "BTSText"),
         @Type(value = ThsEntryDto.class, name = "BTSThsEntry"),
-        @Type(value = CorpusObjectDto.class, name = "BTSTCObject")
+        @Type(value = CorpusObjectDto.class, name = "BTSTCObject"),
+        @Type(value = CommentDto.class, name = "BTSComment")
     }
 )
 public abstract class DocumentDto extends AbstractBTSBaseClass {
 
     private String id;
-    private String name;
-    private String type;
-    private String subtype;
 
     @JsonAlias("revisionState")
     private String reviewState;
 
     private EditorInfo editors;
-
-    private Passport passport;
-
-    @Singular
-    private SortedMap<String, SortedSet<ExternalReference>> externalReferences;
 
     @Singular
     private SortedMap<String, SortedSet<ObjectReference>> relations;
@@ -70,15 +63,7 @@ public abstract class DocumentDto extends AbstractBTSBaseClass {
      * contain initialized external references and relations maps.
      */
     public DocumentDto() {
-        this.externalReferences = Collections.emptySortedMap();
         this.relations = Collections.emptySortedMap();
-    }
-
-    /**
-     * Creates a {@link ObjectReference} representation of this instance.
-     */
-    public ObjectReference toObjectReference() {
-        return ObjectReference.of(this);
     }
 
 }

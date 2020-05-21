@@ -10,12 +10,12 @@ import tla.domain.model.meta.BTSeClass;
 
 @Data
 @NoArgsConstructor
-@BTSeClass("BTSAnnotation")
+@BTSeClass("BTSComment")
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class AnnotationDto extends NamedDocumentDto {
+public class CommentDto extends DocumentDto {
 
-    @JsonAlias("title")
-    private String name;
+    @JsonAlias("content")
+    private String body;
 
 }

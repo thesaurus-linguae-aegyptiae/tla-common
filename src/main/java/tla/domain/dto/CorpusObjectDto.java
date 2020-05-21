@@ -12,7 +12,7 @@ import tla.domain.model.meta.BTSeClass;
 @NoArgsConstructor
 @BTSeClass("BTSTCObject")
 @EqualsAndHashCode(callSuper = true)
-public class CorpusObjectDto extends DocumentDto {
+public class CorpusObjectDto extends NamedDocumentDto {
 
     private String corpus;
     private Paths paths;

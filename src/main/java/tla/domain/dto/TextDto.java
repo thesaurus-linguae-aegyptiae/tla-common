@@ -15,7 +15,7 @@ import tla.domain.model.meta.BTSeClass;
 @SuperBuilder
 @BTSeClass("BTSText")
 @EqualsAndHashCode(callSuper = true)
-public class TextDto extends DocumentDto {
+public class TextDto extends NamedDocumentDto {
 
     private String corpus;
     private Paths paths;

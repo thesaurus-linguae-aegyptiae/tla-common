@@ -2,11 +2,19 @@ package tla.domain.dto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
 
 import tla.domain.Util;
+import tla.domain.model.EditorInfo;
+import tla.domain.model.ObjectReference;
 
 public class AnnotationTest {
 
@@ -40,5 +48,57 @@ public class AnnotationTest {
             () -> assertEquals(a.hashCode(), b.hashCode()),
             () -> assertEquals(a.toString(), b.toString())
         );
+    }
+
+    @Test
+    void equality() throws Exception {
+        AnnotationDto a1 = tla.domain.util.IO.loadFromFile(
+            "src/test/resources/sample/annotation/5YUS7W6LUNC7DLP6SEIQDDKJHE.json",
+            AnnotationDto.class
+        );
+        AnnotationDto a2 = new AnnotationDto();
+        a2.setName(a1.getName());
+        a2.setEclass(a1.getEclass());
+        a2.setId(a1.getId());
+        a2.setType(a1.getType());
+        a2.setReviewState(a1.getReviewState());
+        SortedMap<String, SortedSet<ObjectReference>> relations = new TreeMap<>();
+        a1.getRelations().entrySet().stream().forEach(
+            e -> {
+                relations.put(
+                    e.getKey(),
+                    new TreeSet<>(
+                        e.getValue().stream().map(
+                            ref -> new ObjectReference(
+                                ref.getId(),
+                                ref.getEclass(),
+                                ref.getType(),
+                                ref.getName(),
+                                ref.getRanges()
+                            )
+                        ).collect(
+                            Collectors.toList()
+                        )
+                    )
+                );
+            }
+        );
+        a2.setRelations(relations);
+        a2.setPassport(a1.getPassport());
+        a2.setExternalReferences(a1.getExternalReferences());
+        a2.setEditors(
+            EditorInfo.builder()
+                .author(a1.getEditors().getAuthor())
+                .contributors(a1.getEditors().getContributors())
+                .updated(a1.getEditors().getUpdated())
+                .type(a1.getEditors().getType())
+                .build()
+        );
+        assertAll("procedurally built instance should equal deserialized instance with same contens",
+            () -> assertEquals(a2, a1, "whole instance"),
+            () -> assertEquals(a2.toString(), a1.toString(), "string repr"),
+            () -> assertEquals(a2.hashCode(), a1.hashCode(), "hashcode")
+        );
+
     }
 }

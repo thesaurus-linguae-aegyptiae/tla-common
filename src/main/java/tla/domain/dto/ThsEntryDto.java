@@ -20,7 +20,7 @@ import tla.domain.model.meta.BTSeClass;
 @SuperBuilder
 @BTSeClass("BTSThsEntry")
 @EqualsAndHashCode(callSuper = true)
-public class ThsEntryDto extends DocumentDto {
+public class ThsEntryDto extends NamedDocumentDto {
 
     @JsonAlias("sortkey")
     private String sortKey;

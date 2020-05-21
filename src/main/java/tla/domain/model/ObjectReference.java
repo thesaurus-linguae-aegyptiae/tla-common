@@ -1,21 +1,28 @@
 package tla.domain.model;
 
+import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.Value;
 import tla.domain.dto.DocumentDto;
+import tla.domain.dto.NamedDocumentDto;
 
 /**
  * Reference to a fully qualified TLA document containing type, name, and eclass.
  */
 @Value
 @Builder
+@EqualsAndHashCode
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder(alphabetic = true)
 public class ObjectReference implements Comparable<ObjectReference> {
@@ -38,6 +45,12 @@ public class ObjectReference implements Comparable<ObjectReference> {
      * The document's name.
      */
     private String name;
+    /**
+     * An optional collection of ranges within the referenced object to which
+     * the reference's subject refers to specifically. Should only be used by
+     * annotations and comments.
+     */
+    private List<Range> ranges;
 
     /**
      * Default constructor.
@@ -52,22 +65,28 @@ public class ObjectReference implements Comparable<ObjectReference> {
         @JsonProperty(value = "id", required = true) String id,
         @JsonProperty(value = "eclass", required = true) String eclass,
         @JsonProperty(value = "type", required = false) String type,
-        @JsonProperty(value = "name", required = false) String name
+        @JsonProperty(value = "name", required = false) String name,
+        @JsonProperty(value = "ranges", required = false) List<Range> ranges
     ) {
         this.id = id;
         this.eclass = eclass;
         this.type = type;
         this.name = name;
+        this.ranges = ranges;
     }
 
     @Override
     public String toString() {
-        return Map.of(
+        Map<String, Object> mapRepr = Map.of(
             "id", id,
             "name", name != null ? name : "None",
             "type", type != null ? type : "None",
             "eclass", eclass
-        ).toString();
+        );
+        if (this.ranges != null && !this.ranges.isEmpty()) {
+            mapRepr.put("ranges", this.ranges);
+        }
+        return mapRepr.toString();
     }
 
     @Override
@@ -89,12 +108,38 @@ public class ObjectReference implements Comparable<ObjectReference> {
      * @return Reference object specifying the TLA document.
      */
     public static ObjectReference of(DocumentDto object) {
-        return new ObjectReference(
-            object.getId(),
-            object.getEclass(),
-            object.getType(),
-            object.getName()
-        );
+        if (object instanceof NamedDocumentDto) {
+            return new ObjectReference(
+                object.getId(),
+                object.getEclass(),
+                ((NamedDocumentDto) object).getType(),
+                ((NamedDocumentDto) object).getName(),
+                null
+            );
+        } else {
+            return new ObjectReference(
+                object.getId(),
+                object.getEclass(),
+                null, null, null
+            );
+        }
+    }
+
+    /**
+     * This class represents a selected range within a (most likely text- or sentence-)
+     * document,
+     * identified by the first and last token being covered by it.
+     */
+    @Getter
+    @Setter
+    public static class Range {
+
+        @JsonAlias("start")
+        private String from;
+
+        @JsonAlias("end")
+        private String to;
+
     }
 
 }
