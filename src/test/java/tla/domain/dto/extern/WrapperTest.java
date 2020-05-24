@@ -62,11 +62,12 @@ public class WrapperTest {
 
     @Test
     void searchResultsWrapperTest() throws Exception {
-        PageInfo p = new PageInfo();
-        p.setNumberOfElements(1);
-        p.setTotalElements(1);
-        p.setTotalPages(1);
-        p.setSize(20);
+        PageInfo p = PageInfo.builder()
+            .numberOfElements(1)
+            .totalElements(1)
+            .totalPages(1)
+            .size(20)
+            .build();
         LemmaDto l = (LemmaDto) Util.loadFromFile("lemma", "10070.json");
         SearchResultsWrapper<LemmaDto> searchResults = new SearchResultsWrapper<>(
             List.of(l),
