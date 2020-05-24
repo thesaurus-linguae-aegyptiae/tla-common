@@ -2,6 +2,7 @@ package tla.domain.dto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -30,7 +31,9 @@ public class AnnotationTest {
             () -> assertNotNull(a, "should not be null"),
             () -> assertNotNull(a.getName(), "expect name"),
             () -> assertEquals("annotation.lemma", a.getPassport().extractPaths().get(0), "lemma annotation field should exist in passport"),
-            () -> assertEquals("BTSAnnotation", a.getEclass(), "eclass must be `BTSAnnotation`")
+            () -> assertEquals("BTSAnnotation", a.getEclass(), "eclass must be `BTSAnnotation`"),
+            () -> assertTrue(!a.getBody().isEmpty(), "text content"),
+            () -> assertEquals(List.of("Sicher als Spießente (Anas acuta) identifiziert."), a.getBody(), "text content match")
         );
     }
 
@@ -61,6 +64,7 @@ public class AnnotationTest {
         a2.setEclass(a1.getEclass());
         a2.setId(a1.getId());
         a2.setType(a1.getType());
+        a2.setBody(a1.getBody());
         a2.setReviewState(a1.getReviewState());
         SortedMap<String, SortedSet<ObjectReference>> relations = new TreeMap<>();
         a1.getRelations().entrySet().stream().forEach(

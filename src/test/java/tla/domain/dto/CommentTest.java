@@ -2,13 +2,10 @@ package tla.domain.dto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
-import java.util.Collections;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

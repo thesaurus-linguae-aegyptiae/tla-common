@@ -1,5 +1,7 @@
 package tla.domain.dto;
 
+import java.util.Collection;
+
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -17,5 +19,7 @@ public class AnnotationDto extends NamedDocumentDto {
 
     @JsonAlias("title")
     private String name;
+
+    private Collection<String> body;
 
 }
