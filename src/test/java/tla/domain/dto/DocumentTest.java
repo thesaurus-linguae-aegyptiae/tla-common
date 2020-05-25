@@ -2,6 +2,8 @@ package tla.domain.dto;
 
 import org.junit.jupiter.api.Test;
 
+import tla.domain.dto.meta.DocumentDto;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

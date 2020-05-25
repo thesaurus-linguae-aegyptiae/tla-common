@@ -11,14 +11,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tla.domain.dto.DocumentDto;
+import tla.domain.dto.meta.AbstractDto;
+import tla.domain.dto.meta.DocumentDto;
 
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SingleDocumentWrapper<T extends DocumentDto> {
+public class SingleDocumentWrapper<T extends AbstractDto> {
 
     private static ObjectMapper mapper = new ObjectMapper();
 
@@ -50,7 +51,7 @@ public class SingleDocumentWrapper<T extends DocumentDto> {
     }
 
     @SuppressWarnings({"unchecked"})
-    public static SingleDocumentWrapper<DocumentDto> of(String src) throws Exception {
+    public static SingleDocumentWrapper<? extends AbstractDto> from(String src) throws Exception {
         return mapper.readValue(
             src,
             SingleDocumentWrapper.class

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import tla.domain.Util;
 import tla.domain.command.LemmaSearch;
-import tla.domain.dto.DocumentDto;
+import tla.domain.dto.meta.AbstractDto;
 import tla.domain.dto.LemmaDto;
 import tla.domain.dto.ThsEntryDto;
 
@@ -51,7 +51,7 @@ public class WrapperTest {
         ThsEntryDto t = (ThsEntryDto) Util.loadFromFile("ths", "2AVEQ3VFT5EEPF7NBH7RHCVBXA.json");
         SingleDocumentWrapper<LemmaDto> w = new SingleDocumentWrapper<>(l);
         w.addRelated(t);
-        SingleDocumentWrapper<DocumentDto> w2 = SingleDocumentWrapper.of(mapper.writeValueAsString(w));
+        SingleDocumentWrapper<? extends AbstractDto> w2 = SingleDocumentWrapper.from(mapper.writeValueAsString(w));
         assertAll("test deserialization",
             () -> assertEquals(w, w2, "deserialized instance should equal serialized origin"),
             () -> assertEquals(w.toString(), w2.toString(), "toString repr of both instances should equal"),

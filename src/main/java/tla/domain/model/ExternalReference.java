@@ -21,8 +21,12 @@ public class ExternalReference implements Comparable<ExternalReference> {
 
     @NonNull
     private String id;
+
     private String type;
 
+    /**
+     * Order by <code>type</code>, then by <code>id</code>.
+     */
     @Override
     public int compareTo(ExternalReference arg0) {
         if (this.getType() != null) {

@@ -1,4 +1,4 @@
-package tla.domain.dto;
+package tla.domain.dto.meta;
 
 import java.util.Collections;
 import java.util.SortedMap;
@@ -39,6 +39,6 @@ public abstract class NamedDocumentDto extends DocumentDto {
      * Creates a {@link ObjectReference} representation of this instance.
      */
     public ObjectReference toObjectReference() {
-        return ObjectReference.of(this);
+        return ObjectReference.from(this);
     }
 }

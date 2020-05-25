@@ -10,9 +10,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import tla.domain.dto.AnnotationDto;
 import tla.domain.dto.CorpusObjectDto;
 import tla.domain.dto.LemmaDto;
-import tla.domain.dto.NamedDocumentDto;
 import tla.domain.dto.TextDto;
 import tla.domain.dto.ThsEntryDto;
+import tla.domain.dto.meta.NamedDocumentDto;
 
 public class Util {
 

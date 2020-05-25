@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Singular;
 import lombok.experimental.SuperBuilder;
+import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Language;
 import tla.domain.model.meta.BTSeClass;
 

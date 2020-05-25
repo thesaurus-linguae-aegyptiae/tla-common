@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
+import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Paths;
 import tla.domain.model.meta.BTSeClass;
 

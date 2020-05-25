@@ -5,11 +5,11 @@ import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import tla.domain.command.LemmaSearch;
-import tla.domain.dto.DocumentDto;
+import tla.domain.dto.meta.AbstractDto;
 
 @Getter
 @NoArgsConstructor
-public class SearchResultsWrapper<T extends DocumentDto> {
+public class SearchResultsWrapper<T extends AbstractDto> {
 
     private List<T> content;
 

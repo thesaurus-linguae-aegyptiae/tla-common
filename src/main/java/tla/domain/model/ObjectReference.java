@@ -14,8 +14,8 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.Value;
-import tla.domain.dto.DocumentDto;
-import tla.domain.dto.NamedDocumentDto;
+import tla.domain.dto.meta.DocumentDto;
+import tla.domain.dto.meta.NamedDocumentDto;
 
 /**
  * Reference to a fully qualified TLA document containing type, name, and eclass.
@@ -107,7 +107,7 @@ public class ObjectReference implements Comparable<ObjectReference> {
      * @param object A TLA document instance.
      * @return Reference object specifying the TLA document.
      */
-    public static ObjectReference of(DocumentDto object) {
+    public static ObjectReference from(DocumentDto object) {
         if (object instanceof NamedDocumentDto) {
             return new ObjectReference(
                 object.getId(),

@@ -32,7 +32,13 @@ public class LemmaTest {
 
     @Test
     void builder() {
+        assertThrows(NullPointerException.class,
+            () -> {
+                LemmaDto.builder().eclass("BTSLemmaEntry").build();
+            }
+        );
         LemmaDto l = LemmaDto.builder()
+            .id("ID")
             .translation(Language.DE, List.of("value1"))
             .translation(Language.DE, List.of("value2"))
             .build();

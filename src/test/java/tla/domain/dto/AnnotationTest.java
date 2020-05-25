@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import tla.domain.Util;
+import tla.domain.dto.meta.DocumentDto;
 import tla.domain.model.EditorInfo;
 import tla.domain.model.ObjectReference;
 

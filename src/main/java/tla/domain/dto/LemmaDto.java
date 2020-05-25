@@ -12,6 +12,7 @@ import lombok.Singular;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Language;
 import tla.domain.model.LemmaWord;
 import tla.domain.model.extern.AttestedTimespan;

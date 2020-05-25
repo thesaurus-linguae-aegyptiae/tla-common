@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import tla.domain.Util;
+import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.ExternalReference;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.extern.AttestedTimespan;
@@ -41,7 +42,7 @@ public class ThsEntryTest {
         return AttestedTimespan.Period.builder()
             .begin(years.get(0))
             .end(years.get(1))
-            .ths(ObjectReference.of(term))
+            .ths(ObjectReference.from(term))
             .build();
     }
 

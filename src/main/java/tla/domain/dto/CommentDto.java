@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import tla.domain.dto.meta.DocumentDto;
 import tla.domain.model.meta.BTSeClass;
 
 @Data

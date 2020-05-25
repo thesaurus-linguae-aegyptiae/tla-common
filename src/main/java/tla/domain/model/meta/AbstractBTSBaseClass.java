@@ -5,9 +5,9 @@ import java.lang.annotation.Annotation;
 import javax.naming.InvalidNameException;
 
 import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
@@ -19,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @ToString
 @SuperBuilder
-@NoArgsConstructor
 @EqualsAndHashCode
+@NoArgsConstructor
 public abstract class AbstractBTSBaseClass {
 
     @Getter(AccessLevel.NONE)
