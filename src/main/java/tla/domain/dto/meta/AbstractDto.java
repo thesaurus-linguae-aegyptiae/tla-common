@@ -16,6 +16,7 @@ import tla.domain.dto.AnnotationDto;
 import tla.domain.dto.CommentDto;
 import tla.domain.dto.CorpusObjectDto;
 import tla.domain.dto.LemmaDto;
+import tla.domain.dto.SentenceDto;
 import tla.domain.dto.TextDto;
 import tla.domain.dto.ThsEntryDto;
 import tla.domain.model.meta.AbstractBTSBaseClass;
@@ -42,7 +43,8 @@ import tla.domain.model.meta.AbstractBTSBaseClass;
         @Type(value = TextDto.class, name = "BTSText"),
         @Type(value = ThsEntryDto.class, name = "BTSThsEntry"),
         @Type(value = CorpusObjectDto.class, name = "BTSTCObject"),
-        @Type(value = CommentDto.class, name = "BTSComment")
+        @Type(value = CommentDto.class, name = "BTSComment"),
+        @Type(value = SentenceDto.class, name = "BTSSentence")
     }
 )
 public abstract class AbstractDto extends AbstractBTSBaseClass {
