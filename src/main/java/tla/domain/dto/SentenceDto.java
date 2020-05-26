@@ -40,8 +40,9 @@ public class SentenceDto extends AbstractDto {
 
     @Getter
     @Setter
+    @NoArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public class SentenceContext {
+    public static class SentenceContext {
         private String textId;
         private String line;
         private String paragraph;
