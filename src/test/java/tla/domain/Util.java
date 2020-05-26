@@ -12,13 +12,13 @@ import tla.domain.dto.CorpusObjectDto;
 import tla.domain.dto.LemmaDto;
 import tla.domain.dto.TextDto;
 import tla.domain.dto.ThsEntryDto;
-import tla.domain.dto.meta.NamedDocumentDto;
+import tla.domain.dto.meta.AbstractDto;
 
 public class Util {
 
     static final String RESOURCE_PATH = "src/test/resources/sample/";
 
-    public static final Map<Class<? extends NamedDocumentDto>, String> SAMPLE_DIR_PATHS = Map.of(
+    public static final Map<Class<? extends AbstractDto>, String> SAMPLE_DIR_PATHS = Map.of(
         LemmaDto.class, "lemma",
         TextDto.class, "text",
         ThsEntryDto.class, "ths",
@@ -45,12 +45,12 @@ public class Util {
         );
     }
 
-    public static NamedDocumentDto loadFromFile(String path, String filename) throws Exception {
+    public static AbstractDto loadFromFile(String path, String filename) throws Exception {
         return mapper.readValue(
             new File(
                 getSampleFileFullPath(path, filename)
             ),
-            NamedDocumentDto.class
+            AbstractDto.class
         );
     }
 }
