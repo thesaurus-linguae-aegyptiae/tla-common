@@ -16,7 +16,7 @@ public class LemmaSearchTest {
     @Test
     void deserialize() throws Exception {
         LemmaSearch form = mapper.readValue(
-            "{\"script\":[\"hieratic\"],\"translation\":{\"text\":\"trans\",\"lang\":[\"en\"]},\"transcription\":\"nfr\",\"bibliography\":\"wb\",\"pos\":{\"type\":\"noun\"}}",
+            "{\"script\":[\"hieratic\"],\"translation\":{\"text\":\"trans\",\"lang\":[\"en\"]},\"transcription\":\"nfr\",\"bibliography\":\"wb\",\"pos\":{\"type\":\"noun\"},\"sort\":\"sortKey.desc\"}",
             LemmaSearch.class
         );
         assertAll("does deserialized search form have all expected properties?",
@@ -27,7 +27,8 @@ public class LemmaSearchTest {
             () -> assertEquals(Script.HIERATIC, form.getScript()[0], "script is hieratic"),
             () -> assertEquals("wb", form.getBibliography(), "wb mentioned in bibliography passport field"),
             () -> assertNotNull(form.getPos(), "part of speech/wordclass is defined"),
-            () -> assertEquals("noun", form.getPos().getType(), "correct POS")
+            () -> assertEquals("noun", form.getPos().getType(), "correct POS"),
+            () -> assertNotNull(form.getSort(), "sort order specs")
         );
     }
 

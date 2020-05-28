@@ -75,7 +75,7 @@ public class WrapperTest {
             p
         );
         assertAll("test paged search results wrapper",
-            () -> assertEquals(searchResults.getContent().size(), searchResults.getPage().getNumberOfElements()),
+            () -> assertEquals(searchResults.getResults().size(), searchResults.getPage().getNumberOfElements()),
             () -> assertTrue(searchResults.getPage().isLast()),
             () -> assertTrue(searchResults.getPage().isFirst()),
             () -> assertNotNull(searchResults.getQuery())

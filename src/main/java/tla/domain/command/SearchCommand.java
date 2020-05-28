@@ -2,6 +2,8 @@ package tla.domain.command;
 
 import java.lang.annotation.Annotation;
 
+import lombok.Getter;
+import lombok.Setter;
 import tla.domain.dto.meta.DocumentDto;
 import tla.domain.model.meta.AbstractBTSBaseClass;
 import tla.domain.model.meta.TLADTO;
@@ -12,7 +14,11 @@ import tla.domain.model.meta.TLADTO;
  * is typed, <i>or</i> override {@link #getDTOClass()} to return it
  * (the DTO class).
  */
+@Getter
+@Setter
 public abstract class SearchCommand<T extends AbstractBTSBaseClass> {
+
+    private String sort;
 
     /**
      * Retrieve the DTO model class targeted by this search command.

@@ -2,6 +2,8 @@ package tla.domain.dto.extern;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import tla.domain.command.LemmaSearch;
@@ -11,14 +13,15 @@ import tla.domain.dto.meta.AbstractDto;
 @NoArgsConstructor
 public class SearchResultsWrapper<T extends AbstractDto> {
 
-    private List<T> content;
+    @JsonAlias("content")
+    private List<T> results;
 
     private LemmaSearch query;
 
     private PageInfo page;
 
     public SearchResultsWrapper(List<T> content, LemmaSearch query, PageInfo page) throws Exception {
-        this.content = content;
+        this.results = content;
         this.query = query;
         this.page = page;
         if (page.getNumberOfElements() != content.size()) {
