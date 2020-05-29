@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import tla.domain.model.ObjectReference;
 
 import java.util.List;
@@ -111,11 +112,20 @@ public class AttestedTimespan {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Period implements Comparable<Period> {
 
+        /** first year */
+        @Setter
         private int begin;
+        /** last year */
+        @Setter
         private int end;
-
         /** Link to thesaurus entry */
         private ObjectReference ths;
+
+        public Period(int begin, int end) {
+            this.begin = begin;
+            this.end = end;
+            this.ths = null;
+        }
 
         @Override
         public int compareTo(Period arg0) {

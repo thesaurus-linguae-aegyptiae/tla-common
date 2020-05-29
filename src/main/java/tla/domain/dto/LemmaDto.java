@@ -41,6 +41,8 @@ public class LemmaDto extends NamedDocumentDto {
     @Singular
     private List<AttestedTimespan> attestations;
 
+    private AttestedTimespan.Period timeSpan;
+
     public LemmaDto() {
         this.translations = Collections.emptySortedMap();
         this.words = Collections.emptyList();
