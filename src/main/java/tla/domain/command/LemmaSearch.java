@@ -20,12 +20,24 @@ public class LemmaSearch extends SearchCommand<LemmaDto> {
 
     private String transcription;
 
+    @JsonInclude(
+        value = JsonInclude.Include.CUSTOM,
+        valueFilter = TypeSpec.EmptyObjectFilter.class
+    )
     private TypeSpec pos;
 
     private String root;
 
+    @JsonInclude(
+        value = JsonInclude.Include.CUSTOM,
+        valueFilter = TypeSpec.EmptyObjectFilter.class
+    )
     private TypeSpec annotationType;
 
+    @JsonInclude(
+        value = JsonInclude.Include.CUSTOM,
+        valueFilter = TranslationSpec.EmptyObjectFilter.class
+    )
     private TranslationSpec translation;
 
     private String bibliography;

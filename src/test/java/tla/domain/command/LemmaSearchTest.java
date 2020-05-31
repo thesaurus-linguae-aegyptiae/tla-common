@@ -32,4 +32,22 @@ public class LemmaSearchTest {
         );
     }
 
+    @Test
+    void serialize() throws Exception {
+        LemmaSearch form = new LemmaSearch();
+        form.setPos(new TypeSpec());
+        form.setAnnotationType(new TypeSpec());
+        form.setTranslation(new TranslationSpec());
+        String s = mapper.writeValueAsString(form);
+        form.getTranslation().setLang(new Language[]{});
+        String s2 = mapper.writeValueAsString(form);
+        assertAll("lemma search command serialization",
+            () -> assertTrue(!s.contains("pos"), "no pos in ser"),
+            () -> assertTrue(!s.contains("annotationType"), "no anno type in ser"),
+            () -> assertTrue(!s.contains("translation"), "no translation in ser"),
+            () -> assertTrue(!s.contains("lang"), "no translation lang in ser"),
+            () -> assertTrue(!s2.contains("translation"), "no translation")
+       );
+    }
+
 }

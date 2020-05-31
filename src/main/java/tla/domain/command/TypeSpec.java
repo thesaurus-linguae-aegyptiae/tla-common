@@ -15,4 +15,11 @@ import lombok.Setter;
 public class TypeSpec {
     private String type;
     private String subtype;
+
+    public static class EmptyObjectFilter {
+        @Override
+        public boolean equals(Object other) {
+            return other == null || ((TypeSpec) other).type == null && ((TypeSpec) other).subtype == null;
+        }
+    }
 }
