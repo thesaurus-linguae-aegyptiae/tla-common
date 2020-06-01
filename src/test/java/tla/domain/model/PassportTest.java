@@ -1,5 +1,11 @@
 package tla.domain.model;
 
+import java.io.File;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -11,12 +17,7 @@ import tla.domain.Util;
 import tla.domain.util.DtoPrettyPrinter;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.File;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import static tla.domain.util.IO.json;
 
 class PassportTest {
 
@@ -359,7 +360,7 @@ class PassportTest {
     void serialize_singleValue() throws Exception {
         Passport p = new Passport();
         p.add("key", new Passport("val"));
-        String out = mapper.writeValueAsString(p);
+        String out = json(p);
         assertEquals("{\"key\":[\"val\"]}", out, "serialized passport should only contain key and value");
     }
 
@@ -372,7 +373,7 @@ class PassportTest {
         q.setType("place");
         q.setName("memphis");
         p.add("key", q);
-        String out = mapper.writeValueAsString(p);
+        String out = json(p);
         assertEquals(
             "{\"key\":[{\"eclass\":\"BTSThsEntry\",\"id\":\"THSID\",\"name\":\"memphis\",\"type\":\"place\"}]}",
             out,

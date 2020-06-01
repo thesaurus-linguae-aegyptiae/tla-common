@@ -1,7 +1,5 @@
 package tla.domain.dto;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -9,10 +7,11 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.junit.jupiter.api.Test;
-
 import tla.domain.model.ObjectReference;
+
+import static tla.domain.util.IO.json;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CommentTest {
 
@@ -76,8 +75,8 @@ public class CommentTest {
             () -> assertEquals(c1.toString(), c2.toString(), "string repr"),
             () -> assertEquals(c1.hashCode(), c2.hashCode(), "hashcode"),
             () -> assertEquals(
-                mapper.writeValueAsString(c1),
-                mapper.writeValueAsString(c2),
+                json(c1),
+                json(c2),
                 "json serialization"
             )
         );

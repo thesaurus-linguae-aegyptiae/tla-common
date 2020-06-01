@@ -1,13 +1,13 @@
 package tla.domain.command;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.junit.jupiter.api.Test;
 
 import tla.domain.model.Language;
 import tla.domain.model.Script;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static tla.domain.util.IO.json;
 
 public class LemmaSearchTest {
 
@@ -38,9 +38,9 @@ public class LemmaSearchTest {
         form.setPos(new TypeSpec());
         form.setAnnotationType(new TypeSpec());
         form.setTranslation(new TranslationSpec());
-        String s = mapper.writeValueAsString(form);
+        String s = json(form);
         form.getTranslation().setLang(new Language[]{});
-        String s2 = mapper.writeValueAsString(form);
+        String s2 = json(form);
         assertAll("lemma search command serialization",
             () -> assertTrue(!s.contains("pos"), "no pos in ser"),
             () -> assertTrue(!s.contains("annotationType"), "no anno type in ser"),

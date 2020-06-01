@@ -25,6 +25,7 @@ import tla.domain.model.Transcription;
 import tla.domain.util.DtoPrettyPrinter;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static tla.domain.util.IO.json;
 
 public class LemmaTest {
 
@@ -167,7 +168,7 @@ public class LemmaTest {
             .id("id")
             .word(new LemmaWord(new Transcription("nfr", "nfr"), "N35-Z3"))
             .build();
-        String ser = mapper.writeValueAsString(l);
+        String ser = json(l);
         LemmaDto l2 = mapper.readValue(ser, LemmaDto.class);
         assertAll("test lemma word serialization",
             () -> assertTrue(ser.contains("\"nfr\""), "transcription should be serialized"),
@@ -181,7 +182,7 @@ public class LemmaTest {
             .id("id")
             .translation(Language.EN, Arrays.asList("meaning"))
             .build();
-        String out = mapper.writeValueAsString(l);
+        String out = json(l);
         assertAll("empty properties should be omitted in serialization",
             () -> assertTrue(out.contains("\"en\""), "english translation should be included"),
             () -> assertTrue(!out.contains("\"fr\""), "french translation should be omitted"),
