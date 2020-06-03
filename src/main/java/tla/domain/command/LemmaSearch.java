@@ -24,7 +24,7 @@ public class LemmaSearch extends SearchCommand<LemmaDto> {
         value = JsonInclude.Include.CUSTOM,
         valueFilter = TypeSpec.EmptyObjectFilter.class
     )
-    private TypeSpec pos;
+    private TypeSpec wordClass;
 
     private String root;
 

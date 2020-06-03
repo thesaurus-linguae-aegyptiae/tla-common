@@ -16,7 +16,7 @@ public class LemmaSearchTest {
     @Test
     void deserialize() throws Exception {
         LemmaSearch form = mapper.readValue(
-            "{\"script\":[\"hieratic\"],\"translation\":{\"text\":\"trans\",\"lang\":[\"en\"]},\"transcription\":\"nfr\",\"bibliography\":\"wb\",\"pos\":{\"type\":\"noun\"},\"sort\":\"sortKey.desc\"}",
+            "{\"@class\":\"tla.domain.command.LemmaSearch\",\"script\":[\"hieratic\"],\"translation\":{\"text\":\"trans\",\"lang\":[\"en\"]},\"transcription\":\"nfr\",\"bibliography\":\"wb\",\"wordClass\":{\"type\":\"noun\"},\"sort\":\"sortKey.desc\"}",
             LemmaSearch.class
         );
         assertAll("does deserialized search form have all expected properties?",
@@ -26,8 +26,8 @@ public class LemmaSearchTest {
             () -> assertEquals(1, form.getScript().length, "1 script"),
             () -> assertEquals(Script.HIERATIC, form.getScript()[0], "script is hieratic"),
             () -> assertEquals("wb", form.getBibliography(), "wb mentioned in bibliography passport field"),
-            () -> assertNotNull(form.getPos(), "part of speech/wordclass is defined"),
-            () -> assertEquals("noun", form.getPos().getType(), "correct POS"),
+            () -> assertNotNull(form.getWordClass(), "part of speech/wordclass is defined"),
+            () -> assertEquals("noun", form.getWordClass().getType(), "correct POS"),
             () -> assertNotNull(form.getSort(), "sort order specs")
         );
     }
@@ -35,7 +35,7 @@ public class LemmaSearchTest {
     @Test
     void serialize() throws Exception {
         LemmaSearch form = new LemmaSearch();
-        form.setPos(new TypeSpec());
+        form.setWordClass(new TypeSpec());
         form.setAnnotationType(new TypeSpec());
         form.setTranslation(new TranslationSpec());
         String s = json(form);
