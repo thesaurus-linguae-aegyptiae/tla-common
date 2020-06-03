@@ -1,6 +1,7 @@
 package tla.domain.dto.extern;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -23,6 +24,8 @@ public class SearchResultsWrapper<T extends AbstractDto> {
     private SearchCommand<? extends AbstractDto> query;
 
     private PageInfo page;
+
+    private Map<String, Map<String, Long>> facets;
 
     public SearchResultsWrapper(List<T> hits, SearchCommand<? extends AbstractDto> query) {
         this.results = hits;
@@ -67,5 +70,12 @@ public class SearchResultsWrapper<T extends AbstractDto> {
         }
     }
 
+    public SearchResultsWrapper(
+        List<T> items, SearchCommand<? extends AbstractDto> query,
+        PageInfo page, Map<String, Map<String, Long>> facets
+    ) throws Exception {
+        this(items, query, page);
+        this.facets = facets;
+    }
 
 }
