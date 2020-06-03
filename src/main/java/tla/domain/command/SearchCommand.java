@@ -2,6 +2,9 @@ package tla.domain.command;
 
 import java.lang.annotation.Annotation;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import lombok.Getter;
 import lombok.Setter;
 import tla.domain.dto.meta.DocumentDto;
@@ -16,6 +19,12 @@ import tla.domain.model.meta.TLADTO;
  */
 @Getter
 @Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.CLASS,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "@class"
+)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public abstract class SearchCommand<T extends AbstractBTSBaseClass> {
 
     private String sort;
@@ -36,5 +45,7 @@ public abstract class SearchCommand<T extends AbstractBTSBaseClass> {
         }
         return DocumentDto.class;
     }
+
+    public void setDTOClass(Class<? extends AbstractBTSBaseClass> dtoclass) {}
 
 }
