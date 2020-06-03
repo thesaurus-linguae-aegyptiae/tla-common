@@ -3,33 +3,43 @@ package tla.domain.dto.extern;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import tla.domain.command.LemmaSearch;
+import tla.domain.command.SearchCommand;
 import tla.domain.dto.meta.AbstractDto;
 
 @Getter
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResultsWrapper<T extends AbstractDto> {
 
     @JsonAlias("content")
     private List<T> results;
 
-    private LemmaSearch query;
+    private SearchCommand<? extends AbstractDto> query;
 
     private PageInfo page;
 
-    public SearchResultsWrapper(List<T> content, LemmaSearch query, PageInfo page) throws Exception {
-        this.results = content;
+    public SearchResultsWrapper(List<T> hits, SearchCommand<? extends AbstractDto> query) {
+        this.results = hits;
         this.query = query;
+    }
+
+    public SearchResultsWrapper(
+        List<T> hits, SearchCommand<? extends AbstractDto> query, PageInfo page
+    ) throws Exception {
+        this(hits, query);
         this.page = page;
-        if (page.getNumberOfElements() != content.size()) {
+        if (page.getNumberOfElements() != this.results.size()) {
             throw new IllegalArgumentException(
                 String.format(
                     "page info element count %s does not match actual element count %s",
                     page.getNumberOfElements(),
-                    content.size()
+                    this.results.size()
                 )
             );
         }
@@ -56,5 +66,6 @@ public class SearchResultsWrapper<T extends AbstractDto> {
             );
         }
     }
+
 
 }

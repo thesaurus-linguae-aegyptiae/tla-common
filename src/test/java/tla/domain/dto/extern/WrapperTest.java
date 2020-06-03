@@ -103,9 +103,8 @@ public class WrapperTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     void searchResultsDeserialize() throws Exception {
-        SearchResultsWrapper<LemmaDto> w = mapper.readValue(
+        SearchResultsWrapper<?> w = mapper.readValue(
             Util.loadFromFileAsString("lemma", "search.json"),
             SearchResultsWrapper.class
         );

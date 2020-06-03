@@ -1,21 +1,21 @@
 package tla.domain.dto;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static tla.domain.util.IO.json;
+
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+
 import tla.domain.model.ObjectReference;
 
-import static tla.domain.util.IO.json;
-import static org.junit.jupiter.api.Assertions.*;
-
 public class CommentTest {
-
-    private static ObjectMapper mapper = new ObjectMapper();
 
     public static CommentDto loadFromFile(String id) throws Exception {
         return tla.domain.util.IO.loadFromFile(
