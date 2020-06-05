@@ -143,7 +143,7 @@ public class LemmaTest {
         assertAll("test relations",
             () -> assertTrue(l.getRelations() != null, "relations should not be null"),
             () -> assertEquals(1, l.getRelations().size(), "expect exactly 1 relations type"),
-            () -> assertEquals("successor", l.getRelations().firstKey(), "relation type expected to be 'successor'"),
+            () -> assertTrue(l.getRelations().containsKey("successor"), "relation type expected to be 'successor'"),
             () -> assertEquals(1, l.getRelations().get("successor").size(), "exactly 1 relation expected"),
             () -> assertEquals("BTSLemmaEntry", l.getRelations().get("successor").first().getEclass(), "relation points to other lemma")
         );

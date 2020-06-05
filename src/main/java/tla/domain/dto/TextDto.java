@@ -19,6 +19,10 @@ import tla.domain.model.meta.BTSeClass;
 public class TextDto extends NamedDocumentDto {
 
     private String corpus;
+
+    /**
+     * object tree paths leading to this text
+     */
     private Paths paths;
 
     @JsonAlias("sentences")

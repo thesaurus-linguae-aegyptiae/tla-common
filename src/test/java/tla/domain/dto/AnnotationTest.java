@@ -1,9 +1,12 @@
 package tla.domain.dto;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-import java.util.SortedMap;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -67,7 +70,7 @@ public class AnnotationTest {
         a2.setType(a1.getType());
         a2.setBody(a1.getBody());
         a2.setReviewState(a1.getReviewState());
-        SortedMap<String, SortedSet<ObjectReference>> relations = new TreeMap<>();
+        Map<String, SortedSet<ObjectReference>> relations = new TreeMap<>();
         a1.getRelations().entrySet().stream().forEach(
             e -> {
                 relations.put(
