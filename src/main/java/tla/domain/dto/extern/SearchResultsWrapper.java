@@ -7,10 +7,13 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import tla.domain.command.SearchCommand;
 import tla.domain.dto.meta.AbstractDto;
+import tla.domain.dto.meta.DocumentDto;
 
 @Getter
 @NoArgsConstructor
@@ -18,13 +21,33 @@ import tla.domain.dto.meta.AbstractDto;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResultsWrapper<T extends AbstractDto> {
 
+    /**
+     * the actual search results, one page full of them.
+     */
     @JsonAlias("content")
     private List<T> results;
 
+    /**
+     * any objects directly related to the search results in a way
+     * that we might need those to render the result.
+     */
+    @Setter(AccessLevel.NONE)
+    private Map<String, Map<String, DocumentDto>> related;
+
+    /**
+     * the original command DTO to which this is the response.
+     */
     private SearchCommand<? extends AbstractDto> query;
 
+    /**
+     * page information
+     */
     private PageInfo page;
 
+    /**
+     * ES aggregation buckets little reorganized and given a different
+     * name.
+     */
     private Map<String, Map<String, Long>> facets;
 
     public SearchResultsWrapper(List<T> hits, SearchCommand<? extends AbstractDto> query) {

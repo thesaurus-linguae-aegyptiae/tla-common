@@ -12,6 +12,7 @@ import lombok.Singular;
 import lombok.experimental.SuperBuilder;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Language;
+import tla.domain.model.Paths;
 import tla.domain.model.meta.BTSeClass;
 
 /**
@@ -25,6 +26,11 @@ public class ThsEntryDto extends NamedDocumentDto {
 
     @JsonAlias("sortkey")
     private String sortKey;
+
+    /**
+     * object tree paths leading to this entry
+     */
+    private Paths paths;
 
     @Singular
     private SortedMap<Language, List<String>> translations;

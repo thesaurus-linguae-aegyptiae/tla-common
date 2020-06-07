@@ -16,6 +16,9 @@ import tla.domain.model.meta.BTSeClass;
 public class CorpusObjectDto extends NamedDocumentDto {
 
     private String corpus;
+    /**
+     * corpus object tree paths leading to this object
+     */
     private Paths paths;
 
 }
