@@ -2,11 +2,20 @@ package tla.domain.dto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.jupiter.api.Test;
 
 import tla.domain.Util;
+import tla.domain.command.TypeSpec;
+import tla.domain.model.SentenceToken;
+import tla.domain.model.Transcription;
 
 public class SentenceTest {
+
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Test
     void deserialize() throws Exception {
@@ -29,6 +38,36 @@ public class SentenceTest {
         assertAll("assert equality",
             () -> assertEquals(s, s2, "instance"),
             () -> assertEquals(s.hashCode(), s2.hashCode(), "hashcode")
+        );
+    }
+
+    @Test
+    void serialize() throws Exception {
+        SentenceDto dto = new SentenceDto();
+        dto.setTranscription(new Transcription());
+        dto.getTranscription().setMdc("");
+        SentenceToken t = new SentenceToken();
+        t.setLemma(new SentenceToken.Lemmatization("", new TypeSpec()));
+        t.setFlexion(new SentenceToken.Flexion());
+        t.setType("lc");
+        dto.setTokens(List.of(t));
+        String s = mapper.writeValueAsString(dto);
+        assertAll("serialize minimal sentence dto",
+            () -> assertEquals("{\"eclass\":\"BTSSentence\",\"tokens\":[{\"type\":\"lc\"}]}", s)
+        );
+    }
+
+    @Test
+    void deserializeDefaults() throws Exception {
+        SentenceDto dto = mapper.readValue(
+            "{\"eclass\":\"BTSSentence\",\"tokens\":[{}]}",
+            SentenceDto.class
+        );
+        assertAll("check for null contents",
+            () -> assertNotNull(dto.getTokens().get(0), "token"),
+            () -> assertNull(dto.getTokens().get(0).getTranscription(), "token transcription"),
+            () -> assertNull(dto.getTokens().get(0).getFlexion(), "flexion"),
+            () -> assertNull(dto.getTokens().get(0).getLemma(), "lemma info")
         );
     }
 }

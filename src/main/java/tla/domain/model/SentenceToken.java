@@ -26,8 +26,16 @@ public class SentenceToken {
 
     private String label;
 
+     @JsonInclude(
+         value = JsonInclude.Include.CUSTOM,
+         valueFilter = Lemmatization.EmptyObjectFilter.class
+     )
     private Lemmatization lemma;
 
+    @JsonInclude(
+        value = JsonInclude.Include.CUSTOM,
+        valueFilter = Flexion.EmptyObjectFilter.class
+    )
     private Flexion flexion;
 
     private String glyphs;
@@ -46,6 +54,17 @@ public class SentenceToken {
 
         private String verbal;
         private Long numeric;
+
+        public static class EmptyObjectFilter {
+            public boolean equals(Object obj) {
+                if (obj != null && obj instanceof Flexion) {
+                    Flexion f = (Flexion) obj;
+                    return (f.verbal == null || f.verbal.isBlank()) &&
+                        (f.numeric == null || f.numeric == 0);
+                }
+                return true;
+            }
+        }
 
     }
 
@@ -82,7 +101,6 @@ public class SentenceToken {
                 return true;
             }
         }
-
-
     }
+
 }

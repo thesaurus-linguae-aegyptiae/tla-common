@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Transcription {
 
     /**
@@ -26,7 +26,7 @@ public class Transcription {
      * Determines if an instance should be considered "empty" by jackson
      * object mapper.
      */
-    public static class EmptyObjectSpecs {
+    public static class EmptyObjectFilter {
         @Override
         public boolean equals(Object obj) {
             if (obj != null && obj instanceof Transcription) {

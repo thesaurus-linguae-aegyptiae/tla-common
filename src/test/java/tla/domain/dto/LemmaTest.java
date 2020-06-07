@@ -187,7 +187,8 @@ public class LemmaTest {
             () -> assertTrue(out.contains("\"en\""), "english translation should be included"),
             () -> assertTrue(!out.contains("\"fr\""), "french translation should be omitted"),
             () -> assertTrue(!out.contains("\"externalReferences\""), "externalReferences field should not be present"),
-            () -> assertTrue(!out.contains("\"words\""), "words field should not be present")
+            () -> assertTrue(!out.contains("\"words\""), "words field should not be present"),
+            () -> assertEquals("{\"eclass\":\"BTSLemmaEntry\",\"id\":\"id\",\"translations\":{\"en\":[\"meaning\"]}}", out)
         );
 
     }
