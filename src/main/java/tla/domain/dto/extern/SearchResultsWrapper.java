@@ -55,6 +55,11 @@ public class SearchResultsWrapper<T extends AbstractDto> {
         this.query = query;
     }
 
+    /**
+     * put search result DTOs, the original search command DTO, and page info
+     * together and be very weird about slight irregularities in the page info
+     * parameters.
+     */
     public SearchResultsWrapper(
         List<T> hits, SearchCommand<? extends AbstractDto> query, PageInfo page
     ) throws Exception {

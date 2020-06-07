@@ -11,7 +11,15 @@ import tla.domain.model.Language;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class TranslationSpec {
 
+    /**
+     * search terms expected in an object's translations.
+     */
     private String text;
+
+    /**
+     * Specify zero or more languages in which translations ought to be
+     * searched.
+     */
     private Language[] lang;
 
     public static class EmptyObjectFilter {

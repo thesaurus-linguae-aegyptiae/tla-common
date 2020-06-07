@@ -1,5 +1,6 @@
 package tla.domain.command;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -18,8 +19,23 @@ public class TypeSpec {
 
     public static class EmptyObjectFilter {
         @Override
-        public boolean equals(Object other) {
-            return other == null || ((TypeSpec) other).type == null && ((TypeSpec) other).subtype == null;
+        public boolean equals(Object o) {
+            if (o != null && o instanceof TypeSpec) {
+                TypeSpec s = (TypeSpec) o;
+                return (s.getType() == null || s.getType().isBlank()) &&
+                    (s.getSubtype() == null || s.getSubtype().isBlank());
+            }
+            return true;
         }
+        static EmptyObjectFilter inst = new EmptyObjectFilter();
     }
+
+    /**
+     * whether there's nothing worth serializing in here.
+     */
+    @JsonIgnore
+    public boolean isEmpty() {
+        return EmptyObjectFilter.inst.equals(this);
+    }
+
 }
