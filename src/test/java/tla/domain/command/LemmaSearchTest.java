@@ -36,7 +36,7 @@ public class LemmaSearchTest {
     void serialize() throws Exception {
         LemmaSearch form = new LemmaSearch();
         form.setWordClass(new TypeSpec());
-        form.setAnnotationType(new TypeSpec());
+        form.setAnno(new TypeSpec());
         form.setTranslation(new TranslationSpec());
         String s = json(form);
         form.getTranslation().setLang(new Language[]{});
