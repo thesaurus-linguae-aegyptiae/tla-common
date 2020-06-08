@@ -11,12 +11,13 @@ import lombok.experimental.SuperBuilder;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Paths;
 import tla.domain.model.meta.BTSeClass;
+import tla.domain.model.meta.UserFriendly;
 
 @Data
 @SuperBuilder
 @BTSeClass("BTSText")
 @EqualsAndHashCode(callSuper = true)
-public class TextDto extends NamedDocumentDto {
+public class TextDto extends NamedDocumentDto implements UserFriendly {
 
     private String corpus;
 
@@ -24,6 +25,8 @@ public class TextDto extends NamedDocumentDto {
      * object tree paths leading to this text
      */
     private Paths paths;
+
+    private String sUID;
 
     @JsonAlias("sentences")
     private List<String> sentenceIds;

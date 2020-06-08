@@ -14,6 +14,7 @@ import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Language;
 import tla.domain.model.Paths;
 import tla.domain.model.meta.BTSeClass;
+import tla.domain.model.meta.UserFriendly;
 
 /**
  * DTO Model for serial transfer of TLA thesaurus entry objects.
@@ -22,7 +23,7 @@ import tla.domain.model.meta.BTSeClass;
 @SuperBuilder
 @BTSeClass("BTSThsEntry")
 @EqualsAndHashCode(callSuper = true)
-public class ThsEntryDto extends NamedDocumentDto {
+public class ThsEntryDto extends NamedDocumentDto implements UserFriendly {
 
     @JsonAlias("sortkey")
     private String sortKey;
@@ -31,6 +32,8 @@ public class ThsEntryDto extends NamedDocumentDto {
      * object tree paths leading to this entry
      */
     private Paths paths;
+
+    private String sUID;
 
     @Singular
     private SortedMap<Language, List<String>> translations;

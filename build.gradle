@@ -16,7 +16,7 @@ plugins {
 }
 
 group = 'com.github.jkatzwinkel'
-version = '0.0.7-SNAPSHOT'
+version = '0.0.701-SNAPSHOT'
 sourceCompatibility = '11'
 
 publishing {
