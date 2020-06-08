@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import lombok.Setter;
 import lombok.Value;
 import tla.domain.dto.meta.DocumentDto;
 import tla.domain.dto.meta.NamedDocumentDto;
+import tla.domain.model.meta.Resolvable;
 
 /**
  * Reference to a fully qualified TLA document containing type, name, and eclass.
@@ -25,7 +27,7 @@ import tla.domain.dto.meta.NamedDocumentDto;
 @EqualsAndHashCode
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder(alphabetic = true)
-public class ObjectReference implements Comparable<ObjectReference> {
+public class ObjectReference implements Comparable<Resolvable>, Resolvable {
 
     /**
      * ID of the referenced TLA document. Must not be null.
@@ -47,8 +49,8 @@ public class ObjectReference implements Comparable<ObjectReference> {
     private String name;
     /**
      * An optional collection of ranges within the referenced object to which
-     * the reference's subject refers to specifically. Should only be used by
-     * annotations and comments.
+     * the reference's subject refers to specifically. Only be used by
+     * annotations, comments, and some subtexts ("glosses").
      */
     private List<Range> ranges;
 
@@ -90,7 +92,7 @@ public class ObjectReference implements Comparable<ObjectReference> {
     }
 
     @Override
-    public int compareTo(ObjectReference arg0) {
+    public int compareTo(Resolvable arg0) {
         int diff = 0;
         if (this.getEclass().equals(arg0.getEclass())) {
             diff = this.getId().compareTo(arg0.getId());

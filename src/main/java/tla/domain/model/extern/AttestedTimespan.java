@@ -6,10 +6,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tla.domain.model.ObjectReference;
+import tla.domain.model.meta.Resolvable;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.AllArgsConstructor;
 
@@ -119,7 +121,8 @@ public class AttestedTimespan {
         @Setter
         private int end;
         /** Link to thesaurus entry */
-        private ObjectReference ths;
+        @JsonDeserialize(as = ObjectReference.class)
+        private Resolvable ths;
 
         public Period(int begin, int end) {
             this.begin = begin;
