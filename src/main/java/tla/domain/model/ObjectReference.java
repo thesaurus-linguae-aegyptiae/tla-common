@@ -127,21 +127,4 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
         }
     }
 
-    /**
-     * This class represents a selected range within a (most likely text- or sentence-)
-     * document,
-     * identified by the first and last token being covered by it.
-     */
-    @Getter
-    @Setter
-    public static class Range {
-
-        @JsonAlias("start")
-        private String from;
-
-        @JsonAlias("end")
-        private String to;
-
-    }
-
 }

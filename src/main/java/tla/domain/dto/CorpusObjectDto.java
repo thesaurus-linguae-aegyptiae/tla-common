@@ -1,11 +1,16 @@
 package tla.domain.dto;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import tla.domain.dto.meta.NamedDocumentDto;
-import tla.domain.model.Paths;
+import tla.domain.model.ObjectPath;
 import tla.domain.model.meta.BTSeClass;
 import tla.domain.model.meta.UserFriendly;
 
@@ -16,12 +21,14 @@ import tla.domain.model.meta.UserFriendly;
 @EqualsAndHashCode(callSuper = true)
 public class CorpusObjectDto extends NamedDocumentDto implements UserFriendly {
 
-    private String sUID;
+    @JsonAlias({"hash", "suid"})
+    @JsonProperty("suid")
+    private String SUID;
 
     private String corpus;
     /**
      * corpus object tree paths leading to this object
      */
-    private Paths paths;
+    private List<ObjectPath> paths;
 
 }

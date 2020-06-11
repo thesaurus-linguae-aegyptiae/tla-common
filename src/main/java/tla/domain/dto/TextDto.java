@@ -4,12 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 import tla.domain.dto.meta.NamedDocumentDto;
-import tla.domain.model.Paths;
+import tla.domain.model.ObjectPath;
 import tla.domain.model.meta.BTSeClass;
 import tla.domain.model.meta.UserFriendly;
 
@@ -24,9 +25,11 @@ public class TextDto extends NamedDocumentDto implements UserFriendly {
     /**
      * object tree paths leading to this text
      */
-    private Paths paths;
+    private List<ObjectPath> paths;
 
-    private String sUID;
+    @JsonAlias({"hash", "suid"})
+    @JsonProperty("suid")
+    private String SUID;
 
     @JsonAlias("sentences")
     private List<String> sentenceIds;

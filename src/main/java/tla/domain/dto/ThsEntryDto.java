@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +13,7 @@ import lombok.Singular;
 import lombok.experimental.SuperBuilder;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Language;
-import tla.domain.model.Paths;
+import tla.domain.model.ObjectPath;
 import tla.domain.model.meta.BTSeClass;
 import tla.domain.model.meta.UserFriendly;
 
@@ -31,9 +32,11 @@ public class ThsEntryDto extends NamedDocumentDto implements UserFriendly {
     /**
      * object tree paths leading to this entry
      */
-    private Paths paths;
+    private List<ObjectPath> paths;
 
-    private String sUID;
+    @JsonAlias({"hash", "suid"})
+    @JsonProperty("suid")
+    private String SUID;
 
     @Singular
     private SortedMap<Language, List<String>> translations;

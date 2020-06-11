@@ -53,4 +53,9 @@ public class IO {
         }
     }
 
+    /** get a jackson {@link ObjectMapper} instance*/
+    public static ObjectMapper getMapper() {
+        return mapper;
+    }
+
 }
