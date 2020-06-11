@@ -3,7 +3,6 @@ package tla.domain.model;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.Value;
 import tla.domain.dto.meta.DocumentDto;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.meta.Resolvable;
@@ -22,8 +21,10 @@ import tla.domain.model.meta.Resolvable;
 /**
  * Reference to a fully qualified TLA document containing type, name, and eclass.
  */
-@Value
+@Getter
+@Setter
 @Builder
+@NoArgsConstructor
 @EqualsAndHashCode
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder(alphabetic = true)

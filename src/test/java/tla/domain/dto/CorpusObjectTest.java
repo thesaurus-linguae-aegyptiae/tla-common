@@ -59,7 +59,7 @@ public class CorpusObjectTest {
             .build();
         o1.getEditors().setDate("created", "2015-12-04");
         o1.getEditors().setDate("updated", "2015-12-05");
-        assertThrows(Exception.class,
+        assertDoesNotThrow(
             () -> o1.getEditors().setDate("random", "2015-12-06")
         );
         String s = IO.json(o1);
