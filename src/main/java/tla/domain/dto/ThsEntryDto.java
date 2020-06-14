@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.SortedMap;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,8 +33,6 @@ public class ThsEntryDto extends NamedDocumentDto implements UserFriendly {
      */
     private List<ObjectPath> paths;
 
-    @JsonAlias({"hash", "suid"})
-    @JsonProperty("suid")
     private String SUID;
 
     @Singular
