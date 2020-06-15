@@ -89,10 +89,12 @@ public class ObjectReferenceTest {
             mapper.writeValueAsString(ref1),
             ObjectReference.class
         );
-        assertAll("test objectreference identify",
-            () -> assertEquals(ref2, ref1, "deserialized serialization should be equal"),
-            () -> assertEquals(ref2.hashCode(), ref1.hashCode(), "hashcodes should match"),
-            () -> assertEquals(ref2.toString(), ref1.toString(), "toString() should match")
+        assertAll("test objectreference equality",
+            () -> assertEquals(ref1.getClass(), ref2.getClass(), "same type"),
+            () -> assertEquals(ref1, ref2, "deserialized serialization should be equal"),
+            () -> assertEquals(IO.json(ref1), IO.json(ref2), "JSON serialization"),
+            () -> assertEquals(ref1.hashCode(), ref2.hashCode(), "hashcodes should match"),
+            () -> assertEquals(ref1.toString(), ref2.toString(), "toString() should match")
         );
     }
 

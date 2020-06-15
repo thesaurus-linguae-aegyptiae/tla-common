@@ -1,7 +1,6 @@
 package tla.domain.model;
 
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -14,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 import tla.domain.dto.meta.DocumentDto;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.meta.Resolvable;
@@ -24,10 +24,11 @@ import tla.domain.model.meta.Resolvable;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
+@ToString
 @EqualsAndHashCode
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@NoArgsConstructor
 @JsonPropertyOrder(alphabetic = true)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ObjectReference implements Comparable<Resolvable>, Resolvable {
 
     /**
@@ -53,7 +54,9 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
      * the reference's subject refers to specifically. Only be used by
      * annotations, comments, and some subtexts ("glosses").
      */
-    private List<Range> ranges;
+    @Builder.Default
+    @JsonPropertyOrder(alphabetic = true)
+    private List<Range> ranges = null;
 
     /**
      * Default constructor.
@@ -76,20 +79,6 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
         this.type = type;
         this.name = name;
         this.ranges = ranges;
-    }
-
-    @Override
-    public String toString() {
-        Map<String, Object> mapRepr = Map.of(
-            "id", id,
-            "name", name != null ? name : "None",
-            "type", type != null ? type : "None",
-            "eclass", eclass
-        );
-        if (this.ranges != null && !this.ranges.isEmpty()) {
-            mapRepr.put("ranges", this.ranges);
-        }
-        return mapRepr.toString();
     }
 
     @Override
