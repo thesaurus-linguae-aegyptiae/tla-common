@@ -6,10 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 
 import tla.domain.Util;
+import tla.domain.model.ExternalReference;
 import tla.domain.model.ObjectPath;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.Passport;
@@ -51,14 +55,19 @@ public class TextTest {
             .SUID("xy")
             .corpus("corpus")
             .paths(paths)
+            .externalReference("trismegistos", new TreeSet<>(Set.of(new ExternalReference("xx", "text"))))
             .build();
         TextDto t2 = TextDto.builder()
             .id("1")
             .SUID("xy")
             .corpus("corpus")
             .paths(paths)
-            .build();
-        assertEquals(t1, t2, "two builder-built instances should be euql");
+            .externalReferences(
+                Map.of(
+                    "trismegistos", new TreeSet<>(Set.of(ExternalReference.builder().id("xx").type("text").build()))
+                )
+            ).build();
+        assertEquals(t1, t2, "two builder-built instances should be equal");
         assertEquals(t1.toString(), t2.toString(), "both instances should serialize into same toString() result");
         assertEquals(t1.getPaths(), t2.getPaths(), "paths should be the same");
         assertTrue(IO.json(t1).contains("\"suid\":\"xy\""), "short ID serialized as 'suid'");

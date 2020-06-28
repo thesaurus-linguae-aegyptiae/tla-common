@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ThsEntryTest {
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper = tla.domain.util.IO.getMapper();
 
     public static AttestedTimespan.Period loadThsEntryFromFileAndConvertToTimePeriod(String id) throws Exception {
         NamedDocumentDto term = (NamedDocumentDto) Util.loadFromFile("ths", String.format("%s.json", id));
@@ -92,11 +92,11 @@ public class ThsEntryTest {
     @Test
     void equality() throws Exception {
         ThsEntryDto t1 = mapper.readValue(
-            "{\"eclass\":\"BTSThsEntry\",\"id\":\"1\",\"externalReferences\":{\"thot\":[{\"id\":\"ID\",\"type\":\"TYPE\"}]},"
+            "{\"eclass\":\"BTSThsEntry\",\"id\":\"1\",\"subtype\":\"st\",\"externalReferences\":{\"thot\":[{\"id\":\"ID\",\"type\":\"TYPE\"}]},"
             + "\"suid\":\"xxx\",\"translations\":{\"de\":[\"ja\"]}}",
             ThsEntryDto.class
         );
-        ThsEntryDto t2 = ThsEntryDto.builder().id("1")
+        ThsEntryDto t2 = ThsEntryDto.builder().id("1").subtype("st")
             .externalReference("thot", new TreeSet<>(
                 List.of(ExternalReference.builder().id("ID").type("TYPE").build()))
             ).SUID("xxx")
