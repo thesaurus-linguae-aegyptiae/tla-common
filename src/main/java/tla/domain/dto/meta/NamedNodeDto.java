@@ -36,7 +36,7 @@ import tla.domain.model.meta.UserFriendly;
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class NamedNodeDto extends NamedDocumentDto implements Hierarchic, UserFriendly {
+public abstract class NamedNodeDto extends NamedDocumentDto implements Hierarchic, UserFriendly {
 
     /**
      * Object tree paths leading to this document.
