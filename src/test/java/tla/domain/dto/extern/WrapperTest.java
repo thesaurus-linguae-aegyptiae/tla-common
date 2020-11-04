@@ -17,7 +17,7 @@ import tla.domain.dto.ThsEntryDto;
 
 public class WrapperTest {
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper = tla.domain.util.IO.getMapper();
 
     @Test
     void addRelated() throws Exception {
@@ -43,20 +43,50 @@ public class WrapperTest {
         assertAll("adding another related object of same type",
             () -> assertEquals(2, w.getRelated().get(t.getEclass()).size(), "expect 2 related ths entries now")
         );
+        assertAll("related objects map should never be returned null",
+            () -> assertNotNull(new SingleDocumentWrapper<>(l).getRelated(), "container instantiated by passing lemma to constructor"),
+            () -> assertDoesNotThrow(
+                () -> new SingleDocumentWrapper<>(l).addRelated(t), "container instantiated via one-param container can add related object"
+            ),
+            () -> assertNotNull(new SingleDocumentWrapper<>().getRelated(), "container instantiated using no args constructor"),
+            () -> assertDoesNotThrow(
+                () -> new SingleDocumentWrapper<>().addRelated(t), "container instantiated via no args constructor can add related object"
+            )
+        );
     }
 
     @Test
-    void deserialize() throws Exception {
+    void deserializeDetails() throws Exception {
         LemmaDto l = (LemmaDto) Util.loadFromFile("lemma", "10070.json");
         ThsEntryDto t = (ThsEntryDto) Util.loadFromFile("ths", "2AVEQ3VFT5EEPF7NBH7RHCVBXA.json");
         SingleDocumentWrapper<LemmaDto> w = new SingleDocumentWrapper<>(l);
         w.addRelated(t);
         SingleDocumentWrapper<? extends AbstractDto> w2 = SingleDocumentWrapper.from(mapper.writeValueAsString(w));
-        assertAll("test deserialization",
-            () -> assertEquals(w, w2, "deserialized instance should equal serialized origin"),
-            () -> assertEquals(w.toString(), w2.toString(), "toString repr of both instances should equal"),
-            () -> assertEquals(w.hashCode(), w2.hashCode(), "hashcodes should be same"),
-            () -> assertTrue(w.getDoc() instanceof LemmaDto, "payload should be lemmadto instance")
+        assertAll("test lemma details container deserialization",
+            () -> assertEquals(
+                tla.domain.util.IO.json(w),
+                tla.domain.util.IO.json(w2),
+                "deserialized instance should serialize back to origin"
+            ),
+            () -> assertEquals(w.getDoc(), w2.getDoc(), "payloads should be equal"),
+            () -> assertNotEquals(w.toString(), w2.toString(), "expect different string repr"),
+            () -> assertEquals(w.getDoc().toString(), w2.getDoc().toString(), "toString repr of both instance's payload should equal"),
+            () -> assertEquals(w.getDoc().hashCode(), w2.getDoc().hashCode(), "hashcodes of payloads should be same"),
+            () -> assertTrue(w.getDoc() instanceof LemmaDto, "payload of constructed container should be lemmadto instance"),
+            () -> assertTrue(w2.getDoc() instanceof LemmaDto, "payload of deserialized container should be lemmadto instance"),
+            () -> assertEquals(w.getRelated(), w2.getRelated(), "related objects of both containers should be equal")
+        );
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void deserializeDetailsEmptyRelated() throws Exception {
+        SingleDocumentWrapper<AbstractDto> w = mapper.readValue(
+            "{\"doc\":{\"id\":\"ID\",\"eclass\":\"BTSText\"}}",
+            SingleDocumentWrapper.class
+        );
+        assertAll("test minimal details container deserialization",
+            () -> assertNotNull(w.getRelated(), "related objects should never be null even if missing")
         );
     }
 
@@ -103,9 +133,8 @@ public class WrapperTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     void searchResultsDeserialize() throws Exception {
-        SearchResultsWrapper<LemmaDto> w = mapper.readValue(
+        SearchResultsWrapper<?> w = mapper.readValue(
             Util.loadFromFileAsString("lemma", "search.json"),
             SearchResultsWrapper.class
         );

@@ -1,12 +1,13 @@
 package tla.domain.dto;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.SortedMap;
 import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,9 +15,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import tla.domain.Util;
+import tla.domain.dto.meta.AbstractDto;
 import tla.domain.dto.meta.DocumentDto;
 import tla.domain.model.EditorInfo;
 import tla.domain.model.ObjectReference;
+import tla.domain.model.meta.Resolvable;
 
 public class AnnotationTest {
 
@@ -67,12 +70,12 @@ public class AnnotationTest {
         a2.setType(a1.getType());
         a2.setBody(a1.getBody());
         a2.setReviewState(a1.getReviewState());
-        SortedMap<String, SortedSet<ObjectReference>> relations = new TreeMap<>();
+        LinkedHashMap<String, SortedSet<Resolvable>> relations = new LinkedHashMap<>();
         a1.getRelations().entrySet().stream().forEach(
             e -> {
                 relations.put(
                     e.getKey(),
-                    new TreeSet<>(
+                    new AbstractDto.ObjectReferences(
                         e.getValue().stream().map(
                             ref -> new ObjectReference(
                                 ref.getId(),

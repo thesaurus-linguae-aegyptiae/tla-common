@@ -1,21 +1,21 @@
 package tla.domain.dto;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import tla.domain.dto.meta.NamedDocumentDto;
-import tla.domain.model.Paths;
+import tla.domain.dto.meta.NamedNodeDto;
 import tla.domain.model.meta.BTSeClass;
 
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @BTSeClass("BTSTCObject")
 @EqualsAndHashCode(callSuper = true)
-public class CorpusObjectDto extends NamedDocumentDto {
+public class CorpusObjectDto extends NamedNodeDto {
 
     private String corpus;
-    private Paths paths;
 
 }

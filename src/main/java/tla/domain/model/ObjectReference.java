@@ -1,31 +1,35 @@
 package tla.domain.model;
 
 import java.util.List;
-import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.Value;
+import lombok.ToString;
 import tla.domain.dto.meta.DocumentDto;
 import tla.domain.dto.meta.NamedDocumentDto;
+import tla.domain.model.meta.Resolvable;
 
 /**
  * Reference to a fully qualified TLA document containing type, name, and eclass.
  */
-@Value
+@Getter
+@Setter
 @Builder
+@ToString
 @EqualsAndHashCode
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@NoArgsConstructor
 @JsonPropertyOrder(alphabetic = true)
-public class ObjectReference implements Comparable<ObjectReference> {
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class ObjectReference implements Comparable<Resolvable>, Resolvable {
 
     /**
      * ID of the referenced TLA document. Must not be null.
@@ -47,10 +51,12 @@ public class ObjectReference implements Comparable<ObjectReference> {
     private String name;
     /**
      * An optional collection of ranges within the referenced object to which
-     * the reference's subject refers to specifically. Should only be used by
-     * annotations and comments.
+     * the reference's subject refers to specifically. Only be used by
+     * annotations, comments, and some subtexts ("glosses").
      */
-    private List<Range> ranges;
+    @Builder.Default
+    @JsonPropertyOrder(alphabetic = true)
+    private List<Range> ranges = null;
 
     /**
      * Default constructor.
@@ -76,21 +82,7 @@ public class ObjectReference implements Comparable<ObjectReference> {
     }
 
     @Override
-    public String toString() {
-        Map<String, Object> mapRepr = Map.of(
-            "id", id,
-            "name", name != null ? name : "None",
-            "type", type != null ? type : "None",
-            "eclass", eclass
-        );
-        if (this.ranges != null && !this.ranges.isEmpty()) {
-            mapRepr.put("ranges", this.ranges);
-        }
-        return mapRepr.toString();
-    }
-
-    @Override
-    public int compareTo(ObjectReference arg0) {
+    public int compareTo(Resolvable arg0) {
         int diff = 0;
         if (this.getEclass().equals(arg0.getEclass())) {
             diff = this.getId().compareTo(arg0.getId());
@@ -123,23 +115,6 @@ public class ObjectReference implements Comparable<ObjectReference> {
                 null, null, null
             );
         }
-    }
-
-    /**
-     * This class represents a selected range within a (most likely text- or sentence-)
-     * document,
-     * identified by the first and last token being covered by it.
-     */
-    @Getter
-    @Setter
-    public static class Range {
-
-        @JsonAlias("start")
-        private String from;
-
-        @JsonAlias("end")
-        private String to;
-
     }
 
 }

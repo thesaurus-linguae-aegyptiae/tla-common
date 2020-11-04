@@ -16,5 +16,5 @@ import tla.domain.dto.meta.AbstractDto;
 public @interface TLADTO {
 
     public Class<? extends AbstractDto> value();
-    
+
 }

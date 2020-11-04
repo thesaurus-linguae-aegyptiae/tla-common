@@ -8,10 +8,10 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import lombok.Singular;
-import lombok.experimental.SuperBuilder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Singular;
+import lombok.experimental.SuperBuilder;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Language;
 import tla.domain.model.LemmaWord;

@@ -1,21 +1,21 @@
 package tla.domain.dto;
 
-import java.util.SortedMap;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static tla.domain.util.IO.json;
+
+import java.util.LinkedHashMap;
 import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import tla.domain.model.ObjectReference;
 
-import static tla.domain.util.IO.json;
-import static org.junit.jupiter.api.Assertions.*;
+import tla.domain.dto.meta.AbstractDto;
+import tla.domain.model.ObjectReference;
+import tla.domain.model.meta.Resolvable;
 
 public class CommentTest {
-
-    private static ObjectMapper mapper = new ObjectMapper();
 
     public static CommentDto loadFromFile(String id) throws Exception {
         return tla.domain.util.IO.loadFromFile(
@@ -47,12 +47,12 @@ public class CommentTest {
         c2.setEclass("BTSComment");
         c2.setId(c1.getId());
         c2.setReviewState(c1.getReviewState());
-        SortedMap<String, SortedSet<ObjectReference>> relations = new TreeMap<>();
+        LinkedHashMap<String, SortedSet<Resolvable>> relations = new LinkedHashMap<>();
         c1.getRelations().entrySet().stream().forEach(
             e -> {
                 relations.put(
                     e.getKey(),
-                    new TreeSet<>(
+                    new AbstractDto.ObjectReferences(
                         e.getValue().stream().map(
                             ref -> new ObjectReference(
                                 ref.getId(),

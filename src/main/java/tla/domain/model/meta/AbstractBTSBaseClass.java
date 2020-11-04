@@ -4,6 +4,8 @@ import java.lang.annotation.Annotation;
 
 import javax.naming.InvalidNameException;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,6 +14,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
+import tla.domain.dto.meta.AbstractDto;
 
 /*
  * Subclasses are expected to be annotated with {@link BTSeClass}.
@@ -23,6 +26,10 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 public abstract class AbstractBTSBaseClass {
 
+    /**
+     * @see AbstractDto
+     */
+    @JsonIgnore
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     private String eclass;

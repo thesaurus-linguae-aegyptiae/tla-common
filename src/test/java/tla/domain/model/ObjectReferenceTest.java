@@ -1,24 +1,79 @@
 package tla.domain.model;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import tla.domain.dto.meta.AbstractDto.ObjectReferences;
+import tla.domain.model.meta.Resolvable;
+import tla.domain.util.IO;
 
 public class ObjectReferenceTest {
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper = IO.getMapper();
 
     @Test
     void deserialize_partial_id_eclass() throws Exception {
-        ObjectReference ref = mapper.readValue(
-            "{\"id\": \"ID\", \"eclass\": \"eclass\"}",
-            ObjectReference.class
+        assertThrows(
+            InvalidDefinitionException.class,
+            () -> mapper.readValue(
+                "{\"id\": \"ID\", \"eclass\": \"eclass\"}",
+                Resolvable.class
+            ),
+            "deserializing into instance should fail"
         );
-        assertAll("should deserialize ths ref with id value set",
-            () -> assertTrue(ref != null, "result should not be null"),
-            () -> assertEquals("ID", ref.getId(), "id should be set"),
-            () -> assertEquals("eclass", ref.getEclass(), "eclass should be set")
+    }
+
+    @ParameterizedTest
+    @ValueSource(classes = {List.class, ArrayList.class, ObjectReferences.class})
+    void deserializeInArray(Class<?> model) throws Exception {
+        Object refs = mapper.readValue(
+            "[{\"id\":\"1\",\"eclass\":\"eclass\"},{\"id\":\"2\",\"eclass\":\"eclass\"}]",
+            model
+        );
+        Collection<?> l = model.isArray() ? Arrays.asList(refs) : (Collection<?>) refs;
+        assertAll("should deserialize multiple references",
+            () -> assertNotNull(refs, "array"),
+            () -> assertEquals(2, l.size(), "item count"),
+            () -> assertTrue(
+                l.stream().allMatch(it -> it != null),
+                "no items are null"
+            )
+        );
+    }
+
+    @ParameterizedTest
+    @SuppressWarnings("rawtypes")
+    @ValueSource(classes = {Map.class, LinkedHashMap.class})
+    void deserializeInMap(Class<?> model) throws Exception {
+        Object relations = mapper.readValue(
+            "{\"predicate\":[{\"id\":\"1\",\"eclass\":\"eclass\"},{\"id\":\"2\",\"eclass\":\"eclass\"}]}",
+            model
+        );
+        assertTrue(relations instanceof Map, "deserialized as map");
+        Object refs = ((Map) relations).get("predicate");
+        assertTrue(refs instanceof List, "contains list");
+        List<?> l = (List<?>) refs;
+        assertAll("should deserialize multiple references",
+            () -> assertNotNull(refs, "array"),
+            () -> assertEquals(2, l.size(), "item count"),
+            () -> assertNotNull(l.get(0), "single item")
         );
     }
 
@@ -34,10 +89,12 @@ public class ObjectReferenceTest {
             mapper.writeValueAsString(ref1),
             ObjectReference.class
         );
-        assertAll("test objectreference identify",
-            () -> assertEquals(ref2, ref1, "deserialized serialization should be equal"),
-            () -> assertEquals(ref2.hashCode(), ref1.hashCode(), "hashcodes should match"),
-            () -> assertEquals(ref2.toString(), ref1.toString(), "toString() should match")
+        assertAll("test objectreference equality",
+            () -> assertEquals(ref1.getClass(), ref2.getClass(), "same type"),
+            () -> assertEquals(ref1, ref2, "deserialized serialization should be equal"),
+            () -> assertEquals(IO.json(ref1), IO.json(ref2), "JSON serialization"),
+            () -> assertEquals(ref1.hashCode(), ref2.hashCode(), "hashcodes should match"),
+            () -> assertEquals(ref1.toString(), ref2.toString(), "toString() should match")
         );
     }
 

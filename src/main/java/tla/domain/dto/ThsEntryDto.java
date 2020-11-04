@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Singular;
 import lombok.experimental.SuperBuilder;
-import tla.domain.dto.meta.NamedDocumentDto;
+import tla.domain.dto.meta.NamedNodeDto;
 import tla.domain.model.Language;
 import tla.domain.model.meta.BTSeClass;
 
@@ -21,7 +21,7 @@ import tla.domain.model.meta.BTSeClass;
 @SuperBuilder
 @BTSeClass("BTSThsEntry")
 @EqualsAndHashCode(callSuper = true)
-public class ThsEntryDto extends NamedDocumentDto {
+public class ThsEntryDto extends NamedNodeDto {
 
     @JsonAlias("sortkey")
     private String sortKey;

@@ -143,7 +143,7 @@ public class LemmaTest {
         assertAll("test relations",
             () -> assertTrue(l.getRelations() != null, "relations should not be null"),
             () -> assertEquals(1, l.getRelations().size(), "expect exactly 1 relations type"),
-            () -> assertEquals("successor", l.getRelations().firstKey(), "relation type expected to be 'successor'"),
+            () -> assertTrue(l.getRelations().containsKey("successor"), "relation type expected to be 'successor'"),
             () -> assertEquals(1, l.getRelations().get("successor").size(), "exactly 1 relation expected"),
             () -> assertEquals("BTSLemmaEntry", l.getRelations().get("successor").first().getEclass(), "relation points to other lemma")
         );
@@ -187,7 +187,8 @@ public class LemmaTest {
             () -> assertTrue(out.contains("\"en\""), "english translation should be included"),
             () -> assertTrue(!out.contains("\"fr\""), "french translation should be omitted"),
             () -> assertTrue(!out.contains("\"externalReferences\""), "externalReferences field should not be present"),
-            () -> assertTrue(!out.contains("\"words\""), "words field should not be present")
+            () -> assertTrue(!out.contains("\"words\""), "words field should not be present"),
+            () -> assertEquals("{\"eclass\":\"BTSLemmaEntry\",\"id\":\"id\",\"translations\":{\"en\":[\"meaning\"]}}", out)
         );
 
     }

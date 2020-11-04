@@ -26,8 +26,16 @@ public class SentenceToken {
 
     private String label;
 
+     @JsonInclude(
+         value = JsonInclude.Include.CUSTOM,
+         valueFilter = Lemmatization.EmptyObjectFilter.class
+     )
     private Lemmatization lemma;
 
+    @JsonInclude(
+        value = JsonInclude.Include.CUSTOM,
+        valueFilter = Flexion.EmptyObjectFilter.class
+    )
     private Flexion flexion;
 
     private String glyphs;
@@ -40,12 +48,23 @@ public class SentenceToken {
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Flexion {
 
         private String verbal;
         private Long numeric;
+
+        public static class EmptyObjectFilter {
+            public boolean equals(Object obj) {
+                if (obj != null && obj instanceof Flexion) {
+                    Flexion f = (Flexion) obj;
+                    return (f.verbal == null || f.verbal.isBlank()) &&
+                        (f.numeric == null || f.numeric == 0);
+                }
+                return true;
+            }
+        }
 
     }
 
@@ -53,11 +72,35 @@ public class SentenceToken {
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class Lemmatization {
 
+        /**
+         * lemma ID
+         */
         private String id;
+
+        /**
+         * lemma entry part of speech information
+         */
         private TypeSpec pos;
 
+        /**
+         * for jackson to determine "empty" instances
+         */
+        public static class EmptyObjectFilter {
+            @Override
+            public boolean equals(Object obj) {
+                if (obj != null && obj instanceof Lemmatization) {
+                    Lemmatization l = (Lemmatization) obj;
+                    return (
+                        (l.getId() == null || l.getId().isBlank()) &&
+                        (l.getPos() == null || l.getPos().isEmpty())
+                    );
+                }
+                return true;
+            }
+        }
     }
+
 }

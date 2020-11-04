@@ -2,6 +2,11 @@ package tla.domain.command;
 
 import java.lang.annotation.Annotation;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import lombok.Getter;
 import lombok.Setter;
 import tla.domain.dto.meta.DocumentDto;
@@ -16,6 +21,12 @@ import tla.domain.model.meta.TLADTO;
  */
 @Getter
 @Setter
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.CLASS,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "@class"
+)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public abstract class SearchCommand<T extends AbstractBTSBaseClass> {
 
     private String sort;
@@ -28,6 +39,7 @@ public abstract class SearchCommand<T extends AbstractBTSBaseClass> {
      *
      * @return DTO class of which this search command is supposed to produce instances.
      */
+    @JsonProperty("@dto")
     public Class<? extends AbstractBTSBaseClass> getDTOClass() {
         for (Annotation a : this.getClass().getAnnotations()) {
             if (a instanceof TLADTO) {
@@ -36,5 +48,8 @@ public abstract class SearchCommand<T extends AbstractBTSBaseClass> {
         }
         return DocumentDto.class;
     }
+
+    @JsonAlias("@dto")
+    public void setDTOClass(Class<? extends AbstractBTSBaseClass> dtoclass) {}
 
 }

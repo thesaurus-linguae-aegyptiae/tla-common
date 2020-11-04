@@ -1,6 +1,5 @@
 package tla.domain.model;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -46,6 +45,8 @@ public class EditorInfo {
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
     private Date updated;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+    private Date created;
 
     @EqualsAndHashCode.Include
     @JsonIgnore
@@ -55,12 +56,38 @@ public class EditorInfo {
 
     public void setDateOfLatestUpdate(String localDate) {
         if (localDate != null) {
-            try {
-                this.updated = dateFormatter.parse(localDate);
-            } catch (ParseException e) {
-                log.error("could not parse local date string '{}'. edit info date not set!", localDate);
-            }
+            this.setDate("updated", localDate);
         }
     }
 
+    public void setCreationDate(String localDate) {
+        if (localDate != null) {
+            this.setDate("created", localDate);
+        }
+    }
+
+    /**
+     * Sets date for either the '{@literal created}' or the '{@literal updated}'
+     * event.
+     */
+    public void setDate(String key, String date) {
+        try {
+            EditorInfo.class.getMethod(
+                String.format(
+                    "set%s%s",
+                    key.substring(0, 1).toUpperCase(),
+                    key.substring(1)
+                ),
+                Date.class
+            ).invoke(
+                this,
+                dateFormatter.parse(date)
+            );
+        } catch (Exception e) {
+            log.error(
+                "Could not set '{}' date field to {}: {}",
+                key, date, e.getMessage()
+            );
+        }
+    }
 }

@@ -5,21 +5,21 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import tla.domain.dto.meta.NamedDocumentDto;
-import tla.domain.model.Paths;
+import tla.domain.dto.meta.NamedNodeDto;
 import tla.domain.model.meta.BTSeClass;
 
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @BTSeClass("BTSText")
 @EqualsAndHashCode(callSuper = true)
-public class TextDto extends NamedDocumentDto {
+public class TextDto extends NamedNodeDto {
 
     private String corpus;
-    private Paths paths;
 
     @JsonAlias("sentences")
     private List<String> sentenceIds;

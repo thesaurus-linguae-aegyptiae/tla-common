@@ -1,0 +1,102 @@
+digraph {
+    rankdir = BT
+
+    node [
+        shape = record
+    ]
+
+    edge [
+        arrowhead = empty
+    ]
+
+    i1 [
+        label = <{<i>UserFriendly</i>|+suid}>
+    ]
+
+    i2 [
+        label = <{<i>Hierarchic</i>|+paths}>
+    ]
+
+    a1 [
+        label = "{AbstractBTSBaseClass|+eclass}"
+    ]
+
+    a2 [
+        label = "{AbstractDto|+id\n+relations}"
+    ]
+
+    d [
+        label = "{DocumentDto|+editors\n+reviewState}"
+    ]
+
+    sent [
+        label = "{SentenceDto|+type\n+translations\n+tokens\n+context}"
+        style = filled;
+        fillcolor = gray95;
+    ]
+
+    nd [
+        label = "{NamedDocumentDto|+name\n+type\n+subtype\n+passport\n+externalReferences}"
+    ]
+
+    nn [
+        label = "{NamedNodeDto|}"
+    ]
+
+    ths [
+        label = "{ThsEntryDto|+translations}"
+        style = filled;
+        fillcolor = gray95;
+    ]
+
+    text [
+        label = "{TextDto|+corpus}"
+        style = filled;
+        fillcolor = gray95;
+    ]
+
+    tco [
+        label = "{CorpusObjectDto|+corpus}"
+        style = filled;
+        fillcolor = gray95;
+    ]
+ 
+    lem [
+        label = "{LemmaDto|+translations\n+words\n+attestations}"
+        style = filled;
+        fillcolor = gray95;
+    ]
+
+    ann [
+        label = "{AnnotationDto|+body}"
+        style = filled;
+        fillcolor = gray95;
+    ]
+
+    cmt [
+        label = "{CommentDto|+body}"
+        style = filled;
+        fillcolor = gray95;
+    ]
+
+    a2 -> a1;
+    d -> a2;
+    sent -> a2;
+    nd -> d;
+    cmt -> d;
+    lem -> nd;
+    ann -> nd;
+    nn -> nd;
+    ths -> nn;
+    text -> nn;
+    tco -> nn;
+
+    edge [
+        arrowhead = empty
+        style = dotted
+    ]
+
+    nn -> i1;
+    nn -> i2;
+
+}
