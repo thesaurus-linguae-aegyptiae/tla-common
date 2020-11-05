@@ -14,7 +14,7 @@ import lombok.Singular;
 import lombok.experimental.SuperBuilder;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Language;
-import tla.domain.model.LemmaWord;
+import tla.domain.model.SentenceToken;
 import tla.domain.model.extern.AttestedTimespan;
 import tla.domain.model.meta.BTSeClass;
 
@@ -36,7 +36,7 @@ public class LemmaDto extends NamedDocumentDto {
     private SortedMap<Language, List<String>> translations;
 
     @Singular
-    private List<LemmaWord> words;
+    private List<SentenceToken> words;
 
     @Singular
     private List<AttestedTimespan> attestations;

@@ -3,8 +3,10 @@ package tla.domain.dto;
 import java.util.List;
 import java.util.SortedMap;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -63,7 +65,9 @@ public class SentenceDto extends AbstractDto {
          * How many sentences come before this sentence within the
          * text's contents.
          */
-        private int pos;
+        @JsonAlias({"pos"})
+        @JsonProperty("pos")
+        private int position;
         /**
          * Value of the last new line indicator found before beginning of this sentence.
          * Might be null.
@@ -73,6 +77,10 @@ public class SentenceDto extends AbstractDto {
          * Value of last paragraph indicator found before beginning of sentence.
          */
         private String paragraph;
+        /**
+         * Number of variants which exist for the same sentence due to ambivalences.
+         */
+        private int variants;
     }
 
 }

@@ -28,11 +28,10 @@ public class TextTest {
         assertAll("deserialization from file should preserve all contents",
             () -> assertEquals("tlademotic", t.getCorpus()),
             () -> assertTrue(t.getPaths() != null, "corpus object paths should be deserialized"),
+            () -> assertNotNull(t.getSUID(), "short unique ID"),
             () -> assertEquals(1, t.getPaths().size(), "expect exactly 1 path"),
-            () -> assertEquals(6, t.getPaths().get(0).size(), "count path segments"),
-            () -> assertEquals("6WFOSXHVQRGGNAG5FCM6QEXWR4", t.getPaths().get(0).get(0).getId(), "segment not empty"),
-            () -> assertTrue(t.getSentenceIds() != null, "sentence IDs should be preserved"),
-            () -> assertEquals(2, t.getSentenceIds().size(), "count sentences")
+            () -> assertEquals(5, t.getPaths().get(0).size(), "count path segments"),
+            () -> assertEquals("6WFOSXHVQRGGNAG5FCM6QEXWR4", t.getPaths().get(0).get(0).getId(), "segment not empty")
         );
         Passport pp = t.getPassport();
         List<Passport> leafNodes = pp.extractProperty("object.description_of_object.type");

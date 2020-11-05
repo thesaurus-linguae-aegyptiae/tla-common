@@ -19,8 +19,8 @@ import tla.domain.Util;
 import tla.domain.model.EditorInfo;
 import tla.domain.model.ExternalReference;
 import tla.domain.model.Language;
-import tla.domain.model.LemmaWord;
 import tla.domain.model.Passport;
+import tla.domain.model.SentenceToken;
 import tla.domain.model.Transcription;
 import tla.domain.util.DtoPrettyPrinter;
 
@@ -152,9 +152,7 @@ public class LemmaTest {
     @Test
     void deserializeFromFile_testWords() throws Exception {
         LemmaDto l = loadFromFile("10070.json");
-        LemmaWord w = LemmaWord.builder().glyphs("N35:Z2")
-            .transcription(new Transcription("=n", "=n"))
-            .build();
+        var w = new SentenceToken(new Transcription("=n", "=n"), "N35:Z2");
         assertAll("check lemma tokens",
             () -> assertEquals(1, l.getWords().size(), "should contain exactly 1 word"),
             () -> assertEquals(w, l.getWords().get(0), "should equal procedurally built word"),
@@ -166,7 +164,7 @@ public class LemmaTest {
     void serializeWords() throws Exception {
         LemmaDto l = LemmaDto.builder()
             .id("id")
-            .word(new LemmaWord(new Transcription("nfr", "nfr"), "N35-Z3"))
+            .word(new SentenceToken(new Transcription("nfr", "nfr"), "N35-Z3"))
             .build();
         String ser = json(l);
         LemmaDto l2 = mapper.readValue(ser, LemmaDto.class);

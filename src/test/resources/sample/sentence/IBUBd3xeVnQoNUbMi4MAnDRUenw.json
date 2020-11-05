@@ -1,1 +1,258 @@
-{"context": {"line": "[30,17]", "paragraph": "Eb 131", "pos": 117, "textId": "YQX5S6WJANF7RPBLHLXYKGAIQI"}, "eclass": "BTSSentence", "id": "IBUBd3xeVnQoNUbMi4MAnDRUenw", "tokens": [{"glyphs": null, "id": "IBcAEeWofnYjA09zjOgUEPl7aC4", "label": "Eb 132 = Eb 147", "type": "para"}, {"glyphs": null, "id": "IBUBd967KDXFIUpErLslcEngEFA", "label": "[30,18]", "type": "lc"}, {"flags": ["rubrum"], "flexion": {"glossing": null, "numeric": 3, "verbal": "(not specified)"}, "glyphs": "F46:D21*X1-N33:Z2", "id": "IBUBd7sUD9z4NkqUubpQppyKXL4", "label": "p\u1e96r,t", "lemma": {"id": "61950", "pos": {"subtype": "substantive_fem", "type": "substantive"}}, "transcription": {"mdc": "pXr,t", "unicode": "p\u1e96r,t"}, "translations": {"de": ["Heilmittel (allg.)"]}, "type": "word"}, {"flags": ["rubrum"], "flexion": {"glossing": null, "numeric": 71020, "verbal": "Adj.sgf"}, "glyphs": "N35:X1", "id": "IBUBd2yKs3Mv4kKBpViDsNl0Ggg", "label": "n.t", "lemma": {"id": "79800", "pos": {"subtype": "nisbe_adjective_preposition", "type": "adjective"}}, "transcription": {"mdc": "n.t", "unicode": "n.t"}, "translations": {"de": ["von [Genitiv]"]}, "type": "word"}, {"flags": ["rubrum"], "flexion": {"glossing": null, "numeric": 61000, "verbal": "Inf"}, "glyphs": "S29-D21:Z7-Aa1:Aa2-Y1", "id": "IBUBdWez9BgOpkBkjhifPvVea0w", "label": "srw\u1e2b", "lemma": {"id": "139310", "pos": {"subtype": "verb_4-lit", "type": "verb"}}, "transcription": {"mdc": "srwx", "unicode": "srw\u1e2b"}, "translations": {"de": ["behandeln; pflegen"]}, "type": "word"}, {"flags": ["rubrum"], "flexion": {"glossing": null, "numeric": 3, "verbal": "(not specified)"}, "glyphs": "F32:X1*Z1", "id": "IBUBdQkF8dQKKkmQox5sQYzguUk", "label": "\u1e96,t", "lemma": {"id": "122080", "pos": {"subtype": "substantive_fem", "type": "substantive"}}, "transcription": {"mdc": "X,t", "unicode": "\u1e96,t"}, "translations": {"de": ["Bauch"]}, "type": "word"}, {"flags": ["rubrum"], "flexion": {"glossing": null, "numeric": 61000, "verbal": "Inf"}, "glyphs": "S29-D21:Z7-Aa1:Aa2-Y1", "id": "IBUBdyip9GZtUUf4qiylAqEJb6Y", "label": "srw\u1e2b", "lemma": {"id": "139310", "pos": {"subtype": "verb_4-lit", "type": "verb"}}, "transcription": {"mdc": "srwx", "unicode": "srw\u1e2b"}, "translations": {"de": ["behandeln; pflegen"]}, "type": "word"}, {"flags": ["rubrum"], "flexion": {"glossing": null, "numeric": 3, "verbal": "(not specified)"}, "glyphs": "F22-Z7-M17-M17-X1:F51", "id": "IBUBdxWLb361AUzrvqPYPtM1iC4", "label": "p\u1e25,wyt", "lemma": {"id": "61520", "pos": {"subtype": "substantive_fem", "type": "substantive"}}, "transcription": {"mdc": "pH,wyt", "unicode": "p\u1e25,wyt"}, "translations": {"de": ["After; Rektum"]}, "type": "word"}], "transcription": {"mdc": "_ _ pXr,t n.t srwx X,t srwx pH,wyt", "unicode": "_ _ p\u1e96r,t n.t srw\u1e2b \u1e96,t srw\u1e2b p\u1e25,wyt"}, "translations": {"de": ["Ein Heilmittel zum Behandeln des Bauches und (zum) Behandeln des Rektums:"]}, "type": "HS"}
+{
+    "id": "IBUBd3xeVnQoNUbMi4MAnDRUenw",
+    "eclass": "BTSSentence",
+    "context": {
+        "textId": "YQX5S6WJANF7RPBLHLXYKGAIQI",
+        "line": "[30,17]",
+        "paragraph": "Eb 131",
+        "pos": 117,
+        "variants": 1
+    },
+    "type": "HS",
+    "relations": {
+        "partOf": [
+            {
+                "id": "YQX5S6WJANF7RPBLHLXYKGAIQI",
+                "name": "25,11-36,3 = Eb 104-187: \"Salbmittel gegen das $w\u1e25\ua723.w$-Leiden\"",
+                "type": "Text",
+                "eclass": "BTSText"
+            }
+        ],
+        "contains": [
+            {
+                "id": "IBUBdx96okockkQ3kEMlKeP478o",
+                "eclass": "BTSAnnotation",
+                "type": "rubrum",
+                "ranges": [
+                    {
+                        "start": "IBUBd7sUD9z4NkqUubpQppyKXL4",
+                        "end": "IBUBdxWLb361AUzrvqPYPtM1iC4"
+                    }
+                ]
+            },
+            {
+                "id": "JLO3GFKKNNHUJDEOXOXYVQO7PY",
+                "name": "Paginierung: Seite 30",
+                "eclass": "BTSText",
+                "type": "subtext"
+            }
+        ]
+    },
+    "translations": {
+        "de": [
+            "Ein Heilmittel zum Behandeln des Bauches und (zum) Behandeln des Rektums:"
+        ]
+    },
+    "transcription": {
+        "unicode": "  p\u1e96r,t n.t srw\u1e2b \u1e96,t srw\u1e2b p\u1e25,wyt",
+        "mdc": "  pXr,t n.t srwx X,t srwx pH,wyt"
+    },
+    "tokens": [
+        {
+            "id": "IBcAEeWofnYjA09zjOgUEPl7aC4",
+            "type": "para",
+            "label": "Eb 132 = Eb 147",
+            "glyphs": null,
+            "annoTypes": [
+                "subtext"
+            ]
+        },
+        {
+            "id": "IBUBd967KDXFIUpErLslcEngEFA",
+            "type": "lc",
+            "label": "[30,18]",
+            "glyphs": null,
+            "annoTypes": [
+                "subtext"
+            ]
+        },
+        {
+            "id": "IBUBd7sUD9z4NkqUubpQppyKXL4",
+            "type": "word",
+            "label": "p\u1e96r,t",
+            "lemma": {
+                "id": "61950",
+                "pos": {
+                    "type": "substantive",
+                    "subtype": "substantive_fem"
+                }
+            },
+            "flexion": {
+                "numeric": 3,
+                "bgloss": "n/a",
+                "lgloss": "N.f:sg"
+            },
+            "glyphs": "F46:D21*X1-N33:Z2",
+            "translations": {
+                "de": [
+                    "Heilmittel (allg.)"
+                ]
+            },
+            "transcription": {
+                "unicode": "p\u1e96r,t",
+                "mdc": "pXr,t"
+            },
+            "annoTypes": [
+                "rubrum",
+                "subtext"
+            ]
+        },
+        {
+            "id": "IBUBd2yKs3Mv4kKBpViDsNl0Ggg",
+            "type": "word",
+            "label": "n.t",
+            "lemma": {
+                "id": "79800",
+                "pos": {
+                    "type": "adjective",
+                    "subtype": "nisbe_adjective_preposition"
+                }
+            },
+            "flexion": {
+                "numeric": 71020,
+                "bgloss": "Adj.sgf",
+                "lgloss": "PREP-adjz:f.sg"
+            },
+            "glyphs": "N35:X1",
+            "translations": {
+                "de": [
+                    "von [Genitiv]"
+                ]
+            },
+            "transcription": {
+                "unicode": "n.t",
+                "mdc": "n.t"
+            },
+            "annoTypes": [
+                "rubrum",
+                "subtext"
+            ]
+        },
+        {
+            "id": "IBUBdWez9BgOpkBkjhifPvVea0w",
+            "type": "word",
+            "label": "srw\u1e2b",
+            "lemma": {
+                "id": "139310",
+                "pos": {
+                    "type": "verb",
+                    "subtype": "verb_4-lit"
+                }
+            },
+            "flexion": {
+                "numeric": 61000,
+                "bgloss": "Inf",
+                "lgloss": "V\\inf"
+            },
+            "glyphs": "S29-D21:Z7-Aa1:Aa2-Y1",
+            "translations": {
+                "de": [
+                    "behandeln; pflegen"
+                ]
+            },
+            "transcription": {
+                "unicode": "srw\u1e2b",
+                "mdc": "srwx"
+            },
+            "annoTypes": [
+                "rubrum",
+                "subtext"
+            ]
+        },
+        {
+            "id": "IBUBdQkF8dQKKkmQox5sQYzguUk",
+            "type": "word",
+            "label": "\u1e96,t",
+            "lemma": {
+                "id": "122080",
+                "pos": {
+                    "type": "substantive",
+                    "subtype": "substantive_fem"
+                }
+            },
+            "flexion": {
+                "numeric": 3,
+                "bgloss": "n/a",
+                "lgloss": "N.f:sg"
+            },
+            "glyphs": "F32:X1*Z1",
+            "translations": {
+                "de": [
+                    "Bauch"
+                ]
+            },
+            "transcription": {
+                "unicode": "\u1e96,t",
+                "mdc": "X,t"
+            },
+            "annoTypes": [
+                "rubrum",
+                "subtext"
+            ]
+        },
+        {
+            "id": "IBUBdyip9GZtUUf4qiylAqEJb6Y",
+            "type": "word",
+            "label": "srw\u1e2b",
+            "lemma": {
+                "id": "139310",
+                "pos": {
+                    "type": "verb",
+                    "subtype": "verb_4-lit"
+                }
+            },
+            "flexion": {
+                "numeric": 61000,
+                "bgloss": "Inf",
+                "lgloss": "V\\inf"
+            },
+            "glyphs": "S29-D21:Z7-Aa1:Aa2-Y1",
+            "translations": {
+                "de": [
+                    "behandeln; pflegen"
+                ]
+            },
+            "transcription": {
+                "unicode": "srw\u1e2b",
+                "mdc": "srwx"
+            },
+            "annoTypes": [
+                "rubrum",
+                "subtext"
+            ]
+        },
+        {
+            "id": "IBUBdxWLb361AUzrvqPYPtM1iC4",
+            "type": "word",
+            "label": "p\u1e25,wyt",
+            "lemma": {
+                "id": "61520",
+                "pos": {
+                    "type": "substantive",
+                    "subtype": "substantive_fem"
+                }
+            },
+            "flexion": {
+                "numeric": 3,
+                "bgloss": "n/a",
+                "lgloss": "N.f:sg"
+            },
+            "glyphs": "F22-Z7-M17-M17-X1:F51",
+            "translations": {
+                "de": [
+                    "After; Rektum"
+                ]
+            },
+            "transcription": {
+                "unicode": "p\u1e25,wyt",
+                "mdc": "pH,wyt"
+            },
+            "annoTypes": [
+                "rubrum",
+                "subtext"
+            ]
+        }
+    ],
+    "glyphs": "  F46:D21*X1-N33:Z2 N35:X1 S29-D21:Z7-Aa1:Aa2-Y1 F32:X1*Z1 S29-D21:Z7-Aa1:Aa2-Y1 F22-Z7-M17-M17-X1:F51",
+    "wordCount": 6
+}

@@ -20,7 +20,7 @@ public class OccurrenceSearchTest {
     void donotSerializeEmptyElements() throws Exception {
         OccurrenceSearch cmd = new OccurrenceSearch();
         cmd.setLemma(new Lemmatization());
-        cmd.getLemma().setPos(new TypeSpec());
+        cmd.getLemma().setPartOfSpeech(new TypeSpec());
         cmd.setTranscription(new Transcription());
         cmd.setTranslation(new TranslationSpec());
         cmd.getTranslation().setLang(new Language[]{});

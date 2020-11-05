@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -37,18 +38,19 @@ public interface Resolvable {
     @Getter
     @Setter
     @EqualsAndHashCode
+    @JsonPropertyOrder({"start", "end"})
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class Range {
-        @JsonAlias("start")
-        private String from;
+        @JsonAlias("from")
+        private String start;
 
-        @JsonAlias("end")
-        private String to;
+        @JsonAlias("to")
+        private String end;
 
         public static Range of(String startId, String endId) {
             Range r = new Range();
-            r.setFrom(startId);
-            r.setTo(endId);
+            r.setStart(startId);
+            r.setEnd(endId);
             return r;
         }
     }
