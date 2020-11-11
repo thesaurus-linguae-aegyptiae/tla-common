@@ -1,15 +1,23 @@
 {
   "eclass": "BTSLemmaEntry",
   "editors": {
-    "author": "Altägyptisches Wörterbuch",
+    "author": "Alt\u00e4gyptisches W\u00f6rterbuch",
     "contributors": null,
+    "created": "2015-06-26 16:13:08",
     "type": "user",
-    "updated": "2015-06-26 16:14:04"
+    "updated": "2019-12-18 17:57:28"
   },
   "externalReferences": {
-    "aaew_wcn": [
+    "aaew": [
       {
-        "id": "10070"
+        "id": "10070",
+        "type": "hieratic_hieroglyphic"
+      }
+    ],
+    "dza": [
+      {
+        "id": "10070",
+        "type": "hieratic_hieroglyphic"
       }
     ]
   },
@@ -19,7 +27,7 @@
     "bibliography": [
       {
         "bibliographical_text_field": [
-          "Wb 2, 194; EAG § 159; Schenkel, Einf., 105; ENG § 75; Junge, Näg. Gr., 53"
+          "Wb 2, 194; EAG \u00a7 159; Schenkel, Einf., 105; ENG \u00a7 75; Junge, N\u00e4g. Gr., 53"
         ]
       }
     ],
@@ -55,11 +63,11 @@
     ]
   },
   "revisionState": "published",
-  "sort_string": "1L",
+  "sortKey": "1L",
   "subtype": "personal_pronoun",
   "time_span": {
     "begin": -2686,
-    "end": -30
+    "end": 68
   },
   "translations": {
     "de": [
@@ -72,11 +80,24 @@
   "type": "pronoun",
   "words": [
     {
+      "flexion": {
+        "btsGloss": "(unedited)",
+        "lingGloss": "\u2014",
+        "numeric": 0
+      },
       "glyphs": "N35:Z2",
+      "id": "IBUBd3c4CSwq3UpopzfqrGAeRs4",
+      "label": "=n",
+      "lemma": {
+        "POS": null,
+        "id": null
+      },
       "transcription": {
         "mdc": "=n",
         "unicode": "=n"
-      }
+      },
+      "translations": null,
+      "type": "word"
     }
   ]
 }

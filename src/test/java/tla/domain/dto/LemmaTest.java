@@ -23,6 +23,7 @@ import tla.domain.model.Passport;
 import tla.domain.model.SentenceToken;
 import tla.domain.model.Transcription;
 import tla.domain.util.DtoPrettyPrinter;
+import tla.domain.util.IO;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static tla.domain.util.IO.json;
@@ -75,11 +76,11 @@ public class LemmaTest {
         assertTrue(l.getEditors() != null, "editor info should not be null");
         LocalDate updated = l.getEditors().getUpdated().toInstant().atZone(ZoneId.of("UTC+01:00")).toLocalDate();
         String year = DateTimeFormatter.ofPattern("yyyy").format(updated);
-        assertEquals("2015", year, "latest change should have occured in 2015");
+        assertEquals("2019", year, "latest change should have occured in 2019");
         assertTrue(l.getEditors().getContributors() == null, "there should be no contributing editors");
 
         EditorInfo e = EditorInfo.builder().author("Altägyptisches Wörterbuch")
-            .updated(Date.from(LocalDateTime.of(2015, 6, 26, 16, 14, 4).atZone(ZoneId.systemDefault()).toInstant()))
+            .updated(Date.from(LocalDateTime.of(2019, 12, 18, 17, 57, 18).atZone(ZoneId.systemDefault()).toInstant()))
             .type("user").build();
         assertEquals(e, l.getEditors(), "deserialized should equal procedural build");
     }
@@ -119,21 +120,21 @@ public class LemmaTest {
         LemmaDto l = loadFromFile("10070.json");
         assertAll("should contain external references",
             () -> assertTrue(l.getExternalReferences() != null, "external references should not be null"),
-            () -> assertEquals(1, l.getExternalReferences().size(), "should contain exactly 1 references provider"),
-            () -> assertTrue(l.getExternalReferences().containsKey("aaew_wcn"), "should contain provider 'aaew_wcn'"),
-            () -> assertEquals(1, l.getExternalReferences().get("aaew_wcn").size(), "provider should provide exactly 1 reference")
+            () -> assertEquals(2, l.getExternalReferences().size(), "should contain exactly 2 references providers"),
+            () -> assertTrue(l.getExternalReferences().containsKey("aaew"), "should contain provider 'aaew'"),
+            () -> assertEquals(1, l.getExternalReferences().get("aaew").size(), "provider should provide exactly 1 reference")
         );
-        ExternalReference e1 = l.getExternalReferences().get("aaew_wcn").first();
-        ExternalReference e2 = ExternalReference.builder().id("10070").build();
+        ExternalReference e1 = l.getExternalReferences().get("aaew").first();
+        ExternalReference e2 = ExternalReference.builder().id("10070").type("hieratic_hieroglyphic").build();
         assertAll("external reference should be as expected",
             () -> assertEquals("10070", e1.getId(), "ref ID should be 10070"),
-            () -> assertTrue(e1.getType() == null, "no type should be provided"),
+            () -> assertNotNull(e1.getType(), "type should be provided"),
             () -> assertEquals(e2, e1, "deserialized reference should equal procedural build")
         );
-        l.getExternalReferences().get("aaew_wcn").add(e2);
+        l.getExternalReferences().get("aaew").add(e2);
         assertAll("adding the same external reference again should make no difference",
-            () -> assertEquals(1, l.getExternalReferences().get("aaew_wcn").size(), "number of 'aaew_wcn' references expected to have stayed the same"),
-            () -> assertTrue(l.getExternalReferences().get("aaew_wcn").contains(e2), "reference object being among references nonetheless")
+            () -> assertEquals(1, l.getExternalReferences().get("aaew").size(), "number of 'aaew' references expected to have stayed the same"),
+            () -> assertTrue(l.getExternalReferences().get("aaew").contains(e2), "reference object being among references nonetheless")
         );
     }
 
@@ -153,10 +154,21 @@ public class LemmaTest {
     void deserializeFromFile_testWords() throws Exception {
         LemmaDto l = loadFromFile("10070.json");
         var w = new SentenceToken(new Transcription("=n", "=n"), "N35:Z2");
+        w.setFlexion(new SentenceToken.Flexion(0L, "(unedited)", l.getWords().get(0).getFlexion().getLingGloss()));
+        w.setId(l.getWords().get(0).getId());
+        w.setLabel("=n");
         assertAll("check lemma tokens",
             () -> assertEquals(1, l.getWords().size(), "should contain exactly 1 word"),
+            () -> assertEquals("=n", l.getWords().get(0).getTranscription().getUnicode(), "unicode transcription should be '=n'"),
+            () -> assertNotNull(l.getWords().get(0).getFlexion().getBtsGloss(), "word flexion bts glossing"),
+            () -> assertNotNull(l.getWords().get(0).getFlexion().getLingGloss(), "word flexion leipzig glossing"),
+            () -> assertNotNull(l.getWords().get(0).getLabel(), "lemma word label"),
+            () -> assertEquals(l.getWords().get(0).getFlexion(), w.getFlexion(), "lemma word flexion"),
+            () -> assertEquals(l.getWords().get(0).getLemma(), w.getLemma(), "lemma word lemmatization"),
+            () -> assertEquals(l.getWords().get(0).getTranslations(), w.getTranslations(), "lemma word translations"),
+            () -> assertEquals("word", l.getWords().get(0).getType(), "lemma word type"),
             () -> assertEquals(w, l.getWords().get(0), "should equal procedurally built word"),
-            () -> assertEquals("=n", l.getWords().get(0).getTranscription().getUnicode(), "unicode transcription should be '=n'")
+            () -> assertEquals(IO.json(w), IO.json(l.getWords().get(0)), "JSON serialization should equal procedurally built word's")
         );
     }
 
@@ -166,10 +178,12 @@ public class LemmaTest {
             .id("id")
             .word(new SentenceToken(new Transcription("nfr", "nfr"), "N35-Z3"))
             .build();
+        l.getWords().get(0).setLemma(new SentenceToken.Lemmatization());
         String ser = json(l);
         LemmaDto l2 = mapper.readValue(ser, LemmaDto.class);
         assertAll("test lemma word serialization",
             () -> assertTrue(ser.contains("\"nfr\""), "transcription should be serialized"),
+            () -> assertFalse(ser.contains("\"lemma\": {"), "lemma word lemmatization should be omitted"),
             () -> assertEquals(l, l2, "deserialized serialization should equal origin")
         );
     }

@@ -75,8 +75,8 @@ public class SentenceTest {
         assertAll("check for null contents",
             () -> assertNotNull(dto.getTokens().get(0), "token"),
             () -> assertNull(dto.getTokens().get(0).getTranscription(), "token transcription"),
-            () -> assertNull(dto.getTokens().get(0).getFlexion(), "flexion"),
-            () -> assertNull(dto.getTokens().get(0).getLemma(), "lemma info")
+            () -> assertNotNull(dto.getTokens().get(0).getFlexion(), "flexion"),
+            () -> assertNotNull(dto.getTokens().get(0).getLemma(), "lemma info")
         );
     }
 }

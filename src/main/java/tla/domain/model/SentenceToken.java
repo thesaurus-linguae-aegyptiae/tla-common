@@ -18,14 +18,13 @@ import tla.domain.command.TypeSpec;
 @Getter
 @Setter
 @EqualsAndHashCode
-@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SentenceToken {
 
     private String id;
 
-    private String type;
+    private String type = "word";
 
     private String label;
 
@@ -53,13 +52,20 @@ public class SentenceToken {
      */
     private List<String> annoTypes;
 
+    public SentenceToken() {
+        this.lemma = new Lemmatization();
+        this.flexion = new Flexion();
+    }
+
     public SentenceToken(Transcription transcription, String glyphs) {
+        this();
         this.transcription = transcription;
         this.glyphs = glyphs;
     }
 
     @Getter
     @Setter
+    @EqualsAndHashCode
     @NoArgsConstructor
     @AllArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -73,12 +79,12 @@ public class SentenceToken {
         /**
          * BTS glossing
          */
-        @JsonAlias({"verbal", "bgloss"})
+        @JsonAlias({"verbal", "bgloss", "bGloss"})
         private String btsGloss;
         /**
          * Leipzig Glossing Rules glossing
          */
-        @JsonAlias({"glossing", "lgloss"})
+        @JsonAlias({"glossing", "lgloss", "lGloss"})
         private String lingGloss;
 
         public static class EmptyObjectFilter {
@@ -97,6 +103,7 @@ public class SentenceToken {
 
     @Getter
     @Setter
+    @EqualsAndHashCode
     @NoArgsConstructor
     @AllArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
