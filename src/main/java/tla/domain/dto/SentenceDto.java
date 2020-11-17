@@ -45,6 +45,8 @@ public class SentenceDto extends AbstractDto {
     @Singular
     private List<SentenceToken> tokens;
 
+    private Integer wordCount;
+
     /**
      * Information about where in which text a sentence is to be located.
      */

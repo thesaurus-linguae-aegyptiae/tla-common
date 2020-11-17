@@ -182,5 +182,8 @@
   "revisionState": "published",
   "subtype": null,
   "type": "text",
-  "wordCount": 19
+  "wordCount": {
+      "min": 19,
+      "max": 19
+  }
 }
