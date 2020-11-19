@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,7 +25,6 @@ import tla.domain.model.meta.Resolvable;
 @Builder
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor
 @JsonPropertyOrder(alphabetic = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ObjectReference implements Comparable<Resolvable>, Resolvable {

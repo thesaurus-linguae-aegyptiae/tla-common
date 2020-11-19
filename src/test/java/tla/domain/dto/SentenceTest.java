@@ -25,8 +25,16 @@ public class SentenceTest {
             () -> assertEquals("HS", s.getType(), "type"),
             () -> assertNotNull(s.getContext(), "context"),
             () -> assertNotNull(s.getContext().getParagraph(), "paragraph"),
-            () -> assertEquals(117, s.getContext().getPos(), "position in sentences array"),
-            () -> assertNotNull(s.getTranslations(), "sentence translations")
+            () -> assertEquals(117, s.getContext().getPosition(), "position in sentences array"),
+            () -> assertNotNull(s.getTranslations(), "sentence translations"),
+            () -> assertNotNull(s.getTokens(), "sentence tokens"),
+            () -> assertFalse(s.getTokens().isEmpty(), "tokens exist"),
+            () -> assertTrue(
+                s.getTokens().get(0).getAnnoTypes().contains("subtext"),
+                "token annotated with subtext"
+            ),
+            () -> assertNotNull(s.getRelations(), "sentence relations"),
+            () -> assertFalse(s.getRelations().isEmpty(), "relations exist")
         );
         SentenceDto s2 = new SentenceDto();
         s2.setContext(s.getContext());
@@ -34,6 +42,7 @@ public class SentenceTest {
         s2.setType(s.getType());
         s2.setTranscription(s.getTranscription());
         s2.setTranslations(s.getTranslations());
+        s2.setRelations(s.getRelations());
         s2.setTokens(s.getTokens());
         assertAll("assert equality",
             () -> assertEquals(s, s2, "instance"),
@@ -66,8 +75,8 @@ public class SentenceTest {
         assertAll("check for null contents",
             () -> assertNotNull(dto.getTokens().get(0), "token"),
             () -> assertNull(dto.getTokens().get(0).getTranscription(), "token transcription"),
-            () -> assertNull(dto.getTokens().get(0).getFlexion(), "flexion"),
-            () -> assertNull(dto.getTokens().get(0).getLemma(), "lemma info")
+            () -> assertNotNull(dto.getTokens().get(0).getFlexion(), "flexion"),
+            () -> assertNotNull(dto.getTokens().get(0).getLemma(), "lemma info")
         );
     }
 }

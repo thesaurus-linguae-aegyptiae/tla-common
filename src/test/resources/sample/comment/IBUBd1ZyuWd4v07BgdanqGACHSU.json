@@ -1,31 +1,29 @@
 {
-    "id": "IBUBd1ZyuWd4v07BgdanqGACHSU",
+    "body": "pMMA 35.9.21 22,9 und pLouvre I. 3079 111,18: $Wsjr-\u1e2bnt,j-Jmn,tt Wsjr$ N.\nDie thebanische Geburt des Osiris ist ein bisher nur sp\u00e4tzeitlich bekannter Mythos, der besonders im Opettempel von Karnak Erw\u00e4hnung findet (Nut = Opet die Gro\u00dfe); vgl. Goyon, BIFAO 65 (1967), 122, Anm. (127) und Haikal, Nesmin II, 63, Anm. 44.",
     "eclass": "BTSComment",
-    "content": "pMMA 35.9.21 22,9 und pLouvre I. 3079 111,18: $Wsjr-\u1e2bnt,j-Jmn,tt Wsjr$ N.\nDie thebanische Geburt des Osiris ist ein bisher nur sp\u00e4tzeitlich bekannter Mythos, der besonders im Opettempel von Karnak Erw\u00e4hnung findet (Nut = Opet die Gro\u00dfe); vgl. Goyon, BIFAO 65 (1967), 122, Anm. (127) und Haikal, Nesmin II, 63, Anm. 44.",
-    "revisionState": "published",
     "editors": {
         "author": "F. Feder",
-        "type": "user",
         "contributors": [
             "Alt\u00e4gyptisches W\u00f6rterbuch"
         ],
+        "created": "2015-06-26 16:52:59",
+        "type": "user",
         "updated": "2015-06-26 17:20:23"
     },
+    "id": "IBUBd1ZyuWd4v07BgdanqGACHSU",
     "relations": {
         "partOf": [
             {
-                "id": "F35B4R63DRB5RNEEBEO6QAPKUA",
-                "name": "Ritual der Verkl\u00e4rung des Osiris (Buch IV)",
-                "type": "Text",
-                "eclass": "BTSText",
+                "eclass": "BTSSentence",
+                "id": "IBUBdzUfVpsPzkL0qI7AvWkMlp0",
                 "ranges": [
                     {
-                        "start": "IBUBd6mV3EwlYUnzgQ3zZWz9GJQ",
-                        "end": "IBUBd3951Q5yN0tLsQy6ryhWp4c"
+                        "end": "IBUBd3951Q5yN0tLsQy6ryhWp4c",
+                        "start": "IBUBd6mV3EwlYUnzgQ3zZWz9GJQ"
                     }
                 ]
             }
         ]
-    }
-}
+    },
+    "revisionState": "published"
 }
