@@ -1,7 +1,5 @@
 package tla.domain.model.meta;
 
-import java.lang.annotation.Annotation;
-
 import javax.naming.InvalidNameException;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,14 +36,11 @@ public abstract class AbstractBTSBaseClass {
      * Returns the object's <code>eClass</code> value specified via the {@link BTSeClass} annotation.
      */
     public String getEclass() {
-        String eclass = getTypesEclass(this.getClass());
-        if (eclass != null) {
-            return eclass;
-        } else {
-            return this.getClass().getName();
+        if (eclass == null) {
+            eclass = Util.extractEclass(this.getClass());
         }
+        return eclass;
     }
-
 
     /**
      * Throws an exception if the value passed doesn't match the one specified via {@link BTSeClass} annotation.
@@ -64,12 +59,13 @@ public abstract class AbstractBTSBaseClass {
 
     /**
      * extract a model class's <code>eClass</code> from its {@link BTSeClass} annotation.
+     *
+     * @Deprecated please use {@link Util#extractEclass(Class)}
      */
     public static String getTypesEclass(Class<? extends AbstractBTSBaseClass> modelClass) {
-        for (Annotation annotation : modelClass.getAnnotations()) {
-            if (annotation instanceof BTSeClass) {
-                return ((BTSeClass) annotation).value();
-            }
+        String eclass = Util.extractEclass(modelClass);
+        if (eclass != null) {
+            return eclass;
         }
         log.warn(
             "eClass of {} instance not specified via @BTSeClass annotation. Returning class name",
