@@ -8,7 +8,7 @@ public class Util {
      * Extract BTS <code>eclass</code> specifier from class annotations
      * ({@link BTSeClass} or {@link TLADTO}).
      *
-     * @return <code>eClass</code> value if one was found, class name otherwise
+     * @return <code>eClass</code> value if one was found, null otherwise
      */
     public static String extractEclass(Class<?> clazz) {
         for (Annotation a : clazz.getAnnotations()) {
@@ -18,7 +18,7 @@ public class Util {
                 return extractEclass(((TLADTO) a).value());
             }
         }
-        return clazz.getName();
+        return null;
     }
 
 }
