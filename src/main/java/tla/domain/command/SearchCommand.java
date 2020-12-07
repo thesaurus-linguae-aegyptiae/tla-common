@@ -29,7 +29,20 @@ import tla.domain.model.meta.TLADTO;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public abstract class SearchCommand<T extends AbstractBTSBaseClass> {
 
+    /**
+     * By which criteria to sort results.
+     */
     private String sort;
+
+    /**
+     * filter search results by ID
+     */
+    private String[] id;
+
+    /**
+     * search for documents to which a certain author contributed
+     */
+    private String editor;
 
     /**
      * Retrieve the DTO model class targeted by this search command.
