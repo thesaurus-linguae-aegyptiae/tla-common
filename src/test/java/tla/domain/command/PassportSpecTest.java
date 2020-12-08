@@ -76,4 +76,15 @@ public class PassportSpecTest {
         );
     }
 
+    @Test
+    void specsWithOnlyEmptyValuesAreEmpty() {
+        var pp = new PassportSpec();
+        pp.put("date", PassportSpec.ThsRefPassportValue.of(List.of(), true));
+        assertAll("specs should be considered empty if all values are empty",
+            () -> assertEquals(1, pp.size(), "1 key"),
+            () -> assertTrue(pp.get("date").isEmpty(), "values empty"),
+            () -> assertTrue(pp.isEmpty(), "specs empty")
+        );
+    }
+
 }

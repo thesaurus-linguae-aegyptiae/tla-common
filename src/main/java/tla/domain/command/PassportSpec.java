@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
@@ -19,6 +21,7 @@ public class PassportSpec extends HashMap<String, PassportSpec.PassportSpecValue
 
     private static final long serialVersionUID = 1995818429616022627L;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static interface PassportSpecValue {
         public Set<String> getValues();
         public PassportSpecValue setValues(Collection<String> values);
@@ -33,6 +36,10 @@ public class PassportSpec extends HashMap<String, PassportSpec.PassportSpecValue
             } else {
                 return LiteralPassportValue.of(values);
             }
+        }
+        @JsonIgnore
+        public default boolean isEmpty() {
+            return this.getValues().isEmpty();
         }
     }
 
@@ -94,6 +101,13 @@ public class PassportSpec extends HashMap<String, PassportSpec.PassportSpecValue
     public PassportSpecValue put(String key, PassportSpecValue value) {
         return super.merge(
             key, value, (prev, cur) -> prev.merge(cur)
+        );
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return super.isEmpty() || this.values().stream().allMatch(
+            PassportSpecValue::isEmpty
         );
     }
 
