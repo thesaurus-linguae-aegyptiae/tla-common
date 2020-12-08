@@ -1,5 +1,6 @@
 package tla.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +23,13 @@ public class Transcription {
      */
     private String mdc;
 
+    @JsonIgnore
+    public boolean isEmpty() {
+        return !(this.getMdc() != null && !this.getMdc().isBlank() ||
+            this.getUnicode() != null && !this.getUnicode().isBlank()
+        );
+    }
+
     /**
      * Determines if an instance should be considered "empty" by jackson
      * object mapper.
@@ -30,12 +38,7 @@ public class Transcription {
         @Override
         public boolean equals(Object obj) {
             if (obj != null && obj instanceof Transcription) {
-                Transcription t = (Transcription) obj;
-                if (t.getMdc() != null && !t.getMdc().isBlank() ||
-                    t.getUnicode() != null && !t.getUnicode().isBlank()
-                ) {
-                    return false;
-                }
+                return ((Transcription) obj).isEmpty();
             }
             return true;
         }

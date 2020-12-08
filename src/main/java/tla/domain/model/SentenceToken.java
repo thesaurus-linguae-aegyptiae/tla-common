@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -121,6 +122,13 @@ public class SentenceToken {
         @JsonAlias({"pos", "POS"})
         private TypeSpec partOfSpeech;
 
+        @JsonIgnore
+        public boolean isEmpty() {
+            return (
+                (this.id == null || this.id.isBlank()) &&
+                (this.partOfSpeech == null || this.partOfSpeech.isEmpty())
+            );
+        }
         /**
          * for jackson to determine "empty" instances
          */
@@ -128,11 +136,7 @@ public class SentenceToken {
             @Override
             public boolean equals(Object obj) {
                 if (obj != null && obj instanceof Lemmatization) {
-                    Lemmatization l = (Lemmatization) obj;
-                    return (
-                        (l.getId() == null || l.getId().isBlank()) &&
-                        (l.getPartOfSpeech() == null || l.getPartOfSpeech().isEmpty())
-                    );
+                    return ((Lemmatization) obj).isEmpty();
                 }
                 return true;
             }
