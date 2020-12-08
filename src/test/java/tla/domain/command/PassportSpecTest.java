@@ -33,7 +33,7 @@ public class PassportSpecTest {
     }
 
     @Test
-    void mergePassportSpecs() {
+    void mergePassportSpecValues() {
         var pp = new PassportSpec();
         pp.put("date", ThsRefPassportValue.of(List.of("THSID1"), true));
         pp.put("date", ThsRefPassportValue.of(List.of("THSID2"), true));
@@ -48,6 +48,32 @@ public class PassportSpecTest {
         var dd = ThsRefPassportValue.of(List.of("THSID1", "THSID2"), false);
         pp.put("date", dd);
         assertFalse(((ThsRefPassportValue) pp.get("date")).isExpand());
+    }
+
+    @Test
+    void mergeEmptyPassportSpec() {
+        var pp = new PassportSpec();
+        var pp2 = new PassportSpec();
+        pp2.put("date", PassportSpec.ThsRefPassportValue.of(List.of("XX"), true));
+        pp.addAll(pp2);
+        assertAll("merge passport specs into empty instance",
+            () -> assertTrue(pp.get("date") instanceof ThsRefPassportValue),
+            () -> assertTrue(((ThsRefPassportValue) pp.get("date")).isExpand(), "expansion flag on")
+        );
+    }
+
+    @Test
+    void mergePassportSpecs() throws Exception {
+        var s = "{\"date\":{\"values\":[\"XX\"],\"expand\":true},\"comment\":{\"values\":[\"bla\"]}}";
+        var pp = tla.domain.util.IO.getMapper().readValue(s, PassportSpec.class);
+        var pp2 = new PassportSpec();
+        pp2.put("date", PassportSpec.ThsRefPassportValue.of(List.of("YY"), false));
+        pp.addAll(pp2);
+        assertAll("merge 2 passport spec instances together",
+            () -> assertTrue(pp.get("date") instanceof ThsRefPassportValue),
+            () -> assertFalse(((ThsRefPassportValue) pp.get("date")).isExpand(), "expansion flag off"),
+            () -> assertEquals(2, pp.get("date").getValues().size(), "two ths IDs")
+        );
     }
 
 }

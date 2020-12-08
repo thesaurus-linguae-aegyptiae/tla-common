@@ -17,7 +17,7 @@ import tla.domain.model.meta.TLADTO;
 @BTSeClass("BTSSentence")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OccurrenceSearch extends SearchCommand<SentenceDto> {
+public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
 
     /**
      * looking for usages of a specific lemma entry.
@@ -43,16 +43,6 @@ public class OccurrenceSearch extends SearchCommand<SentenceDto> {
     private Transcription transcription;
 
     /**
-     * search for particular meaning in one or more languages mentioned
-     * in either token or surrounding sentence translation.
-     */
-    @JsonInclude(
-        value = JsonInclude.Include.CUSTOM,
-        valueFilter = TranslationSpec.EmptyObjectFilter.class
-    )
-    private TranslationSpec translation;
-
-    /**
      * type of the surrounding sentence
      */
     @JsonInclude(
@@ -60,5 +50,7 @@ public class OccurrenceSearch extends SearchCommand<SentenceDto> {
         valueFilter = TypeSpec.EmptyObjectFilter.class
     )
     private TypeSpec type;
+
+    private PassportSpec passport;
 
 }
