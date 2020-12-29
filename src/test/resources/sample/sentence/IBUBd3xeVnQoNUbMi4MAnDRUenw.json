@@ -52,7 +52,7 @@
             "id": "IBcAEeWofnYjA09zjOgUEPl7aC4",
             "type": "para",
             "label": "Eb 132 = Eb 147",
-            "glyphs": null,
+            "glyphs": {},
             "annoTypes": [
                 "subtext"
             ]
@@ -61,7 +61,7 @@
             "id": "IBUBd967KDXFIUpErLslcEngEFA",
             "type": "lc",
             "label": "[30,18]",
-            "glyphs": null,
+            "glyphs": {},
             "annoTypes": [
                 "subtext"
             ]
@@ -82,7 +82,7 @@
                 "bgloss": "n/a",
                 "lgloss": "N.f:sg"
             },
-            "glyphs": "F46:D21*X1-N33:Z2",
+            "glyphs": {"mdc": "F46:D21*X1-N33:Z2"},
             "translations": {
                 "de": [
                     "Heilmittel (allg.)"
@@ -113,7 +113,7 @@
                 "bgloss": "Adj.sgf",
                 "lgloss": "PREP-adjz:f.sg"
             },
-            "glyphs": "N35:X1",
+            "glyphs": {"mdc": "N35:X1"},
             "translations": {
                 "de": [
                     "von [Genitiv]"
@@ -144,7 +144,7 @@
                 "bgloss": "Inf",
                 "lgloss": "V\\inf"
             },
-            "glyphs": "S29-D21:Z7-Aa1:Aa2-Y1",
+            "glyphs": {"mdc": "S29-D21:Z7-Aa1:Aa2-Y1"},
             "translations": {
                 "de": [
                     "behandeln; pflegen"
@@ -175,7 +175,7 @@
                 "bgloss": "n/a",
                 "lgloss": "N.f:sg"
             },
-            "glyphs": "F32:X1*Z1",
+            "glyphs": {"mdc": "F32:X1*Z1"},
             "translations": {
                 "de": [
                     "Bauch"
@@ -206,7 +206,7 @@
                 "bgloss": "Inf",
                 "lgloss": "V\\inf"
             },
-            "glyphs": "S29-D21:Z7-Aa1:Aa2-Y1",
+            "glyphs": {"mdc": "S29-D21:Z7-Aa1:Aa2-Y1"},
             "translations": {
                 "de": [
                     "behandeln; pflegen"
@@ -237,7 +237,7 @@
                 "bgloss": "n/a",
                 "lgloss": "N.f:sg"
             },
-            "glyphs": "F22-Z7-M17-M17-X1:F51",
+            "glyphs": {"mdc": "F22-Z7-M17-M17-X1:F51"},
             "translations": {
                 "de": [
                     "After; Rektum"
