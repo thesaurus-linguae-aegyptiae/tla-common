@@ -3,6 +3,8 @@
 ![LINE](https://img.shields.io/badge/line--coverage-88%25-brightgreen.svg)
 ![METHOD](https://img.shields.io/badge/method--coverage-84%25-brightgreen.svg)
 
+Copyright (c) 2020-2021 Berlin-Brandenburgische Akademie der Wissenschaften
+
 # TLA data transfer model library
 
 Use this to speak to speak to TLA backend endpoints.
