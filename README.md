@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.jkatzwinkel:tla-common:master-SNAPSHOT'
+    implementation 'com.github.thesaurus-linguae-aegyptiae:tla-common:master-SNAPSHOT'
 }
 ```
 
