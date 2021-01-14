@@ -1,5 +1,6 @@
 package tla.domain.command;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Getter;
@@ -22,12 +23,16 @@ public class TranslationSpec {
      */
     private Language[] lang;
 
+    @JsonIgnore
+    public boolean isEmpty() {
+        return this.text == null && (this.lang == null || this.lang.length < 1);
+    }
+
     public static class EmptyObjectFilter {
         @Override
         public boolean equals(Object o) {
             if (o != null && o instanceof TranslationSpec) {
-                TranslationSpec t = (TranslationSpec) o;
-                return t.text == null && (t.lang == null || t.lang.length < 1);
+                return ((TranslationSpec) o).isEmpty();
             }
             return true;
         }

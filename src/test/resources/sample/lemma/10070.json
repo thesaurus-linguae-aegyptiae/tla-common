@@ -85,7 +85,7 @@
         "lingGloss": "\u2014",
         "numeric": 0
       },
-      "glyphs": "N35:Z2",
+      "glyphs": {"mdc": "N35:Z2"},
       "id": "IBUBd3c4CSwq3UpopzfqrGAeRs4",
       "label": "=n",
       "lemma": {

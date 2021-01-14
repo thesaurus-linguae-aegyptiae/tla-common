@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -40,7 +41,11 @@ public class SentenceToken {
     )
     private Flexion flexion;
 
-    private String glyphs;
+    @JsonInclude(
+        value = JsonInclude.Include.CUSTOM,
+        valueFilter = Glyphs.EmptyObjectFilter.class
+    )
+    private Glyphs glyphs;
 
     private Transcription transcription;
 
@@ -57,10 +62,13 @@ public class SentenceToken {
         this.flexion = new Flexion();
     }
 
+    /**
+     * For testing only.
+     */
     public SentenceToken(Transcription transcription, String glyphs) {
         this();
         this.transcription = transcription;
-        this.glyphs = glyphs;
+        this.glyphs = new Glyphs(glyphs, null, null);
     }
 
     @Getter
@@ -121,6 +129,13 @@ public class SentenceToken {
         @JsonAlias({"pos", "POS"})
         private TypeSpec partOfSpeech;
 
+        @JsonIgnore
+        public boolean isEmpty() {
+            return (
+                (this.id == null || this.id.isBlank()) &&
+                (this.partOfSpeech == null || this.partOfSpeech.isEmpty())
+            );
+        }
         /**
          * for jackson to determine "empty" instances
          */
@@ -128,11 +143,38 @@ public class SentenceToken {
             @Override
             public boolean equals(Object obj) {
                 if (obj != null && obj instanceof Lemmatization) {
-                    Lemmatization l = (Lemmatization) obj;
-                    return (
-                        (l.getId() == null || l.getId().isBlank()) &&
-                        (l.getPartOfSpeech() == null || l.getPartOfSpeech().isEmpty())
-                    );
+                    return ((Lemmatization) obj).isEmpty();
+                }
+                return true;
+            }
+        }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Glyphs {
+        private String mdc;
+        private String unicode;
+        private String orig;
+
+        @JsonIgnore
+        public boolean isEmpty() {
+            return (
+                (this.mdc == null || this.mdc.isBlank()) &&
+                (this.orig == null || this.orig.isBlank())
+            );
+        }
+
+        public static class EmptyObjectFilter {
+            @Override
+            public boolean equals(Object obj) {
+                if (obj != null && obj instanceof Glyphs) {
+                    return ((Glyphs) obj).isEmpty();
                 }
                 return true;
             }

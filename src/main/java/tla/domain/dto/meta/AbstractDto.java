@@ -29,6 +29,7 @@ import tla.domain.dto.TextDto;
 import tla.domain.dto.ThsEntryDto;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.meta.AbstractBTSBaseClass;
+import tla.domain.model.meta.Relatable;
 import tla.domain.model.meta.Resolvable;
 
 /**
@@ -56,7 +57,7 @@ import tla.domain.model.meta.Resolvable;
         @Type(value = SentenceDto.class, name = "BTSSentence")
     }
 )
-public abstract class AbstractDto extends AbstractBTSBaseClass {
+public abstract class AbstractDto extends AbstractBTSBaseClass implements Relatable<SortedSet<Resolvable>> {
 
     @NonNull
     private String id;

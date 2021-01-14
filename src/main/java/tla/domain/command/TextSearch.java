@@ -10,15 +10,20 @@ import tla.domain.model.meta.TLADTO;
 
 @Getter
 @Setter
-@TLADTO(TextDto.class)
 @BTSeClass("BTSText")
+@TLADTO(TextDto.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class TextSearch extends SearchCommand<TextDto> {
+public class TextSearch extends SearchCommand<TextDto> implements Expandable {
 
     /**
      * ID of the thesaurus entry representing the historic era
      * during which the searched for text was conceived.
      */
     private String dateId;
+
+    private PassportSpec passport;
+
+    private boolean expand;
+    private String[] rootIds;
 
 }

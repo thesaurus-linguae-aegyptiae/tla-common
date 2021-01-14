@@ -15,7 +15,7 @@ import tla.domain.model.meta.TLADTO;
 @TLADTO(LemmaDto.class)
 @BTSeClass("BTSLemmaEntry")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class LemmaSearch extends SearchCommand<LemmaDto> {
+public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
 
     /**
      * Only looking for lemma being used in one or more particular
@@ -52,15 +52,6 @@ public class LemmaSearch extends SearchCommand<LemmaDto> {
     )
     @JsonAlias("annotationType")
     private TypeSpec anno;
-
-    /**
-     * Require lemma to have a specifig meaning in one or more languages.
-     */
-    @JsonInclude(
-        value = JsonInclude.Include.CUSTOM,
-        valueFilter = TranslationSpec.EmptyObjectFilter.class
-    )
-    private TranslationSpec translation;
 
     /**
      * Lemma entry is referencing a specific bibliographic source.
