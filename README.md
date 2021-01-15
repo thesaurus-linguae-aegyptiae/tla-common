@@ -1,5 +1,5 @@
-[![](https://jitpack.io/v/jkatzwinkel/tla-common.svg)](https://jitpack.io/#jkatzwinkel/tla-common)
-![Build](https://github.com/JKatzwinkel/tla-common/workflows/Java%20CI/badge.svg)
+[![](https://jitpack.io/v/thesaurus-linguae-aegyptiae/tla-common.svg)](https://jitpack.io/#thesaurus-linguae-aegyptiae/tla-common)
+![Build](https://github.com/thesaurus-linguae-aegyptiae/tla-common/workflows/Java%20CI/badge.svg)
 ![LINE](https://img.shields.io/badge/line--coverage-88%25-brightgreen.svg)
 ![METHOD](https://img.shields.io/badge/method--coverage-83%25-brightgreen.svg)
 
