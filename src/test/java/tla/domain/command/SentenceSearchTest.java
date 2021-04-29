@@ -27,6 +27,7 @@ public class SentenceSearchTest {
         token.setLemma(new Lemmatization());
         token.getLemma().setPartOfSpeech(new TypeSpec());
         token.setTranscription(new Transcription());
+        token.setTranslation(new TranslationSpec());
         cmd.setTokens(List.of(token));
         cmd.setTranslation(new TranslationSpec());
         cmd.getTranslation().setLang(new Language[]{});

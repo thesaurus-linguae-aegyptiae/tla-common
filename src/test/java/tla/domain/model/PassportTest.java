@@ -56,7 +56,7 @@ class PassportTest {
     /**
      * tests whether the {@link Passport#add} method works on Passport nodes that have
      * been explicitly instantiated as a value-holding leaf, i.e. using the {@link Passport#Passport(String)}
-     * constructor. 
+     * constructor.
      */
     @Test
     void addProperties_refitNodeType() {
@@ -75,7 +75,7 @@ class PassportTest {
     @Test
     void deserializeFromString_emptyLeafList() throws Exception {
         Passport pp = mapper.readValue(
-            "{\"key\": [{\"subkey\": []}]}", 
+            "{\"key\": [{\"subkey\": []}]}",
             Passport.class
         );
         assertEquals(pp.getProperties().size(), 1, "passport size should be 1");
@@ -91,7 +91,7 @@ class PassportTest {
     @Test
     void deserializeFromString_emptyLeaf() throws Exception {
         Passport pp = mapper.readValue(
-            "{\"key\": [{\"subkey\": [{}]}]}", 
+            "{\"key\": [{\"subkey\": [{}]}]}",
             Passport.class
         );
         Passport subkeyPassport = pp.getProperties().get("key").get(0);
@@ -204,7 +204,7 @@ class PassportTest {
     @Test
     void extractPaths_level2() throws Exception {
         Passport pp = mapper.readValue(
-            "{\"key\": [{\"subkey\": [\"val\"]}]}", 
+            "{\"key\": [{\"subkey\": [\"val\"]}]}",
             Passport.class
         );
         List<String> paths = pp.extractPaths();
@@ -261,11 +261,11 @@ class PassportTest {
             Passport.class
         );
         List<Passport> nodes = pp.extractProperty("a");
-        assertAll("should extact internal node",
+        assertAll("should extract internal node",
             () -> assertEquals(1, nodes.size(), "expect 1 inner node"),
             () -> assertEquals(2, nodes.get(0).size(), "expect 2 keys in inner node"),
-            () -> assertTrue(nodes.get(0).containsKey("b")),
-            () -> assertTrue(nodes.get(0).containsKey("c"))
+            () -> assertTrue(nodes.get(0).containsKey("b"), "inner node contains key 'b'"),
+            () -> assertTrue(nodes.get(0).containsKey("c"), "inner node contains key 'c'")
         );
     }
 
@@ -304,6 +304,30 @@ class PassportTest {
             () -> assertEquals(1, leafs.size(), "exactly 1 leaf node expected"),
             () -> assertTrue(leafs.get(0).get() instanceof ObjectReference, "leaf is thesaurus ref"),
             () -> assertEquals("1", ((ObjectReference) leafs.get(0).get()).getId(), "check ths ref ID")
+        );
+    }
+
+    @Test
+    void extractLeafValues_nullNode() throws Exception {
+        Passport p = mapper.readValue(
+            "{\"a\": [{\"b\":[\"c\"], \"d\": null}]}",
+            Passport.class
+        );
+        assertDoesNotThrow(
+            () -> { p.extractValues(); },
+            "entire tree traversed despite of internal null node lurking inside"
+        );
+    }
+
+    @Test
+    void extractProperty_nullNode() throws Exception {
+        Passport p = mapper.readValue(
+            "{\"a\": [{\"b\":[\"c\"], \"d\": null}]}",
+            Passport.class
+        );
+        assertDoesNotThrow(
+            () -> { p.extractProperty("a.b.c"); },
+            "lurking internal null node doesn't compromise path lookup"
         );
     }
 

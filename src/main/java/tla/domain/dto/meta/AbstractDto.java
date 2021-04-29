@@ -80,13 +80,18 @@ public abstract class AbstractDto extends AbstractBTSBaseClass implements Relata
     @NoArgsConstructor
     @JsonDeserialize(contentAs = ObjectReference.class)
     public static class ObjectReferences extends TreeSet<Resolvable> {
-
         private static final long serialVersionUID = -11078168966585263L;
 
         public ObjectReferences(Collection<Resolvable> refs) {
             super(refs);
         }
+    }
 
+    /**
+     * serialize object to JSON
+     */
+    public String toJson() {
+        return tla.domain.util.IO.json(this);
     }
 
 }

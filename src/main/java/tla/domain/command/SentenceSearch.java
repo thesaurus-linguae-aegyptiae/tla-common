@@ -62,7 +62,8 @@ public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
             return (
                 (this.lemma == null || this.lemma.isEmpty()) &&
                 (this.glyphs == null || this.glyphs.isBlank()) &&
-                (this.transcription == null || this.transcription.isEmpty())
+                (this.transcription == null || this.transcription.isEmpty()) &&
+                (this.translation == null || this.translation.isEmpty())
             );
         }
 

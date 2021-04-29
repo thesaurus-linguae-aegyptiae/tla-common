@@ -18,7 +18,7 @@ import tla.error.TlaStatusCodeException;
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SearchResultsWrapper<T extends AbstractDto> {
+public class SearchResultsWrapper<T extends AbstractDto> implements DocumentWrapper {
 
     private TlaStatusCodeException errorStatus = null;
 
