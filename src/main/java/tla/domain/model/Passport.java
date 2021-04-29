@@ -190,13 +190,16 @@ public class Passport {
      */
     public List<Passport> extractValues() {
         List<Passport> values = new LinkedList<Passport>();
-        Object value = this.get();
-        if (value != null) {
-            return List.of(this);
+        if (this.get() != null) {
+            values.add(this);
         } else {
             for (Entry<String, List<Passport>> e : this.properties.entrySet()) {
-                for (Passport child : e.getValue()) {
-                    values.addAll(child.extractValues());
+                if (e.getValue() != null) {
+                    for (Passport child : e.getValue()) {
+                        if (child != null) {
+                            values.addAll(child.extractValues());
+                        }
+                    }
                 }
             }
         }

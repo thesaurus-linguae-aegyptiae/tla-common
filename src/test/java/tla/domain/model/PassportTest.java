@@ -261,11 +261,11 @@ class PassportTest {
             Passport.class
         );
         List<Passport> nodes = pp.extractProperty("a");
-        assertAll("should extact internal node",
+        assertAll("should extract internal node",
             () -> assertEquals(1, nodes.size(), "expect 1 inner node"),
             () -> assertEquals(2, nodes.get(0).size(), "expect 2 keys in inner node"),
-            () -> assertTrue(nodes.get(0).containsKey("b")),
-            () -> assertTrue(nodes.get(0).containsKey("c"))
+            () -> assertTrue(nodes.get(0).containsKey("b"), "inner node contains key 'b'"),
+            () -> assertTrue(nodes.get(0).containsKey("c"), "inner node contains key 'c'")
         );
     }
 
@@ -304,6 +304,18 @@ class PassportTest {
             () -> assertEquals(1, leafs.size(), "exactly 1 leaf node expected"),
             () -> assertTrue(leafs.get(0).get() instanceof ObjectReference, "leaf is thesaurus ref"),
             () -> assertEquals("1", ((ObjectReference) leafs.get(0).get()).getId(), "check ths ref ID")
+        );
+    }
+
+    @Test
+    void extractLeafValues_nullNode() throws Exception {
+        Passport p = mapper.readValue(
+            "{\"a\": [{\"b\":[\"c\"], \"d\": null}]}",
+            Passport.class
+        );
+        assertDoesNotThrow(
+            () -> { p.extractValues(); },
+            "leaf nodes traversed despite of looming internal null node"
         );
     }
 
