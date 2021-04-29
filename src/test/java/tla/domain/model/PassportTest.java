@@ -56,7 +56,7 @@ class PassportTest {
     /**
      * tests whether the {@link Passport#add} method works on Passport nodes that have
      * been explicitly instantiated as a value-holding leaf, i.e. using the {@link Passport#Passport(String)}
-     * constructor. 
+     * constructor.
      */
     @Test
     void addProperties_refitNodeType() {
@@ -75,7 +75,7 @@ class PassportTest {
     @Test
     void deserializeFromString_emptyLeafList() throws Exception {
         Passport pp = mapper.readValue(
-            "{\"key\": [{\"subkey\": []}]}", 
+            "{\"key\": [{\"subkey\": []}]}",
             Passport.class
         );
         assertEquals(pp.getProperties().size(), 1, "passport size should be 1");
@@ -91,7 +91,7 @@ class PassportTest {
     @Test
     void deserializeFromString_emptyLeaf() throws Exception {
         Passport pp = mapper.readValue(
-            "{\"key\": [{\"subkey\": [{}]}]}", 
+            "{\"key\": [{\"subkey\": [{}]}]}",
             Passport.class
         );
         Passport subkeyPassport = pp.getProperties().get("key").get(0);
@@ -204,7 +204,7 @@ class PassportTest {
     @Test
     void extractPaths_level2() throws Exception {
         Passport pp = mapper.readValue(
-            "{\"key\": [{\"subkey\": [\"val\"]}]}", 
+            "{\"key\": [{\"subkey\": [\"val\"]}]}",
             Passport.class
         );
         List<String> paths = pp.extractPaths();
@@ -315,7 +315,19 @@ class PassportTest {
         );
         assertDoesNotThrow(
             () -> { p.extractValues(); },
-            "leaf nodes traversed despite of looming internal null node"
+            "entire tree traversed despite of internal null node lurking inside"
+        );
+    }
+
+    @Test
+    void extractProperty_nullNode() throws Exception {
+        Passport p = mapper.readValue(
+            "{\"a\": [{\"b\":[\"c\"], \"d\": null}]}",
+            Passport.class
+        );
+        assertDoesNotThrow(
+            () -> { p.extractProperty("a.b.c"); },
+            "lurking internal null node doesn't compromise path lookup"
         );
     }
 

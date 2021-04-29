@@ -129,13 +129,15 @@ public class Passport {
         List<Passport> recursionResults = new LinkedList<Passport>();
         if (path.length > 0) {
             String segment = path[0];
-            if (this.properties.containsKey(segment)) {
+            if (this.properties != null && this.properties.containsKey(segment)) {
                 for (Passport child : this.properties.get(segment)) {
-                    recursionResults.addAll(
-                        child.extractProperty(
-                            Arrays.copyOfRange(path, 1, path.length)
-                        )
-                    );
+                    if (child != null) {
+                        recursionResults.addAll(
+                            child.extractProperty(
+                                Arrays.copyOfRange(path, 1, path.length)
+                            )
+                        );
+                    }
                 }
                 return recursionResults;
             } else {
