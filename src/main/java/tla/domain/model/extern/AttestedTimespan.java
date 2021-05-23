@@ -2,7 +2,6 @@ package tla.domain.model.extern;
 
 import lombok.Getter;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tla.domain.model.ObjectReference;
@@ -17,41 +16,24 @@ import lombok.AllArgsConstructor;
 
 /**
  * Nested data structure for temporally grouped lemma attestation statistics.
- *
- * <p>If an instance contains child nodes, its own attestation counts will be ignored,
- * and the values returned within the {@link AttestedTimespan#getAttestations()} result
- * will be recursively summed up.
- * </p>
  */
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AttestedTimespan {
 
     private Period period;
 
-    private AttestationStats attestations;
+    @Builder.Default
+    private AttestationStats attestations = new AttestationStats();
 
-    private List<AttestedTimespan> contains;
+    @Builder.Default
+    private List<AttestedTimespan> contains = List.of();
 
-    /**
-     * Return an instance's attestation stats unlesz those can be
-     * calculated from its children.
-     *
-     * @return an {@link AttestationStats} instance holding text, object, and sentence count
-     */
-    public AttestationStats getAttestations() {
-        if (this.contains != null && !this.contains.isEmpty()) {
-            AttestationStats result = new AttestationStats();
-            this.contains.forEach(
-                child -> result.add(child.getAttestations())
-            );
-            return result;
-        } else {
-            return this.attestations;
-        }
+    public AttestedTimespan() {
+        this.attestations = new AttestationStats();
+        this.contains = List.of();
     }
 
     /**
@@ -70,7 +52,6 @@ public class AttestedTimespan {
      */
     @Getter
     @Builder
-    @EqualsAndHashCode
     @AllArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class AttestationStats {
@@ -122,12 +103,12 @@ public class AttestedTimespan {
         private int end;
         /** Link to thesaurus entry */
         @JsonDeserialize(as = ObjectReference.class)
-        private Resolvable ths;
+        private Resolvable ref;
 
         public Period(int begin, int end) {
             this.begin = begin;
             this.end = end;
-            this.ths = null;
+            this.ref = null;
         }
 
         @Override
