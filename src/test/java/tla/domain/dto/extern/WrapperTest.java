@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.LinkedList;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -135,7 +136,11 @@ public class WrapperTest {
     @Test
     void searchResultsWrapperTest_pagination() throws Exception {
         PageInfo p = PageInfo.builder().numberOfElements(20).totalElements(80).totalPages(4).size(20).build();
-        SearchResultsWrapper<LemmaDto> dto = new SearchResultsWrapper<>(List.of(), new LemmaSearch(), p);
+        LinkedList<LemmaDto> hits = new LinkedList<>();
+        for (int i=0; i<20; i++) {
+            hits.add(LemmaDto.builder().id(String.format("%d", i)).eclass("BTSLemmaEntry").build());
+        }
+        SearchResultsWrapper<LemmaDto> dto = new SearchResultsWrapper<>(hits, new LemmaSearch(), p);
         assertNotNull(dto, "should be able to create search results wrapper if number of results is multiple of page size");
     }
 
