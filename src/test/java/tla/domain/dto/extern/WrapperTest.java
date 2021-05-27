@@ -133,6 +133,13 @@ public class WrapperTest {
     }
 
     @Test
+    void searchResultsWrapperTest_pagination() throws Exception {
+        PageInfo p = PageInfo.builder().numberOfElements(20).totalElements(80).totalPages(4).size(20).build();
+        SearchResultsWrapper<LemmaDto> dto = new SearchResultsWrapper<>(List.of(), new LemmaSearch(), p);
+        assertNotNull(dto, "should be able to create search results wrapper if number of results is multiple of page size");
+    }
+
+    @Test
     void searchResultsDeserialize() throws Exception {
         SearchResultsWrapper<?> w = mapper.readValue(
             Util.loadFromFileAsString("lemma", "search.json"),
