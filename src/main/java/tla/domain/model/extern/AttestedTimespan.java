@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
  * Nested data structure for temporally grouped lemma attestation statistics.
  */
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -51,6 +52,7 @@ public class AttestedTimespan {
      * Container for document counts.
      */
     @Getter
+    @Setter
     @Builder
     @AllArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -89,6 +91,7 @@ public class AttestedTimespan {
      * a link to the corresponding thesaurus entry.
      */
     @Getter
+    @Setter
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
