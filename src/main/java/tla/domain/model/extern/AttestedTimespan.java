@@ -89,6 +89,11 @@ public class AttestedTimespan {
     /**
      * Time period identified by first and last year, and
      * a link to the corresponding thesaurus entry.
+     *
+     * Note: equality is determined based on first and last year alone, without
+     * taking thesaurus entry object reference into account at all.
+     *
+     * Comparator consistent with equals.
      */
     @Getter
     @Setter
@@ -116,7 +121,23 @@ public class AttestedTimespan {
 
         @Override
         public int compareTo(Period arg0) {
-            return this.begin - arg0.begin;
+            if (this.begin < arg0.begin) {
+                return -1;
+            } else if (this.begin > arg0.begin) {
+                return 1;
+            }
+            if (this.end < arg0.end) {
+                return -1;
+            } else if (this.end > arg0.end) {
+                return 1;
+            }
+            return 0;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return (((Period) o).begin == this.begin)
+                && (((Period) o).end == this.end);
         }
 
         /**

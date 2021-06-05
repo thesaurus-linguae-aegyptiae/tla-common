@@ -1,5 +1,6 @@
 package tla.domain.model.extern;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import tla.domain.dto.ThsEntryTest;
@@ -58,7 +59,7 @@ public class AttestationsTest {
     }
 
     @Test
-    void periodCompare() throws Exception {
+    void periodCompare_noOverlap() throws Exception {
         Period siam = ThsEntryTest.loadThsEntryFromFileAndConvertToTimePeriod(
             "677YHBKQIRHB3HVZG45V2N6DU4"
         );
@@ -69,10 +70,36 @@ public class AttestationsTest {
             () -> assertTrue(thut.compareTo(siam) < 0, "Thutmosis earlier than siamun"),
             () -> assertTrue(siam.compareTo(thut) > 0, "siamun later than thutmosis"),
             () -> assertTrue(thut.getEnd() < siam.getBegin(), "no overlap"),
-            () -> assertFalse(thut.contains(siam), "no inclusion")
+            () -> assertFalse(thut.contains(siam), "no inclusion"),
+            () -> assertNotEquals(thut, siam, "should not be equal")
         );
         Period test = new Period(thut.getBegin() + 1, thut.getEnd());
         assertTrue(thut.contains(test));
+    }
+
+    @Test
+    @DisplayName("overlapping periods should compare correctly: same left boundary")
+    void periodCompare_leftOverlap() {
+        Period p1 = new Period(0, 5);
+        Period p2 = new Period(0, 7);
+        Period p3 = new Period(0, 10);
+        assertAll("periods starting in the same year should compare based on when they end",
+            () -> assertTrue(p2.contains(p1), "containment should be true"),
+            () -> assertTrue(p1.compareTo(p3) < 0, "period ending earlier should compare as negative"),
+            () -> assertTrue(p3.compareTo(p1) > 0, "period ending later should compare as positive"),
+            () -> assertNotEquals(p1, p3, "should not be equal"),
+            () -> assertEquals(p1.compareTo(p2), p2.compareTo(p3), "compare should be transitive")
+        );
+    }
+
+    @Test
+    @DisplayName("overlapping periods should compare correctly: equality")
+    void periodCompare_equality() {
+        Period p1 = new Period(0, 5);
+        Period p2 = new Period(0, 5);
+        assertTrue(
+            (p1.compareTo(p2) == 0) == p1.equals(p2), "natural ordering should be consistent with equals"
+        );
     }
 
     @Test
