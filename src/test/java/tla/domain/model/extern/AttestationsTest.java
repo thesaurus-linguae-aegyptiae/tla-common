@@ -10,7 +10,10 @@ import tla.domain.model.extern.AttestedTimespan.Period;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -93,12 +96,46 @@ public class AttestationsTest {
     }
 
     @Test
+    @DisplayName("periods ending in the same year should be ordered by granularity (finer coming first)")
+    void periodComapre_rightOverlap() {
+        Period p1 = new Period(0, 10);
+        Period p2 = new Period(5, 10);
+        Period p3 = new Period(0, 5);
+        assertAll("periods starting in the same year should be ordered by how short they are",
+            () -> assertTrue(p2.compareTo(p1) < 0, "shorter period should come first"),
+            () -> assertTrue(p1.compareTo(p2) > 0, "longer period should come last"),
+            () -> assertEquals(p2.compareTo(p1), p3.compareTo(p2), "compare should be transitive"),
+            () -> assertEquals(p2.compareTo(p1), p3.compareTo(p1), "compare should be consistent")
+        );
+    }
+
+    @Test
     @DisplayName("overlapping periods should compare correctly: equality")
     void periodCompare_equality() {
         Period p1 = new Period(0, 5);
         Period p2 = new Period(0, 5);
+        assertFalse(p1.equals(null), "should handle equality check against null");
         assertTrue(
             (p1.compareTo(p2) == 0) == p1.equals(p2), "natural ordering should be consistent with equals"
+        );
+    }
+
+    @Test
+    @DisplayName("periods should be sorted by the year in which they end && by duration")
+    void periodSort() {
+        List<Period> periods = new ArrayList<>();
+        periods.addAll(List.of(
+            new Period(0, 30),
+            new Period(10, 20),
+            new Period(0, 10),
+            new Period(20, 30)
+        ));
+        Collections.sort(periods);
+        assertEquals(
+            List.of("0-10", "10-20", "20-30", "0-30"),
+            periods.stream().map(p -> String.format("%d-%d", p.getBegin(), p.getEnd())).collect(
+                Collectors.toList()
+            )
         );
     }
 

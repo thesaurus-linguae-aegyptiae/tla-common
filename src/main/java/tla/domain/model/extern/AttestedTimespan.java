@@ -121,22 +121,22 @@ public class AttestedTimespan {
 
         @Override
         public int compareTo(Period arg0) {
-            if (this.begin < arg0.begin) {
-                return -1;
-            } else if (this.begin > arg0.begin) {
-                return 1;
-            }
             if (this.end < arg0.end) {
                 return -1;
             } else if (this.end > arg0.end) {
                 return 1;
+            }
+            if (this.begin < arg0.begin) {
+                return 1;
+            } else if (this.begin > arg0.begin) {
+                return -1;
             }
             return 0;
         }
 
         @Override
         public boolean equals(Object o) {
-            return (((Period) o).begin == this.begin)
+            return (o != null && ((Period) o).begin == this.begin)
                 && (((Period) o).end == this.end);
         }
 
