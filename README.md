@@ -1,5 +1,5 @@
-[![](https://jitpack.io/v/jkatzwinkel/tla-common.svg)](https://jitpack.io/#jkatzwinkel/tla-common)
-![build](https://github.com/JKatzwinkel/tla-common/workflows/build/badge.svg)
+[![](https://jitpack.io/v/thesaurus-linguae-aegyptiae/tla-common.svg)](https://jitpack.io/#thesaurus-linguae-aegyptiae/tla-common)
+![Build](https://github.com/thesaurus-linguae-aegyptiae/tla-common/workflows/build/badge.svg)
 ![LINE](https://img.shields.io/badge/line--coverage-90.07%25-brightgreen.svg)
 ![METHOD](https://img.shields.io/badge/method--coverage-83.90%25-brightgreen.svg)
 
@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.jkatzwinkel:tla-common:master-SNAPSHOT'
+    implementation 'com.github.thesaurus-linguae-aegyptiae:tla-common:master-SNAPSHOT'
 }
 ```
 
