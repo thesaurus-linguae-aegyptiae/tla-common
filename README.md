@@ -1,7 +1,7 @@
 [![](https://jitpack.io/v/thesaurus-linguae-aegyptiae/tla-common.svg)](https://jitpack.io/#thesaurus-linguae-aegyptiae/tla-common)
-![Build](https://github.com/thesaurus-linguae-aegyptiae/tla-common/workflows/Java%20CI/badge.svg)
-![LINE](https://img.shields.io/badge/line--coverage-88%25-brightgreen.svg)
-![METHOD](https://img.shields.io/badge/method--coverage-83%25-brightgreen.svg)
+![Build](https://github.com/thesaurus-linguae-aegyptiae/tla-common/workflows/build/badge.svg)
+![LINE](https://img.shields.io/badge/line--coverage-90.07%25-brightgreen.svg)
+![METHOD](https://img.shields.io/badge/method--coverage-83.90%25-brightgreen.svg)
 
 Copyright (c) 2020-2021 Berlin-Brandenburgische Akademie der Wissenschaften
 

@@ -44,7 +44,7 @@ public class ThsEntryTest {
         return AttestedTimespan.Period.builder()
             .begin(years.get(0))
             .end(years.get(1))
-            .ths(ObjectReference.from(term))
+            .ref(ObjectReference.from(term))
             .build();
     }
 

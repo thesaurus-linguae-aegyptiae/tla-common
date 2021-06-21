@@ -166,7 +166,8 @@ public class SentenceToken {
         public boolean isEmpty() {
             return (
                 (this.mdc == null || this.mdc.isBlank()) &&
-                (this.orig == null || this.orig.isBlank())
+                (this.orig == null || this.orig.isBlank()) &&
+                (this.unicode == null || this.unicode.isBlank())
             );
         }
 

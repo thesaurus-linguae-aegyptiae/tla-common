@@ -18,7 +18,7 @@ import tla.error.TlaStatusCodeException;
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SearchResultsWrapper<T extends AbstractDto> {
+public class SearchResultsWrapper<T extends AbstractDto> implements DocumentWrapper {
 
     private TlaStatusCodeException errorStatus = null;
 
@@ -92,7 +92,8 @@ public class SearchResultsWrapper<T extends AbstractDto> {
         if (page.getSize() < 1) {
             throw new IllegalArgumentException("page size can't be 0");
         }
-        if (page.getTotalElements() > 0 && page.getTotalPages() != Math.floorDiv(page.getTotalElements(), page.getSize()) + 1) {
+        if (page.getTotalElements() > 0) {
+          if (page.getTotalPages() != Math.floorDiv(page.getTotalElements(), page.getSize()) + (page.getTotalElements() % page.getSize() < 1 ? 0 : 1)) {
             throw new IllegalArgumentException(
                 String.format(
                     "total page count can't be %s when page size is %s and total element count is %s",
@@ -101,6 +102,7 @@ public class SearchResultsWrapper<T extends AbstractDto> {
                     page.getTotalElements()
                 )
             );
+          }
         }
     }
 

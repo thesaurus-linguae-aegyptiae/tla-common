@@ -129,13 +129,15 @@ public class Passport {
         List<Passport> recursionResults = new LinkedList<Passport>();
         if (path.length > 0) {
             String segment = path[0];
-            if (this.properties.containsKey(segment)) {
+            if (this.properties != null && this.properties.containsKey(segment)) {
                 for (Passport child : this.properties.get(segment)) {
-                    recursionResults.addAll(
-                        child.extractProperty(
-                            Arrays.copyOfRange(path, 1, path.length)
-                        )
-                    );
+                    if (child != null) {
+                        recursionResults.addAll(
+                            child.extractProperty(
+                                Arrays.copyOfRange(path, 1, path.length)
+                            )
+                        );
+                    }
                 }
                 return recursionResults;
             } else {
@@ -190,13 +192,16 @@ public class Passport {
      */
     public List<Passport> extractValues() {
         List<Passport> values = new LinkedList<Passport>();
-        Object value = this.get();
-        if (value != null) {
-            return List.of(this);
+        if (this.get() != null) {
+            values.add(this);
         } else {
             for (Entry<String, List<Passport>> e : this.properties.entrySet()) {
-                for (Passport child : e.getValue()) {
-                    values.addAll(child.extractValues());
+                if (e.getValue() != null) {
+                    for (Passport child : e.getValue()) {
+                        if (child != null) {
+                            values.addAll(child.extractValues());
+                        }
+                    }
                 }
             }
         }
