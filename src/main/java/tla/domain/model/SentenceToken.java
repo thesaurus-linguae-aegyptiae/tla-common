@@ -50,6 +50,8 @@ public class SentenceToken {
     private Transcription transcription;
 
     private SortedMap<Language, List<String>> translations;
+    
+    private String mdc;
 
     /**
      * types of standoff objects (annotations, comments, subtexts) referencing
@@ -68,7 +70,7 @@ public class SentenceToken {
     public SentenceToken(Transcription transcription, String glyphs) {
         this();
         this.transcription = transcription;
-        this.glyphs = new Glyphs(glyphs, null, null);
+        this.glyphs = new Glyphs(glyphs, null, null,null,null,false,null);
     }
 
     @Getter
@@ -161,8 +163,20 @@ public class SentenceToken {
         private String mdc;
         private String unicode;
         private String orig;
+        private String tla;
+        private String safe;
+        private boolean artificial;
+        private List<Integer> order;
 
         @JsonIgnore
+        /*
+         * "mdc_original": String,
+G 	              "mdc_original_safe": String | null,
+G		"unicode_tla":String | null,
+G		"mdc_compact": String | null, (zuvor mdc)
+G		"mdc_artificially_aligned": boolean,
+		"order": [numeral],
+         */
         public boolean isEmpty() {
             return (
                 (this.mdc == null || this.mdc.isBlank()) &&
