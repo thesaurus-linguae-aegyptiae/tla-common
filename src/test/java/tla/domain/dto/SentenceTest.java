@@ -19,7 +19,7 @@ public class SentenceTest {
 
     @Test
     void deserialize() throws Exception {
-        SentenceDto s = (SentenceDto) Util.loadFromFile("sentence", "IBUBd3xeVnQoNUbMi4MAnDRUenw.json");
+        SentenceDto s = (SentenceDto) Util.loadFromFile("sentence", "EABJWRR7NBBHNP4XLPA7GJ4JEA.json");
         assertAll("check deserialized properties",
             () -> assertNotNull(s, "sentence should not be null"),
             () -> assertEquals("HS", s.getType(), "type"),

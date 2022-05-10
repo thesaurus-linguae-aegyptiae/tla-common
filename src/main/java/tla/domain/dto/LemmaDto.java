@@ -31,6 +31,7 @@ public class LemmaDto extends NamedDocumentDto {
 
     @JsonAlias({"sortString", "sort_string", "sort_key"})
     private String sortKey;
+    private String mdc;
 
     @Singular
     private SortedMap<Language, List<String>> translations;
