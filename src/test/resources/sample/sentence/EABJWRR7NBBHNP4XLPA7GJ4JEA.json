@@ -1,0 +1,189 @@
+{
+  "context": {
+    "line": "[vso 5,1]",
+    "paragraph": "Schutzdekret gegen verschiedene Todesursachen",
+    "pos": 33,
+    "textId": "Q6DR3YCR6VCG7MBRAWMZWFEAF4",
+    "textType": "Text",
+    "variants": 1
+  },
+  "eclass": "BTSSentence",
+  "glyphs": {
+    "mdc_compact": "D4_-G17_-Aa1:X1-Y1:Z2_-Z1:X1",
+    "unicode_tla": "Unicode-String from D4Unicode-String from G17Unicode-String from Aa1:X1-Y1:Z2Unicode-String from Z1:X1"
+  },
+  "id": "EABJWRR7NBBHNP4XLPA7GJ4JEA",
+  "relations": {
+    "partOf": [
+      {
+        "eclass": "BTSText",
+        "id": "Q6DR3YCR6VCG7MBRAWMZWFEAF4",
+        "name": "Verso: Begleitspr\u00fcche f\u00fcr Einl\u00e4ufe und verschiedene R\u00e4uchermittel",
+        "type": "Text"
+      }
+    ]
+  },
+  "tokens": [
+    {
+      "flexion": {
+        "btsGloss": "SC.w.pass.impers",
+        "lingGloss": "V\\tam.pass",
+        "numeric": 10940
+      },
+      "glyphs": {
+        "mdc_artificially_aligned": false,
+        "mdc_compact": "D4",
+        "mdc_original": "D4",
+        "mdc_original_safe": null,
+        "mdc_tla": "D4",
+        "order": [
+          1
+        ],
+        "unicode_tla": "Unicode-String from D4"
+      },
+      "id": "HQCXLTA5ZZDEZMDUMP3HTAUXQ4",
+      "label": "jri\u032f.w",
+      "lemma": {
+        "POS": {
+          "subtype": "verb_3-inf",
+          "type": "verb"
+        },
+        "id": "28550"
+      },
+      "transcription": {
+        "mdc": "jri.w",
+        "unicode": "jri\u032f.w"
+      },
+      "translations": {
+        "de": [
+          "machen"
+        ]
+      },
+      "type": "word"
+    },
+    {
+      "flexion": {
+        "btsGloss": "(not specified)",
+        "lingGloss": "PREP",
+        "numeric": 3
+      },
+      "glyphs": {
+        "mdc_artificially_aligned": false,
+        "mdc_compact": "G17",
+        "mdc_original": "G17",
+        "mdc_original_safe": null,
+        "mdc_tla": "G17",
+        "order": [
+          2
+        ],
+        "unicode_tla": "Unicode-String from G17"
+      },
+      "id": "SFDCD6UKYFA5BNEJFHNOINBD3E",
+      "label": "m",
+      "lemma": {
+        "POS": {
+          "type": "preposition"
+        },
+        "id": "500292"
+      },
+      "transcription": {
+        "mdc": "m",
+        "unicode": "m"
+      },
+      "translations": {
+        "de": [
+          "zu (etwas gemacht werden)"
+        ]
+      },
+      "type": "word"
+    },
+    {
+      "flexion": {
+        "btsGloss": "(not specified)",
+        "lingGloss": "N.f:sg",
+        "numeric": 3
+      },
+      "glyphs": {
+        "mdc_artificially_aligned": false,
+        "mdc_compact": "Aa1:X1-Y1:Z2",
+        "mdc_original": "Aa1:X1-Y1:Z2",
+        "mdc_original_safe": null,
+        "mdc_tla": "Aa1:X1-Y1:Z2",
+        "order": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "unicode_tla": "Unicode-String from Aa1:X1-Y1:Z2"
+      },
+      "id": "XHVNARZK3BHQFLTGYT3Y7DRCRM",
+      "label": "(j)\u1e2b,t",
+      "lemma": {
+        "POS": {
+          "subtype": "substantive_fem",
+          "type": "substantive"
+        },
+        "id": "30750"
+      },
+      "transcription": {
+        "mdc": "(j)x.t",
+        "unicode": "(j)\u1e2b.t"
+      },
+      "translations": {
+        "de": [
+          "Masse"
+        ]
+      },
+      "type": "word"
+    },
+    {
+      "flexion": {
+        "btsGloss": "Adj.sgf",
+        "lingGloss": "ADJ:f.sg",
+        "numeric": 71020
+      },
+      "glyphs": {
+        "mdc_artificially_aligned": false,
+        "mdc_compact": "Z1:X1",
+        "mdc_original": "Z1:X1",
+        "mdc_original_safe": null,
+        "mdc_tla": "Z1:X1",
+        "order": [
+          7,
+          8
+        ],
+        "unicode_tla": "Unicode-String from Z1:X1"
+      },
+      "id": "CJLQ7S6F6VFJ3NNGSVSUCLAG2M",
+      "label": "w\ua725.t",
+      "lemma": {
+        "POS": {
+          "type": "adjective"
+        },
+        "id": "44150"
+      },
+      "transcription": {
+        "mdc": "wa.t",
+        "unicode": "w\ua725.t"
+      },
+      "translations": {
+        "de": [
+          "eins (Zahl); einzig"
+        ]
+      },
+      "type": "word"
+    }
+  ],
+  "transcription": {
+    "mdc": "jri.w m (j)x.t wa.t",
+    "unicode": "jri\u032f.w m (j)\u1e2b.t w\ua725.t"
+  },
+  "translations": {
+    "de": [
+      "werde zu einer Masse gemacht;"
+    ]
+  },
+  "type": null,
+  "wordCount": 4
+}

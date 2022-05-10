@@ -49,6 +49,23 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.0-M1'
 }
 
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
+    finalizedBy 'jacocoTestReport'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+    finalizedBy 'generateJacocoBadge'
+}
+
+check {
+    dependsOn 'jacocoTestCoverageVerification'
+}
 
 checkstyle {
     toolVersion '8.29'
@@ -70,3 +87,15 @@ checkstyleTest {
     ]
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.1
+           }
+        }
+    }
+}

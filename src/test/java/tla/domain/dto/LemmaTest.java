@@ -87,7 +87,7 @@ public class LemmaTest {
 
     @Test
     void deserializeFromFile_testTranslations() throws Exception {
-        LemmaDto l = loadFromFile("10070.json");
+        LemmaDto l = loadFromFile("31.json");
 
         assertTrue(l.getTranslations() != null, "lemma translations field should have non-null value");
         assertEquals(2, l.getTranslations().size(), "exactly 2 translation languages should be present");
@@ -152,12 +152,13 @@ public class LemmaTest {
 
     @Test
     void deserializeFromFile_testWords() throws Exception {
-        LemmaDto l = loadFromFile("10070.json");
+        LemmaDto l = loadFromFile("31.json");
         var w = new SentenceToken(new Transcription("=n", "=n"), "N35:Z2");
         w.setFlexion(new SentenceToken.Flexion(0L, "(unedited)", l.getWords().get(0).getFlexion().getLingGloss()));
         w.setId(l.getWords().get(0).getId());
         w.setLabel("=n");
         assertAll("check lemma tokens",
+        		
             () -> assertEquals(1, l.getWords().size(), "should contain exactly 1 word"),
             () -> assertEquals("=n", l.getWords().get(0).getTranscription().getUnicode(), "unicode transcription should be '=n'"),
             () -> assertNotNull(l.getWords().get(0).getFlexion().getBtsGloss(), "word flexion bts glossing"),
