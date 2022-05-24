@@ -161,11 +161,11 @@ public class SentenceToken {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Glyphs {
     	 @JsonAlias({"mdc_compact"})
-    	private String mdc;
+    	private String mdc_compact;
     	 @JsonAlias({"unicode_tla"})
-        private String unicode;
+        private String unicode_tla;
     	 @JsonAlias({"mdc_original"})
-        private String orig;
+        private String mdc_orig;
        // private String tla;
         @JsonAlias({"mdc_original_safe"})
         private String safe;
@@ -184,9 +184,9 @@ G		"mdc_artificially_aligned": boolean,
          */
         public boolean isEmpty() {
             return (
-                (this.mdc == null || this.mdc.isBlank()) &&
-                (this.orig == null || this.orig.isBlank()) &&
-                (this.unicode == null || this.unicode.isBlank())
+                (this.mdc_compact == null || this.mdc_compact.isBlank()) &&
+                (this.mdc_orig == null || this.mdc_orig.isBlank()) &&
+                (this.unicode_tla == null || this.unicode_tla.isBlank())
             );
         }
 
