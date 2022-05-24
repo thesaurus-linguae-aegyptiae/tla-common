@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -64,7 +65,9 @@ public class TextDto extends NamedNodeDto {
     	private String id;	
         private String eclass;
         private String type;
+        @JsonProperty("pos")
         private int pos;
+        @JsonProperty("variants")
         private int variants;
 
         @JsonIgnore
