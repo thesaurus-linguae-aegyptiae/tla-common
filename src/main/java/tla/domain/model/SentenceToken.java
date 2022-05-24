@@ -70,7 +70,7 @@ public class SentenceToken {
     public SentenceToken(Transcription transcription, String glyphs) {
         this();
         this.transcription = transcription;
-        this.glyphs = new Glyphs(glyphs, null, null,null,null,false,null);
+        this.glyphs = new Glyphs(glyphs, null, null,null,false,null);
     }
 
     @Getter
@@ -160,11 +160,16 @@ public class SentenceToken {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Glyphs {
-        private String mdc;
+    	 @JsonAlias({"mdc_compact"})
+    	private String mdc;
+    	 @JsonAlias({"unicode_tla"})
         private String unicode;
+    	 @JsonAlias({"mdc_original"})
         private String orig;
-        private String tla;
+       // private String tla;
+        @JsonAlias({"mdc_original_safe"})
         private String safe;
+        @JsonAlias({"mdc_artificially_aligned"})
         private boolean artificial;
         private List<Integer> order;
 
