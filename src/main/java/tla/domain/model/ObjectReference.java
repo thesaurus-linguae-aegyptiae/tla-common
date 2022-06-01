@@ -16,6 +16,7 @@ import lombok.ToString;
 import tla.domain.dto.meta.DocumentDto;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.dto.TextDto;
+import tla.domain.dto.SentenceDto;
 import tla.domain.model.meta.Resolvable;
 
 /**
@@ -72,8 +73,8 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
      * @param eclass TLA document eclass
      * @param type TLA document type
      * @param name TLA document name
-     * @param name TLA document pos
-     * @param name TLA document variants
+     * @param name TLA sentence pos
+     * @param name TLA sentence variants
      */
     @JsonCreator
     public ObjectReference(
@@ -112,19 +113,22 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
      * @param object A TLA document instance.
      * @return Reference object specifying the TLA document.
      */
-    public static ObjectReference from(DocumentDto object) {
-    	if (object instanceof TextDto) {
+    public static ObjectReference from(SentenceDto object) {
+    	
             return new ObjectReference(
                 object.getId(),
                 object.getEclass(),
-                ((TextDto) object).getType(),
-                ((TextDto) object).getName(),
-                ((TextDto) object).getPos(),
-                ((TextDto) object).getVariants(),
+                object.getType(),
+                null,
+                object.getContext().getPosition(),
+                object.getContext().getVariants(),
                 null
             );
+    	
         } 
-    	else if (object instanceof NamedDocumentDto) {
+    	
+     public static ObjectReference from(DocumentDto object) {	
+    	 if (object instanceof NamedDocumentDto) {
             return new ObjectReference(
                 object.getId(),
                 object.getEclass(),

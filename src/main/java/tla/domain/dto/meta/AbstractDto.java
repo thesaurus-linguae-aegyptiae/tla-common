@@ -61,7 +61,6 @@ public abstract class AbstractDto extends AbstractBTSBaseClass implements Relata
 
     @NonNull
     private String id;
-
     /**
      * labeled references to other objects.
      */
