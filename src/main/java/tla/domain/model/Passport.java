@@ -348,6 +348,8 @@ public class Passport {
             this.thsValueCache.get("eclass"),
             this.thsValueCache.get("type"),
             this.thsValueCache.get("name"),
+            -1,
+            -1,
             null
         );
     }

@@ -31,6 +31,7 @@ public class LemmaDto extends NamedDocumentDto {
 
     @JsonAlias({"sortString", "sort_string", "sort_key"})
     private String sortKey;
+   
     private String mdc;
 
     @Singular
@@ -38,7 +39,7 @@ public class LemmaDto extends NamedDocumentDto {
 
     @Singular
     private List<SentenceToken> words;
-
+    
     @Singular
     private List<AttestedTimespan> attestations;
 
@@ -47,6 +48,7 @@ public class LemmaDto extends NamedDocumentDto {
     public LemmaDto() {
         this.translations = Collections.emptySortedMap();
         this.words = Collections.emptyList();
+      
         this.attestations = Collections.emptyList();
     }
 

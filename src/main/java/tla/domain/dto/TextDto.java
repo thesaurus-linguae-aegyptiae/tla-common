@@ -35,7 +35,6 @@ public class TextDto extends NamedNodeDto {
      */
     private WordCount wordCount;
     
-    private List<SentenceRef> parts;
 
     @Getter
     @Setter
@@ -53,46 +52,5 @@ public class TextDto extends NamedNodeDto {
         }
     }
 
-    @Getter
-    @Setter
-    @EqualsAndHashCode
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class SentenceRef {
-    	
-    	private String id;	
-        private String eclass;
-        private String type;
-        @JsonProperty("pos")
-        private int pos;
-        @JsonProperty("variants")
-        private int variants;
-
-        @JsonIgnore
-        /*
-         * "mdc_original": String,
-G 	              "mdc_original_safe": String | null,
-G		"unicode_tla":String | null,
-G		"mdc_compact": String | null, (zuvor mdc)
-G		"mdc_artificially_aligned": boolean,
-		"order": [numeral],
-         */
-      public boolean isEmpty() {
-            return (
-                (this.id == null || this.id.isBlank()) 
-            );
-        }
-
-        public static class EmptyObjectFilter {
-            @Override
-            public boolean equals(Object obj) {
-                if (obj != null && obj instanceof Glyphs) {
-                    return ((SentenceRef) obj).isEmpty();
-                }
-                return true;
-            }
-        }
-    }
+  
 }
