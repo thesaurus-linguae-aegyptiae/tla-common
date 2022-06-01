@@ -51,7 +51,7 @@ public class SentenceToken {
 
     private SortedMap<Language, List<String>> translations;
     
-    private String mdc;
+   // private String mdc;
 
     /**
      * types of standoff objects (annotations, comments, subtexts) referencing
@@ -70,7 +70,8 @@ public class SentenceToken {
     public SentenceToken(Transcription transcription, String glyphs) {
         this();
         this.transcription = transcription;
-        this.glyphs = new Glyphs(glyphs, null, null,null,false,null);
+        this.glyphs = new Glyphs(glyphs, null, null,null,false,null,null);
+     
     }
 
     @Getter
@@ -161,17 +162,20 @@ public class SentenceToken {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Glyphs {
     	 @JsonAlias({"mdc_compact"})
-    	private String mdc_compact;
+    	private String mdcCompact;
     	 @JsonAlias({"unicode_tla"})
-        private String unicode_tla;
+        private String unicodeTla;
     	 @JsonAlias({"mdc_original"})
-        private String mdc_orig;
+        private String mdcOriginal;
        // private String tla;
         @JsonAlias({"mdc_original_safe"})
-        private String safe;
+        private String mdcOriginalSafe;
+       
         @JsonAlias({"mdc_artificially_aligned"})
-        private boolean artificial;
+        private boolean mdcArtificialAligned;
         private List<Integer> order;
+        @JsonAlias({"mdc_tla"})
+        private String mdcTla;
 
         @JsonIgnore
         /*
@@ -184,9 +188,9 @@ G		"mdc_artificially_aligned": boolean,
          */
         public boolean isEmpty() {
             return (
-                (this.mdc_compact == null || this.mdc_compact.isBlank()) &&
-                (this.mdc_orig == null || this.mdc_orig.isBlank()) &&
-                (this.unicode_tla == null || this.unicode_tla.isBlank())
+                (this.mdcCompact == null || this.mdcCompact.isBlank()) &&
+                (this.mdcOriginal == null || this.mdcOriginal.isBlank()) &&
+                (this.unicodeTla == null || this.unicodeTla.isBlank())
             );
         }
 

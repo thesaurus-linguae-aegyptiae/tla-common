@@ -15,6 +15,7 @@ import lombok.Setter;
 import lombok.ToString;
 import tla.domain.dto.meta.DocumentDto;
 import tla.domain.dto.meta.NamedDocumentDto;
+import tla.domain.dto.TextDto;
 import tla.domain.model.meta.Resolvable;
 
 /**
@@ -47,6 +48,14 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
      * The document's name.
      */
     private String name;
+    
+    /**
+     * optional just for <code>parts</code> relation in Text Object
+     */
+
+    private int pos;
+    
+    private int variants;
     /**
      * An optional collection of ranges within the referenced object to which
      * the reference's subject refers to specifically. Only be used by
@@ -63,6 +72,8 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
      * @param eclass TLA document eclass
      * @param type TLA document type
      * @param name TLA document name
+     * @param name TLA document pos
+     * @param name TLA document variants
      */
     @JsonCreator
     public ObjectReference(
@@ -70,12 +81,16 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
         @JsonProperty(value = "eclass", required = true) String eclass,
         @JsonProperty(value = "type", required = false) String type,
         @JsonProperty(value = "name", required = false) String name,
+        @JsonProperty(value = "pos", required = false) int pos,
+        @JsonProperty(value = "variants", required = false) int variants,
         @JsonProperty(value = "ranges", required = false) List<Range> ranges
     ) {
         this.id = id;
         this.eclass = eclass;
         this.type = type;
         this.name = name;
+        this.pos=pos;
+        this.variants=variants;
         this.ranges = ranges;
     }
 
@@ -98,19 +113,30 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
      * @return Reference object specifying the TLA document.
      */
     public static ObjectReference from(DocumentDto object) {
-        if (object instanceof NamedDocumentDto) {
+    	if (object instanceof TextDto) {
+            return new ObjectReference(
+                object.getId(),
+                object.getEclass(),
+                ((TextDto) object).getType(),
+                ((TextDto) object).getName(),
+                ((TextDto) object).getPos(),
+                ((TextDto) object).getVariants(),
+                null
+            );
+        } 
+    	else if (object instanceof NamedDocumentDto) {
             return new ObjectReference(
                 object.getId(),
                 object.getEclass(),
                 ((NamedDocumentDto) object).getType(),
                 ((NamedDocumentDto) object).getName(),
-                null
+                -1,-1,null
             );
         } else {
             return new ObjectReference(
                 object.getId(),
                 object.getEclass(),
-                null, null, null
+                null, null,-1, -1, null
             );
         }
     }
