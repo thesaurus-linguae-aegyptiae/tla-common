@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Singular;
 import tla.domain.dto.meta.AbstractDto;
 import tla.domain.model.Language;
+import tla.domain.model.ObjectReference;
 import tla.domain.model.SentenceToken;
 import tla.domain.model.Transcription;
 import tla.domain.model.meta.BTSeClass;
@@ -46,6 +47,10 @@ public class SentenceDto extends AbstractDto {
     private List<SentenceToken> tokens;
 
     private Integer wordCount;
+    
+    public ObjectReference toObjectReference() {
+        return ObjectReference.from(this);
+    }
 
     /**
      * Information about where in which text a sentence is to be located.

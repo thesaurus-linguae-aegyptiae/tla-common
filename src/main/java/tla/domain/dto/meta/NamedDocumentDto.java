@@ -22,11 +22,9 @@ import tla.domain.model.Passport;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class NamedDocumentDto extends DocumentDto {
     
-    private String name;
+	private String name;
     private String type;
     private String subtype;
-    private int pos;
-    private int variants;
     private Passport passport;
 
     @Singular
