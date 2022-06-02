@@ -22,12 +22,10 @@ public interface Resolvable {
     public String getName();
 
     public String getType();
-    
-    /**
-     *  used just for <code>parts</code> relaltions in Text Object
-     */
     public int getPos();
     public int getVariants();
+    
+    
     /**
      * An optional collection of ranges within the referenced object to which
      * the reference's subject refers to specifically. Only be used by
