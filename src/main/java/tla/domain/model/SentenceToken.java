@@ -163,7 +163,7 @@ public class SentenceToken {
     public static class Glyphs {
     	 @JsonAlias({"mdc_compact"})
     	private String mdcCompact;
-    	 @JsonAlias({"unicode_tla"})
+    	 @JsonAlias({"unicode"})
         private String unicodeTla;
     	 @JsonAlias({"mdc_original"})
         private String mdcOriginal;
