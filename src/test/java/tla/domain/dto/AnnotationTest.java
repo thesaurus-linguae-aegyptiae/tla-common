@@ -79,6 +79,7 @@ public class AnnotationTest {
                         e.getValue().stream().map(
                             ref -> new ObjectReference(
                                 ref.getId(),
+                                null,
                                 ref.getEclass(),
                                 ref.getType(),
                                 ref.getName(),

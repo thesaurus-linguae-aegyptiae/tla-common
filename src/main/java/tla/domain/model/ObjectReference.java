@@ -38,7 +38,10 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
     private String id;
     /**
      * The TLA document's eclass. Must not be null.
+     *
      */
+    private String _class;
+    
     @NonNull
     private String eclass;
     /**
@@ -79,6 +82,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
     @JsonCreator
     public ObjectReference(
         @JsonProperty(value = "id", required = true) String id,
+        @JsonProperty(value = "_class", required = false) String _class,
         @JsonProperty(value = "eclass", required = true) String eclass,
         @JsonProperty(value = "type", required = false) String type,
         @JsonProperty(value = "name", required = false) String name,
@@ -87,6 +91,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
         @JsonProperty(value = "ranges", required = false) List<Range> ranges
     ) {
         this.id = id;
+        this._class = _class;
         this.eclass = eclass;
         this.type = type;
         this.name = name;
@@ -117,6 +122,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
     	
             return new ObjectReference(
                 object.getId(),
+                null,
                 object.getEclass(),
                 object.getType(),
                 null,
@@ -131,6 +137,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
     	 if (object instanceof NamedDocumentDto) {
             return new ObjectReference(
                 object.getId(),
+                null,
                 object.getEclass(),
                 ((NamedDocumentDto) object).getType(),
                 ((NamedDocumentDto) object).getName(),
@@ -139,6 +146,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
         } else {
             return new ObjectReference(
                 object.getId(),
+                null,
                 object.getEclass(),
                 null, null,-1, -1, null
             );
