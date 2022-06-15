@@ -51,6 +51,8 @@ public class LemmaDto extends NamedDocumentDto {
 
     @Singular
     private SortedMap<Language, List<String>> translations;
+    
+    private Transcription transcription;
 
     @Singular
     private List<SentenceToken> words;
@@ -61,6 +63,8 @@ public class LemmaDto extends NamedDocumentDto {
     private AttestedTimespan.Period timeSpan;
 
     public LemmaDto() {
+    	this.glyphs=new Glyphs();
+    	this.transcription=new Transcription();
         this.translations = Collections.emptySortedMap();
         this.words = Collections.emptyList();
       
