@@ -99,4 +99,38 @@ public class LemmaDto extends NamedDocumentDto {
             }
         }
     }
+    
+    @Getter
+    @Setter
+    @EqualsAndHashCode
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Transcription {
+    	 @JsonAlias({"mdc"})
+    	private String mdc;
+    	 @JsonAlias({"unicode"})
+        private String unicode;
+    
+
+        @JsonIgnore
+      
+        public boolean isEmpty() {
+            return (
+                (this.mdc == null || this.mdc.isBlank()) &&
+                (this.unicode == null || this.unicode.isBlank())
+            );
+        }
+
+        public static class EmptyObjectFilter {
+            @Override
+            public boolean equals(Object obj) {
+                if (obj != null && obj instanceof Glyphs) {
+                    return ((Transcription) obj).isEmpty();
+                }
+                return true;
+            }
+        }
+    }
 }
