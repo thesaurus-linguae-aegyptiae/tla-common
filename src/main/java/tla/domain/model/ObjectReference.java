@@ -73,6 +73,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
      * Default constructor.
      *
      * @param id TLA document ID
+     * @param _class 
      * @param eclass TLA document eclass
      * @param type TLA document type
      * @param name TLA document name
