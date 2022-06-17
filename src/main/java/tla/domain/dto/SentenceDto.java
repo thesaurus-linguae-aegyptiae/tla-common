@@ -17,6 +17,7 @@ import tla.domain.model.Language;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.SentenceToken;
 import tla.domain.model.Transcription;
+import tla.domain.model.Glyphs;
 import tla.domain.model.meta.BTSeClass;
 
 @Getter
@@ -41,6 +42,9 @@ public class SentenceDto extends AbstractDto {
         value = JsonInclude.Include.CUSTOM,
         valueFilter = Transcription.EmptyObjectFilter.class
     )
+    
+    private  Glyphs glyphs;
+    
     private Transcription transcription;
 
     @Singular
