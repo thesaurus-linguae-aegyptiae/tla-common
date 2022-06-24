@@ -172,7 +172,7 @@ public class SentenceToken {
         private String mdcOriginalSafe;
        
         @JsonAlias({"mdc_artificially_aligned"})
-        private boolean mdcArtificialAligned;
+        private boolean mdcArtificiallyAligned;
         private List<Integer> order;
         @JsonAlias({"mdc_tla"})
         private String mdcTla;
