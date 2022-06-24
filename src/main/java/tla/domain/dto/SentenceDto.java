@@ -37,13 +37,18 @@ public class SentenceDto extends AbstractDto {
 
     @Singular
     private SortedMap<Language, List<String>> translations;
+    
+    @JsonInclude(
+            value = JsonInclude.Include.CUSTOM,
+            valueFilter = Glyphs.EmptyObjectFilter.class
+        )
+        
+    private Glyphs glyphs;
 
     @JsonInclude(
         value = JsonInclude.Include.CUSTOM,
         valueFilter = Transcription.EmptyObjectFilter.class
     )
-    
-    private  Glyphs glyphs;
     
     private Transcription transcription;
 
