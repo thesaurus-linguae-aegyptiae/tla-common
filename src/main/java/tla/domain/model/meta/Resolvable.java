@@ -18,6 +18,7 @@ public interface Resolvable {
     public String getId();
 
     public String getEclass();
+    public String get_class();
 
     public String getName();
 
