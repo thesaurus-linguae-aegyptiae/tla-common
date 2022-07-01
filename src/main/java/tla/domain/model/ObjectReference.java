@@ -34,7 +34,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
     /**
      * ID of the referenced TLA document. Must not be null.
      */
-   
+	 @NonNull
     private String id;
     /**
      * The TLA document's eclass. Must not be null.
@@ -82,7 +82,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
      */
     @JsonCreator
     public ObjectReference(
-        @JsonProperty(value = "id", required = true) String id,
+        @JsonProperty(value = "id", required = false) String id,
         @JsonProperty(value = "_class", required = false) String _class,
         @JsonProperty(value = "eclass", required = true) String eclass,
         @JsonProperty(value = "type", required = false) String type,
