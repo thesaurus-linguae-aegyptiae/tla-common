@@ -34,7 +34,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
     /**
      * ID of the referenced TLA document. Must not be null.
      */
-	 @NonNull
+	 
     private String id;
     /**
      * The TLA document's eclass. Must not be null.
