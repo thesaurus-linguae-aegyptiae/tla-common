@@ -91,8 +91,9 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
         @JsonProperty(value = "variants", required = false) int variants,
         @JsonProperty(value = "ranges", required = false) List<Range> ranges
     ) {
-        if(id!=null)this.id = id;
+        if(!id.isEmpty())this.id = id;
         else this.id="composed";
+        System.out.println("ID constructor "+this.id);
         this._class = _class;
         this.eclass = eclass;
         this.type = type;
@@ -105,7 +106,9 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
     @Override
     public int compareTo(Resolvable arg0) {
         int diff = 0;
-      if(!this.getId().isEmpty()&&(!arg0.getId().isEmpty())) {
+        System.out.println("ID ="+this.getId());
+        System.out.println("ARG0 ="+arg0.getId());
+      if((!this.getId().isEmpty())&&(!arg0.getId().isEmpty())) {
         if (this.getEclass().equals(arg0.getEclass())) {
             diff = this.getId().compareTo(arg0.getId());
         }
