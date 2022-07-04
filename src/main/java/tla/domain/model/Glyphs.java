@@ -7,10 +7,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Glyphs {
 
@@ -37,7 +39,7 @@ public class Glyphs {
     public static class EmptyObjectFilter {
         @Override
         public boolean equals(Object obj) {
-            if (obj != null && obj instanceof Transcription) {
+            if (obj != null && obj instanceof Glyphs) {
                 return ((Glyphs) obj).isEmpty();
             }
             return true;
