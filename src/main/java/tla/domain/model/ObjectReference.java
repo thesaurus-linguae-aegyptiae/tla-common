@@ -105,13 +105,14 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
     @Override
     public int compareTo(Resolvable arg0) {
         int diff = 0;
-      
+      if(!this.getId().isEmpty()&&(!arg0.getId().isEmpty())) {
         if (this.getEclass().equals(arg0.getEclass())) {
             diff = this.getId().compareTo(arg0.getId());
         }
         else {
             diff = this.getEclass().compareTo(arg0.getEclass());
         }
+    }
         
         return diff;
     }
