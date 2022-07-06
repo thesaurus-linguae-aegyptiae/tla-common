@@ -103,6 +103,26 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
         this.ranges = ranges;
     }
 
+    @JsonCreator
+    public ObjectReference(
+        @JsonProperty(value = "id", required = false) String id,
+        @JsonProperty(value = "eclass", required = true) String eclass,
+        @JsonProperty(value = "type", required = false) String type,
+        @JsonProperty(value = "name", required = false) String name,
+        @JsonProperty(value = "ranges", required = false) List<Range> ranges
+    ) {
+        if(!id.isEmpty())this.id = id;
+        else this.id="composed";
+        System.out.println("ID constructor "+this.id);
+        this._class = _class;
+        this.eclass = eclass;
+        this.type = type;
+        this.name = name;
+        this.pos=pos;
+        this.variants=variants;
+        this.ranges = ranges;
+    }
+
     @Override
     public int compareTo(Resolvable arg0) {
         int diff = 0;
@@ -141,22 +161,21 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
     	
         } 
     	
-     public static ObjectReference from(DocumentDto object) {	
+     public static ObjectReference from(DocumentDto object) {
+    	
     	 if (object instanceof NamedDocumentDto) {
             return new ObjectReference(
                 object.getId(),
-                null,
                 object.getEclass(),
                 ((NamedDocumentDto) object).getType(),
                 ((NamedDocumentDto) object).getName(),
-                -1,-1,null
+              null
             );
         } else {
             return new ObjectReference(
                 object.getId(),
-                null,
                 object.getEclass(),
-                null, null,-1, -1, null
+                null,null,null
             );
         }
     }
