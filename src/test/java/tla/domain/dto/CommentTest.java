@@ -60,8 +60,8 @@ public class CommentTest {
                                 ref.getEclass(),
                                 ref.getType(),
                                 ref.getName(),
-                                -1,
-                                -1,
+                               null,
+                                null,
                                 ref.getRanges()
                             )
                         ).collect(

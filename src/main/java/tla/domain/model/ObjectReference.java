@@ -57,9 +57,9 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
      * optional just for <code>parts</code> relation in Text Object
      */
 
-    private int pos;
+    private String pos;
     
-    private int variants;
+    private String variants;
     /**
      * An optional collection of ranges within the referenced object to which
      * the reference's subject refers to specifically. Only be used by
@@ -87,13 +87,13 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
         @JsonProperty(value = "eclass", required = true) String eclass,
         @JsonProperty(value = "type", required = false) String type,
         @JsonProperty(value = "name", required = false) String name,
-        @JsonProperty(value = "pos", required = false) int pos,
-        @JsonProperty(value = "variants", required = false) int variants,
+        @JsonProperty(value = "pos", required = false) String pos,
+        @JsonProperty(value = "variants", required = false) String variants,
         @JsonProperty(value = "ranges", required = false) List<Range> ranges
     ) {
         if(!id.isEmpty())this.id = id;
         else this.id="composed";
-        System.out.println("ID constructor "+this.id);
+       // System.out.println("ID constructor "+this.id);
         this._class = _class;
         this.eclass = eclass;
         this.type = type;
@@ -108,8 +108,8 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
     @Override
     public int compareTo(Resolvable arg0) {
         int diff = 0;
-        System.out.println("ID ="+this.getId());
-        System.out.println("ARG0 ="+arg0.getId());
+       // System.out.println("ID ="+this.getId());
+      //  System.out.println("ARG0 ="+arg0.getId());
       if((!this.getId().isEmpty())&&(!arg0.getId().isEmpty())) {
         if (this.getEclass().equals(arg0.getEclass())) {
             diff = this.getId().compareTo(arg0.getId());
@@ -136,8 +136,8 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
                 object.getEclass(),
                 object.getType(),
                 null,
-                object.getContext().getPosition(),
-                object.getContext().getVariants(),
+                ""+object.getContext().getPosition(),
+               ""+ object.getContext().getVariants(),
                 null
             );
     	
@@ -152,7 +152,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
                 object.getEclass(),
                 ((NamedDocumentDto) object).getType(),
                 ((NamedDocumentDto) object).getName(),
-                -1,-1,
+                null,null,
               null
             );
         } else {
@@ -160,7 +160,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
                 object.getId(),
                 null,
                 object.getEclass(),
-                null,null,-1,-1,null
+                null,null,null,null,null
             );
         }
     }

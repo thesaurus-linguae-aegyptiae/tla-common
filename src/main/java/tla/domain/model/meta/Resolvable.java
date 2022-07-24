@@ -23,8 +23,8 @@ public interface Resolvable {
     public String getName();
 
     public String getType();
-    public int getPos();
-    public int getVariants();
+    public String getPos();
+    public String getVariants();
     
     
     /**
