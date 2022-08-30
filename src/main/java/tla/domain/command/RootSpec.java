@@ -20,7 +20,7 @@ public class RootSpec {
 
     @JsonIgnore
     public boolean isEmpty() {
-        return this.text == null || (this.enc == null || this.enc.length < 1);
+        return this.text == null;
     }
 
     public static class EmptyObjectFilter {
