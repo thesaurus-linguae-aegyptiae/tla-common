@@ -26,8 +26,9 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
     /**
      * lemma is written like this.
      */
-    private String transcription;
-    private String transcription_enc;
+    //private String transcription;
+    //private String transcription_enc;
+    private TranscriptionSpec transcription;
 
     /**
      * Lemma we are looking for needs to have the specified part of speech.
@@ -61,7 +62,7 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
     private String bibliography;
     
     public String getEncodTranscription() {
-    	return transcription+"|"+transcription_enc;
+    	return transcription.getText()+"|"+transcription.getEnc();
     }
 
 }
