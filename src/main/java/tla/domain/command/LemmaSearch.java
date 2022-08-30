@@ -30,7 +30,7 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
     //private String transcription_enc;
     @JsonInclude(
             value = JsonInclude.Include.CUSTOM,
-            valueFilter = TypeSpec.EmptyObjectFilter.class
+            valueFilter = TranscriptionSpec.EmptyObjectFilter.class
         )
     private TranscriptionSpec transcription;
 
