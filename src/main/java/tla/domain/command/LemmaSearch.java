@@ -27,11 +27,12 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
      * lemma is written like this.
      */
     private String transcription;
+    private String transcription_enc;
 
     /**
      * Lemma we are looking for needs to have the specified part of speech.
      */
-    private String transcription_enc;
+  
     @JsonInclude(
         value = JsonInclude.Include.CUSTOM,
         valueFilter = TypeSpec.EmptyObjectFilter.class
@@ -60,7 +61,7 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
     private String bibliography;
     
     public String getEncodTranscription() {
-    	return transcription+"$"+transcription_enc;
+    	return transcription+"|"+transcription_enc;
     }
 
 }

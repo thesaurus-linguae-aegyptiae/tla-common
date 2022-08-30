@@ -12,15 +12,10 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class TranscriptionSpec {
 
-    /**
-     * search terms expected in an object's translations.
-     */
+    
     private String text;
 
-    /**
-     * Specify zero or more languages in which translations ought to be
-     * searched.
-     */
+   
     private String enc;
 
     @JsonIgnore
