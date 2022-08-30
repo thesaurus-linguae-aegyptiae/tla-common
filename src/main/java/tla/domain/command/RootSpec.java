@@ -26,8 +26,8 @@ public class RootSpec {
     public static class EmptyObjectFilter {
         @Override
         public boolean equals(Object o) {
-            if (o != null && o instanceof TranscriptionSpec) {
-                return ((TranscriptionSpec) o).isEmpty();
+            if (o != null && o instanceof RootSpec) {
+                return ((RootSpec) o).isEmpty();
             }
             return true;
         }
