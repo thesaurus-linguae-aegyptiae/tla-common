@@ -28,6 +28,10 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
      */
     //private String transcription;
     //private String transcription_enc;
+    @JsonInclude(
+            value = JsonInclude.Include.CUSTOM,
+            valueFilter = TypeSpec.EmptyObjectFilter.class
+        )
     private TranscriptionSpec transcription;
 
     /**
@@ -61,8 +65,8 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
      */
     private String bibliography;
     
-    public String getEncodTranscription() {
+   /* public String getEncodTranscription() {
     	return transcription.getText()+"|"+transcription.getEnc();
-    }
+    }*/
 
 }
