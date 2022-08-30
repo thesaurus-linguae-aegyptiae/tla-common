@@ -16,11 +16,11 @@ public class TranscriptionSpec {
     private String text;
 
    
-    private String enc;
+    private String[] enc;
 
     @JsonIgnore
     public boolean isEmpty() {
-        return this.text == null && (this.enc == null);
+        return this.text == null && (this.enc == null || this.enc.length < 1);
     }
 
     public static class EmptyObjectFilter {
