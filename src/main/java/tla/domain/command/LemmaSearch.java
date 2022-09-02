@@ -52,6 +52,7 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
             valueFilter = RootSpec.EmptyObjectFilter.class
         )
     private RootSpec root;*/
+     private String root;
 
     /**
      * Search for lemma with an annotation of the specified type
