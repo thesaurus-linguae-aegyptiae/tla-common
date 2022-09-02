@@ -47,11 +47,12 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
     /**
      * Transcription of the lemma's root lemma.
      */
-    @JsonInclude(
+   /* @JsonInclude(
             value = JsonInclude.Include.CUSTOM,
             valueFilter = RootSpec.EmptyObjectFilter.class
         )
-    private RootSpec root;
+    private RootSpec root;*/
+     private String root;
 
     /**
      * Search for lemma with an annotation of the specified type
