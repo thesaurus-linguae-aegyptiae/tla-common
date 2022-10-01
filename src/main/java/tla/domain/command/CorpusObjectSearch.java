@@ -10,7 +10,7 @@ import tla.domain.model.meta.TLADTO;
 
 @Getter
 @Setter
-@BTSeClass("BTSObject")
+@BTSeClass("BTSTCObject")
 @TLADTO(CorpusObjectDto.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CorpusObjectSearch extends SearchCommand<CorpusObjectDto> implements Expandable {
