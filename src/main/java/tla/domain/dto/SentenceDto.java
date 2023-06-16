@@ -26,7 +26,7 @@ import tla.domain.model.meta.BTSeClass;
 @BTSeClass("BTSSentence")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SentenceDto extends AbstractDto {
+public class SentenceDto extends DocumentDto {
 
     /**
      * How sentence relates to a text's contents.
