@@ -13,6 +13,7 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.Singular;
 import tla.domain.dto.meta.AbstractDto;
+import tla.domain.dto.meta.DocumentDto;
 import tla.domain.model.Language;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.SentenceToken;
