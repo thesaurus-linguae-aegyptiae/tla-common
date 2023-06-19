@@ -81,7 +81,7 @@ digraph {
 
     a2 -> a1;
     d -> a2;
-    sent -> a2;
+    sent -> d;
     nd -> d;
     cmt -> d;
     lem -> nd;
