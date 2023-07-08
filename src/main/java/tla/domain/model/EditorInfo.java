@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class EditorInfo {
-
+   
     public static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
     static {
         dateFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -90,4 +90,16 @@ public class EditorInfo {
             );
         }
     }
+
+    public boolean wasCreatedBeforeBTS3() {
+        try {
+           Date dateBTS3 = dateFormatter.parse("2015-06-26");
+           return (created.compareTo(dateBTS3) == 0); // Date of creation is date of import of pre-BTS data
+        } catch (Exception e) {
+            log.error("Invalid date format for BTS3 date");
+        }
+        return false;
+    }
+
+
 }
