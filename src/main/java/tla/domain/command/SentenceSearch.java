@@ -28,6 +28,11 @@ public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
     @Setter
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class TokenSpec {
+    	
+    	
+    	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+    	private String id;
+    	
         /**
          * looking for usages of a specific lemma entry.
          */
@@ -60,6 +65,7 @@ public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
         @JsonIgnore
         public boolean isEmpty() {
             return (
+            		(this.id==null) &&
                 (this.lemma == null || this.lemma.isEmpty()) &&
                 (this.glyphs == null || this.glyphs.isBlank()) &&
                 (this.transcription == null || this.transcription.isEmpty()) &&
