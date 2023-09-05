@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class EditorInfo {
-   
+
     public static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
     static {
         dateFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -90,7 +90,7 @@ public class EditorInfo {
             );
         }
     }
-
+    
     public boolean wasCreatedBeforeBTS3() {
         try {
            Date dateBTS3 = dateFormatter.parse("2015-06-26");
@@ -100,6 +100,5 @@ public class EditorInfo {
         }
         return false;
     }
-
 
 }
