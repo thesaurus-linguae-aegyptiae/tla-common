@@ -81,6 +81,15 @@ public class SentenceDto extends AbstractDto {
          * How many sentences come before this sentence within the
          * text's contents.
          */
+        private int notAfter;
+        /** 
+        * latest attestation
+        */
+        private int notBefore;
+        /**
+        * earliest attestation
+        */
+        
         @JsonAlias({"pos"})
         @JsonProperty("pos")
         private int position;
