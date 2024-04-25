@@ -56,10 +56,8 @@ public class LemmaDto extends NamedDocumentDto {
     @Singular
     private List<SentenceToken> words;
     
-    @Singular
     private int attestedSentencesCount;
-    
-    
+        
     public static class TimeSpan{
     	 /** first year */
         @Setter
