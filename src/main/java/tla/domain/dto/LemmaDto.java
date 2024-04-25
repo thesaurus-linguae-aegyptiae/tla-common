@@ -58,18 +58,28 @@ public class LemmaDto extends NamedDocumentDto {
     private List<SentenceToken> words;
     
     @Singular
-    private List<AttestedTimespan> attestations;
-
-    private AttestedTimespan.Period timeSpan;
+    private int attestedSentencesCount;
+    
+    
+    public static class Period{
+    	 /** first year */
+        @Setter
+        @Getter
+        private int begin;
+        /** last year */
+        @Setter
+        @Getter
+        private int end;
+    }
+    
+    private Period timeSpan;
 
     public LemmaDto() {
     	this.glyphs=new Glyphs();
     	this.transcription=new Transcription();
         this.translations = Collections.emptySortedMap();
         this.words = Collections.emptyList();
-      
-        this.attestations = Collections.emptyList();
-    }
+          }
     @Getter
     @Setter
     @EqualsAndHashCode
