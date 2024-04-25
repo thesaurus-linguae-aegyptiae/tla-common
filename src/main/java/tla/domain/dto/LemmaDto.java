@@ -25,7 +25,6 @@ import tla.domain.model.Language;
 import tla.domain.model.SentenceToken;
 import tla.domain.model.SentenceToken.Glyphs;
 import tla.domain.model.SentenceToken.Lemmatization;
-import tla.domain.model.extern.AttestedTimespan;
 import tla.domain.model.meta.BTSeClass;
 
 /**
