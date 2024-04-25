@@ -60,7 +60,7 @@ public class LemmaDto extends NamedDocumentDto {
     private int attestedSentencesCount;
     
     
-    public static class Period{
+    public static class TimeSpan{
     	 /** first year */
         @Setter
         @Getter
@@ -71,7 +71,7 @@ public class LemmaDto extends NamedDocumentDto {
         private int end;
     }
     
-    private Period timeSpan;
+    private TimeSpan timeSpan;
 
     public LemmaDto() {
     	this.glyphs=new Glyphs();
