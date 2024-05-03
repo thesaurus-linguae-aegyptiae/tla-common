@@ -25,7 +25,6 @@ import tla.domain.model.Language;
 import tla.domain.model.SentenceToken;
 import tla.domain.model.SentenceToken.Glyphs;
 import tla.domain.model.SentenceToken.Lemmatization;
-import tla.domain.model.extern.AttestedTimespan;
 import tla.domain.model.meta.BTSeClass;
 
 /**
@@ -57,19 +56,27 @@ public class LemmaDto extends NamedDocumentDto {
     @Singular
     private List<SentenceToken> words;
     
-    @Singular
-    private List<AttestedTimespan> attestations;
-
-    private AttestedTimespan.Period timeSpan;
+    private int attestedSentencesCount;
+        
+    public static class TimeSpan{
+    	 /** first year */
+        @Setter
+        @Getter
+        private int begin;
+        /** last year */
+        @Setter
+        @Getter
+        private int end;
+    }
+    
+    private TimeSpan timeSpan;
 
     public LemmaDto() {
     	this.glyphs=new Glyphs();
     	this.transcription=new Transcription();
         this.translations = Collections.emptySortedMap();
         this.words = Collections.emptyList();
-      
-        this.attestations = Collections.emptyList();
-    }
+          }
     @Getter
     @Setter
     @EqualsAndHashCode
