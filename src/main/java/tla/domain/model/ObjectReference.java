@@ -91,9 +91,8 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
         @JsonProperty(value = "variants", required = false) String variants,
         @JsonProperty(value = "ranges", required = false) List<Range> ranges
     ) {
-        if(!id.isEmpty())this.id = id;
+        if(id != null)this.id = id;
         else this.id="composed";
-       // System.out.println("ID constructor "+this.id);
         this._class = _class;
         this.eclass = eclass;
         this.type = type;
