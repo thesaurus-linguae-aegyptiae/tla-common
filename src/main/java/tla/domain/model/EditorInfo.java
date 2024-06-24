@@ -101,4 +101,14 @@ public class EditorInfo {
         return false;
     }
 
+    public boolean wasLastEditedBeforeBTS3() {
+        try {
+           Date dateBTS3 = dateFormatter.parse("2015-06-26");
+           return (updated.compareTo(dateBTS3) == 0); // Date of creation is date of import of pre-BTS data
+        } catch (Exception e) {
+            log.error("Invalid date format for BTS3 date");
+        }
+        return false;
+    }
+
 }
