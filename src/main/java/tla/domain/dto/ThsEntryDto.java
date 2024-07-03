@@ -26,11 +26,7 @@ public class ThsEntryDto extends NamedNodeDto {
     @JsonAlias("sortkey")
     private String sortKey;
 
-    @Singular
-    private SortedMap<Language, List<String>> translations;
-
     public ThsEntryDto() {
-        this.translations = Collections.emptySortedMap();
     }
 
 }
