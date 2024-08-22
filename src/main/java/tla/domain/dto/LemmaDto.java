@@ -86,7 +86,6 @@ public class LemmaDto extends NamedDocumentDto {
 	@JsonAlias({ "sortString", "sort_string", "sort_key" })
 	private String sortKey;
 
-	// private String mdc;
 	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Glyphs.EmptyObjectFilter.class)
 	private Glyphs glyphs;
 
@@ -100,7 +99,9 @@ public class LemmaDto extends NamedDocumentDto {
 	@Singular
 	private List<SentenceToken> words;
 
-	private int attestedSentencesCount;
+	private int attestedSentencesCount;	
+	
+	private TimeSpan timeSpan;
 
 	public static class Spelling {
 		@Setter
@@ -131,7 +132,7 @@ public class LemmaDto extends NamedDocumentDto {
 		private int end;
 	}
 
-	private TimeSpan timeSpan;
+
 
 	public LemmaDto() {
 		this.glyphs = new Glyphs();
@@ -200,109 +201,4 @@ public class LemmaDto extends NamedDocumentDto {
 			}
 		}
 	}
-}
-   
-    //private String mdc;
-    @JsonInclude(
-            value = JsonInclude.Include.CUSTOM,
-            valueFilter = Glyphs.EmptyObjectFilter.class
-        )
-    private Glyphs glyphs;
-
-    @Singular
-    private SortedMap<Language, List<String>> translations;
-    
-    private Transcription transcription;
-
-    @Singular
-    private List<SentenceToken> words;
-    
-    private int attestedSentencesCount;
-        
-    public static class TimeSpan{
-    	 /** first year */
-        @Setter
-        @Getter
-        private int begin;
-        /** last year */
-        @Setter
-        @Getter
-        private int end;
-    }
-    
-    private TimeSpan timeSpan;
-
-    public LemmaDto() {
-    	this.glyphs=new Glyphs();
-    	this.transcription=new Transcription();
-        this.translations = Collections.emptySortedMap();
-        this.words = Collections.emptyList();
-          }
-    @Getter
-    @Setter
-    @EqualsAndHashCode
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Glyphs {
-    	 @JsonAlias({"mdc_compact"})
-    	private String mdcCompact;
-    	 @JsonAlias({"unicode"})
-        private String unicode;
-    
-
-        @JsonIgnore
-      
-        public boolean isEmpty() {
-            return (
-                (this.mdcCompact == null || this.mdcCompact.isBlank()) &&
-                (this.unicode == null || this.unicode.isBlank())
-            );
-        }
-
-        public static class EmptyObjectFilter {
-            @Override
-            public boolean equals(Object obj) {
-                if (obj != null && obj instanceof Glyphs) {
-                    return ((Glyphs) obj).isEmpty();
-                }
-                return true;
-            }
-        }
-    }
-    
-    @Getter
-    @Setter
-    @EqualsAndHashCode
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Transcription {
-    	 @JsonAlias({"mdc"})
-    	private String mdc;
-    	 @JsonAlias({"unicode"})
-        private String unicode;
-    
-
-        @JsonIgnore
-      
-        public boolean isEmpty() {
-            return (
-                (this.mdc == null || this.mdc.isBlank()) &&
-                (this.unicode == null || this.unicode.isBlank())
-            );
-        }
-
-        public static class EmptyObjectFilter {
-            @Override
-            public boolean equals(Object obj) {
-                if (obj != null && obj instanceof Glyphs) {
-                    return ((Transcription) obj).isEmpty();
-                }
-                return true;
-            }
-        }
-    }
 }
