@@ -1,46 +1,5 @@
 package tla.domain.dto;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.SortedMap;
-
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Singular;
-import lombok.experimental.SuperBuilder;
-import tla.domain.command.TypeSpec;
-import tla.domain.dto.meta.NamedDocumentDto;
-import tla.domain.model.Language;
-import tla.domain.model.SentenceToken;
-import tla.domain.model.SentenceToken.Glyphs;
-import tla.domain.model.SentenceToken.Lemmatization;
-import tla.domain.model.meta.BTSeClass;
-
-/**
- * DTO Model for serial transfer of TLA lemma entry objects.
- */
-@Data
-@SuperBuilder
-@BTSeClass("BTSLemmaEntry")
-@EqualsAndHashCode(callSuper = true)
-@JsonPropertyOrder(alphabetic = true)
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class LemmaDto extends NamedDocumentDto {
-
-    @JsonAlias({"sortString", "sort_string", "sort_key"})
-    private String sortKey;package tla.domain.dto;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
