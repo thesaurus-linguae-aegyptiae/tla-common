@@ -75,6 +75,10 @@ public class LemmaDto extends NamedDocumentDto {
 		@Setter
 		@Getter
 		private String count;
+		
+		@Setter
+		@Getter
+		private String[] tokenIds;
 	}
 
 	public static class TimeSpan {
