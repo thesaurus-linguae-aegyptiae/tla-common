@@ -55,8 +55,8 @@ public class LemmaDto extends NamedDocumentDto {
 	@Singular
 	private List<SentenceToken> words;
 
-	private int attestedSentencesCount;	
-	
+	private int attestedSentencesCount;
+
 	private TimeSpan timeSpan;
 
 	public static class Spelling {
@@ -75,6 +75,11 @@ public class LemmaDto extends NamedDocumentDto {
 		@Setter
 		@Getter
 		private String count;
+
+		@Setter
+		@Getter
+		private String[] tokenIds;
+
 	}
 
 	public static class TimeSpan {
@@ -87,8 +92,6 @@ public class LemmaDto extends NamedDocumentDto {
 		@Getter
 		private int end;
 	}
-
-
 
 	public LemmaDto() {
 		this.glyphs = new Glyphs();
