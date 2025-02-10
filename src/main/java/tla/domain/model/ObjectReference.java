@@ -18,6 +18,7 @@ import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.dto.TextDto;
 import tla.domain.dto.SentenceDto;
 import tla.domain.model.meta.Resolvable;
+import tla.web.model.meta.TLAObject;
 
 /**
  * Reference to a fully qualified TLA document containing type, name, and eclass.
@@ -141,6 +142,21 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
             );
     	
         } 
+    
+    public static ObjectReference from(TLAObject object) {
+    	
+        return new ObjectReference(
+            object.getId(),
+            null,
+            object.getEclass(),
+            object.getType(),
+            object.getName(),
+            null,
+            null,
+            null
+        );
+	
+    }
     	
      public static ObjectReference from(DocumentDto object) {
     	

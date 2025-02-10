@@ -24,6 +24,8 @@ public class CorpusObjectSearch extends SearchCommand<CorpusObjectDto> implement
     private PassportSpec passport;
 
     private boolean expand;
-     private String[] rootIds;
-
+    
+    private String[] rootIds;
+    
+    private boolean mainNodes;
 }
