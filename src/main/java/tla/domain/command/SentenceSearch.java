@@ -26,9 +26,7 @@ import tla.domain.model.meta.TLADTO;
 public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
 
 	private SentenceContext context;
-
-	private String searchType;
-
+	
 	@Getter
 	@Setter
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
