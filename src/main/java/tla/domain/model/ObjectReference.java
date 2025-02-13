@@ -146,13 +146,6 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
 
 	}
 
-	public static ObjectReference from(TLAObject object) {
-
-		return new ObjectReference(object.getId(), null, object.getEclass(), object.getType(), object.getName(), null,
-				null, null);
-
-	}
-
 	public static ObjectReference from(DocumentDto object) {
 
 		if (object instanceof NamedDocumentDto) {
