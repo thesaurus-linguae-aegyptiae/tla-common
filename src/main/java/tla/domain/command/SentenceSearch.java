@@ -24,89 +24,67 @@ import tla.domain.model.meta.TLADTO;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
+
+	private SentenceContext context;
 	
-	 private SentenceContext context;
+	@Getter
+	@Setter
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	public static class TokenSpec {
 
+		@JsonInclude(JsonInclude.Include.NON_EMPTY)
+		private String id;
 
-    @Getter
-    @Setter
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public static class TokenSpec {
-    	
-    	  @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    	  private String id;
-    	  
-        /**
-         * looking for usages of a specific lemma entry.
-         */
-        @JsonInclude(
-            value = JsonInclude.Include.CUSTOM,
-            valueFilter = Lemmatization.EmptyObjectFilter.class
-        )
-        private Lemmatization lemma;
-        /**
-         * word uses these hieroglyphs
-         */
-        private String glyphs;
-        /**
-         * looking for word uses written in a specific way.
-         */
-        @JsonInclude(
-            value = JsonInclude.Include.CUSTOM,
-            valueFilter = Transcription.EmptyObjectFilter.class
-        )
-        private Transcription transcription;
-        /**
-         * token translation
-         */
-        @JsonInclude(
-            value = JsonInclude.Include.CUSTOM,
-            valueFilter = TranslationSpec.EmptyObjectFilter.class
-        )
-        private TranslationSpec translation;
+		/**
+		 * looking for usages of a specific lemma entry.
+		 */
+		@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Lemmatization.EmptyObjectFilter.class)
+		private Lemmatization lemma;
+		/**
+		 * word uses these hieroglyphs
+		 */
+		private String glyphs;
+		/**
+		 * looking for word uses written in a specific way.
+		 */
+		@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Transcription.EmptyObjectFilter.class)
+		private Transcription transcription;
+		/**
+		 * token translation
+		 */
+		@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = TranslationSpec.EmptyObjectFilter.class)
+		private TranslationSpec translation;
 
-        @JsonIgnore
-        public boolean isEmpty() {
-            return (
-            		(this.id==null) &&
-                (this.lemma == null || this.lemma.isEmpty()) &&
-                (this.glyphs == null || this.glyphs.isBlank()) &&
-                (this.transcription == null || this.transcription.isEmpty()) &&
-                (this.translation == null || this.translation.isEmpty())
-            );
-        }
+		@JsonIgnore
+		public boolean isEmpty() {
+			return ((this.id == null) && (this.lemma == null || this.lemma.isEmpty())
+					&& (this.glyphs == null || this.glyphs.isBlank())
+					&& (this.transcription == null || this.transcription.isEmpty())
+					&& (this.translation == null || this.translation.isEmpty()));
+		}
 
-        public static class EmptyObjectFilter {
-            @Override
-            public boolean equals(Object o) {
-                if (o != null && o instanceof Collection) {
-                    return ((Collection<?>) o).stream().allMatch(
-                        item -> item == null || (item instanceof TokenSpec && ((TokenSpec) item).isEmpty())
-                    );
-                }
-                return true;
-            }
-        }
-    }
+		public static class EmptyObjectFilter {
+			@Override
+			public boolean equals(Object o) {
+				if (o != null && o instanceof Collection) {
+					return ((Collection<?>) o).stream().allMatch(
+							item -> item == null || (item instanceof TokenSpec && ((TokenSpec) item).isEmpty()));
+				}
+				return true;
+			}
+		}
+	}
 
-    /**
-     * type of the surrounding sentence
-     */
-    @JsonInclude(
-        value = JsonInclude.Include.CUSTOM,
-        valueFilter = TypeSpec.EmptyObjectFilter.class
-    )
-    private TypeSpec type;
-    
+	/**
+	 * type of the surrounding sentence
+	 */
+	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = TypeSpec.EmptyObjectFilter.class)
+	private TypeSpec type;
 
+	private PassportSpec passport;
 
-    private PassportSpec passport;
-
-    @Singular
-    @JsonInclude(
-        value = JsonInclude.Include.CUSTOM,
-        valueFilter = TokenSpec.EmptyObjectFilter.class
-    )
-    private List<TokenSpec> tokens;
+	@Singular
+	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = TokenSpec.EmptyObjectFilter.class)
+	private List<TokenSpec> tokens;
 
 }

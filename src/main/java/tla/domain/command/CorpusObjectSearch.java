@@ -26,6 +26,6 @@ public class CorpusObjectSearch extends SearchCommand<CorpusObjectDto> implement
     private boolean expand;
     
     private String[] rootIds;
-
+    
     private boolean mainNodes;
 }
