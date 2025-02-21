@@ -73,5 +73,5 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
    /* public String getEncodTranscription() {
     	return transcription.getText()+"|"+transcription.getEnc();
     }*/
-
+    private String revisionState;
 }
