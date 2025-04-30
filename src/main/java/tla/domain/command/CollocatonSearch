@@ -1,0 +1,37 @@
+package tla.domain.command;
+
+import java.util.Collection;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import tla.domain.dto.TextDto;
+import tla.domain.model.meta.BTSeClass;
+import tla.domain.model.meta.TLADTO;
+
+@Getter
+@Setter
+@BTSeClass("CollocationText")
+@TLADTO(TextDto.class)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class CollocationSearch {
+
+	private String sort;
+	
+    private Collection<Token> tokens;
+    
+    private int maxDistance;
+    
+    @Getter
+    @Setter
+    @NoArgsConstructor
+	public static class Token{
+    	private String lemmaId;
+    	
+    	private String btsGloss;
+    	
+    	private String lingGloss;
+    }
+}
