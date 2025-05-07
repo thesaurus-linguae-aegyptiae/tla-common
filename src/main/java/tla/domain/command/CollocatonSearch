@@ -1,12 +1,17 @@
 package tla.domain.command;
 
 import java.util.Collection;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Singular;
+import tla.domain.dto.CollocationDto;
 import tla.domain.dto.TextDto;
 import tla.domain.model.meta.BTSeClass;
 import tla.domain.model.meta.TLADTO;
@@ -14,24 +19,44 @@ import tla.domain.model.meta.TLADTO;
 @Getter
 @Setter
 @BTSeClass("CollocationText")
-@TLADTO(TextDto.class)
+@TLADTO(TextDto.class) // TODO
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class CollocationSearch {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CollocationSearch extends SearchCommand<CollocationDto> {
 
 	private String sort;
-	
-    private Collection<Token> tokens;
-    
-    private int maxDistance;
-    
-    @Getter
-    @Setter
-    @NoArgsConstructor
-	public static class Token{
-    	private String lemmaId;
-    	
-    	private String btsGloss;
-    	
-    	private String lingGloss;
-    }
+
+	@Singular
+	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Token.EmptyObjectFilter.class)
+	private List<Token> tokens; // = List.of(new Token(), new Token(), new Token());
+
+	private int maxDistance;
+
+	@Getter
+	@Setter
+	@NoArgsConstructor
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	public static class Token {
+		private String lemmaId;
+
+		private String btsGloss;
+
+		private String lingGloss;
+		
+		@JsonIgnore
+		public boolean isEmpty() {
+			return (this.lemmaId == null) && (this.btsGloss == null || this.lingGloss.isEmpty());
+		}
+
+		public static class EmptyObjectFilter {
+			@Override
+			public boolean equals(Object o) {
+				if (o != null && o instanceof Collection) {
+					return ((Collection<?>) o).stream()
+							.allMatch(item -> item == null || (item instanceof Token && ((Token) item).isEmpty()));
+				}
+				return true;
+			}
+		}
+	}
 }
