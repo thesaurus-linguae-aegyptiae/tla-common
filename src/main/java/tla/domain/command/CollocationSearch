@@ -28,9 +28,13 @@ public class CollocationSearch extends SearchCommand<CollocationDto> {
 
 	@Singular
 	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Token.EmptyObjectFilter.class)
-	private List<Token> tokens; // = List.of(new Token(), new Token(), new Token());
+	private List<Token> tokens; // CollocationToken
 
 	private int maxDistance;
+
+	private String sequence = "false";
+
+	private String collocation_scope = "text";
 
 	@Getter
 	@Setter
@@ -42,7 +46,7 @@ public class CollocationSearch extends SearchCommand<CollocationDto> {
 		private String btsGloss;
 
 		private String lingGloss;
-		
+
 		@JsonIgnore
 		public boolean isEmpty() {
 			return (this.lemmaId == null) && (this.btsGloss == null || this.lingGloss.isEmpty());
