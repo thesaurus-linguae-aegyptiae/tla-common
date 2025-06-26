@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.NoArgsConstructor;
 import tla.domain.dto.meta.DocumentDto;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.dto.TextDto;
@@ -29,6 +30,7 @@ import tla.domain.model.meta.Resolvable;
 @Builder
 @ToString
 @EqualsAndHashCode
+@NoArgsconstructor
 @JsonPropertyOrder(alphabetic = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ObjectReference implements Comparable<Resolvable>, Resolvable {
