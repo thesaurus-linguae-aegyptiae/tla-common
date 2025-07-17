@@ -22,6 +22,8 @@ public class Transcription {
      * Transcription using the Manuel de Codage (MdC) notation.
      */
     private String mdc;
+    
+    private boolean emended;
 
     @JsonIgnore
     public boolean isEmpty() {

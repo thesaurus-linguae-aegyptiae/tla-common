@@ -23,6 +23,7 @@ import lombok.experimental.SuperBuilder;
 import tla.domain.command.TypeSpec;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Language;
+import tla.domain.model.Nominal;
 import tla.domain.model.SentenceToken;
 import tla.domain.model.SentenceToken.Glyphs;
 import tla.domain.model.SentenceToken.Lemmatization;
@@ -59,6 +60,8 @@ public class LemmaDto extends NamedDocumentDto {
 
 	private TimeSpan timeSpan;
 
+	private Nominal nominal;
+
 	public static class Spelling {
 		@Setter
 		@Getter
@@ -78,8 +81,11 @@ public class LemmaDto extends NamedDocumentDto {
 
 		@Setter
 		@Getter
-		private String[] tokenIds;
+		private boolean emended;
 
+		@Setter
+		@Getter
+		private String[] tokenIds;
 	}
 
 	public static class TimeSpan {
