@@ -59,7 +59,7 @@ public class LemmaDto extends NamedDocumentDto {
 	private int attestedSentencesCount;
 
 	private TimeSpan timeSpan;
-
+	
 	private Nominal nominal;
 
 	public static class Spelling {
@@ -81,21 +81,24 @@ public class LemmaDto extends NamedDocumentDto {
 
 		@Setter
 		@Getter
-		private boolean emended;
-
+		private String[] tokenIds;
+		
 		@Setter
 		@Getter
-		private String[] tokenIds;
+		private boolean emended;
+
 	}
 
 	public static class TimeSpan {
 		/** first year */
 		@Setter
 		@Getter
+		@JsonAlias("notBefore")
 		private int begin;
 		/** last year */
 		@Setter
 		@Getter
+		@JsonAlias("notAfter")
 		private int end;
 	}
 
