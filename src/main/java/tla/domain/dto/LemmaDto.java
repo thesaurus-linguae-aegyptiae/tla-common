@@ -93,13 +93,11 @@ public class LemmaDto extends NamedDocumentDto {
 		/** first year */
 		@Setter
 		@Getter
-		@JsonAlias("notBefore")
-		private int begin;
+		private int notBefore;
 		/** last year */
 		@Setter
 		@Getter
-		@JsonAlias("notAfter")
-		private int end;
+		private int notAfter;
 	}
 
 	public LemmaDto() {
