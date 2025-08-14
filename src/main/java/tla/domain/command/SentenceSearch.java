@@ -54,6 +54,8 @@ public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
 		 */
 		@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = TranslationSpec.EmptyObjectFilter.class)
 		private TranslationSpec translation;
+		
+		private String revisionState;
 
 		@JsonIgnore
 		public boolean isEmpty() {
