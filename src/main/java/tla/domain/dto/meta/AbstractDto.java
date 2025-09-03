@@ -21,6 +21,7 @@ import lombok.Singular;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import tla.domain.dto.AnnotationDto;
+import tla.domain.dto.CollocationDto;
 import tla.domain.dto.CommentDto;
 import tla.domain.dto.CorpusObjectDto;
 import tla.domain.dto.LemmaDto;
