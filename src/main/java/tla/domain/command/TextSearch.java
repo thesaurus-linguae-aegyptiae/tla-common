@@ -15,6 +15,8 @@ import tla.domain.model.meta.TLADTO;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class TextSearch extends SearchCommand<TextDto> implements Expandable {
 
+    private String name;
+
     /**
      * ID of the thesaurus entry representing the historic era
      * during which the searched for text was conceived.
