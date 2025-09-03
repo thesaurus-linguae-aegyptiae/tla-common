@@ -30,7 +30,7 @@ import tla.domain.model.meta.Resolvable;
 @Builder
 @ToString
 @EqualsAndHashCode
-@NoArgsconstructor
+@NoArgsConstructor
 @JsonPropertyOrder(alphabetic = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ObjectReference implements Comparable<Resolvable>, Resolvable {
