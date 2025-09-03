@@ -24,6 +24,8 @@ public class TextSearch extends SearchCommand<TextDto> implements Expandable {
     private PassportSpec passport;
 
     private boolean expand;
+    
     private String[] rootIds;
 
+    private String name;
 }
