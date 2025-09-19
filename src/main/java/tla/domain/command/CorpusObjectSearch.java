@@ -30,4 +30,6 @@ public class CorpusObjectSearch extends SearchCommand<CorpusObjectDto> implement
     private boolean mainNodes;
     
     private String name;
+    
+    private String bibliography;
 }

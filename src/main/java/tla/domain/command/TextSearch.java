@@ -28,5 +28,6 @@ public class TextSearch extends SearchCommand<TextDto> implements Expandable {
     private boolean expand;
     
     private String[] rootIds;
-
+    
+    private String bibliography;
 }
