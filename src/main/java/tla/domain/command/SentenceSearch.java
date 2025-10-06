@@ -29,6 +29,8 @@ public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
 	
 	private String revisionState;
 	
+	private String glyphs;
+	
 	@Getter
 	@Setter
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
