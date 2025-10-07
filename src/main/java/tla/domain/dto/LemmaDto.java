@@ -37,7 +37,7 @@ import tla.domain.model.meta.BTSeClass;
 @BTSeClass("BTSLemmaEntry")
 @EqualsAndHashCode(callSuper = true)
 @JsonPropertyOrder(alphabetic = true)
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LemmaDto extends NamedDocumentDto {
 
 	@JsonAlias({ "sortString", "sort_string", "sort_key" })
