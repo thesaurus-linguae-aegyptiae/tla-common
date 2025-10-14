@@ -24,7 +24,7 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
     private Script[] script;
 
     /**
-     * lemma is written like this.
+     * lemma is written like this in transliteration.
      */
     //private String transcription;
     //private String transcription_enc;
@@ -34,6 +34,15 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
         )
     private TranscriptionSpec transcription;
 
+    /**
+     * lemma is written like this in hieroglyphs.
+     */
+    @JsonInclude(
+            value = JsonInclude.Include.CUSTOM,
+            valueFilter = GlyphsSpec.EmptyObjectFilter.class
+        )
+    private GlyphsSpec glyphs;
+    
     /**
      * Lemma we are looking for needs to have the specified part of speech.
      */
