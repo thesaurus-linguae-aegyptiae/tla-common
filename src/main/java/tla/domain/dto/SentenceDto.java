@@ -81,11 +81,11 @@ public class SentenceDto extends AbstractDto {
          * How many sentences come before this sentence within the
          * text's contents.
          */
-        private int notAfter;
+        private Integer notAfter;
         /** 
         * latest attestation
         */
-        private int notBefore;
+        private Integer notBefore;
         /**
         * earliest attestation
         */
