@@ -423,5 +423,15 @@ public class Passport {
             return Collections.emptyList();
         }
     }
+    
+    public String getFirstLeaf(String key) {
+        List<Passport> list = this.extractProperty(key);
+        if (list != null && !list.isEmpty()) {
+            Object val = list.get(0).get();
+            return val != null ? val.toString() : null;
+        }
+        return null;
+    }
+
 
 }
