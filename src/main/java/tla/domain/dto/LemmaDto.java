@@ -58,6 +58,7 @@ public class LemmaDto extends NamedDocumentDto {
 
 	private int attestedSentencesCount;
 
+	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = TimeSpan.EmptyObjectFilter.class)
 	private TimeSpan timeSpan;
 	
 	private Nominal nominal;
@@ -93,11 +94,25 @@ public class LemmaDto extends NamedDocumentDto {
 		/** first year */
 		@Setter
 		@Getter
-		private int notBefore;
+		private Integer notBefore;
 		/** last year */
 		@Setter
 		@Getter
-		private int notAfter;
+		private Integer notAfter;
+		
+		public boolean isEmpty() {
+	        return notBefore == null && notAfter == null;
+		}
+		
+		public static class EmptyObjectFilter {
+			@Override
+			public boolean equals(Object obj) {
+				if (obj != null && obj instanceof TimeSpan) {
+					return ((TimeSpan) obj).isEmpty();
+				}
+				return true;
+			}
+		}
 	}
 
 	public LemmaDto() {
