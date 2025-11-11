@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import tla.domain.dto.LemmaDto;
+import tla.domain.model.Nominal;
 import tla.domain.model.Script;
 import tla.domain.model.meta.BTSeClass;
 import tla.domain.model.meta.TLADTO;
@@ -83,4 +84,6 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
     	return transcription.getText()+"|"+transcription.getEnc();
     }*/
     private String revisionState;
+    
+    private Nominal nominal;
 }
