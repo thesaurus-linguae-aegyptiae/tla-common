@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Getter;
 import lombok.Setter;
+import tla.domain.command.LemmaSearch.Nominal;
 import tla.domain.dto.LemmaDto;
 import tla.domain.model.Script;
 import tla.domain.model.meta.BTSeClass;
@@ -71,7 +72,7 @@ public class LemmaSearch extends MultiLingSearchCommand<LemmaDto> {
 	 */
 	private String revisionState;
 
-	private Nominal nominal;
+	private Nominal nominal = new Nominal();
 
 	@Getter
 	@Setter
