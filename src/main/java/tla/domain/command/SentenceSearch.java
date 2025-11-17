@@ -87,8 +87,6 @@ public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
 	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = TypeSpec.EmptyObjectFilter.class)
 	private TypeSpec type;
 
-	private PassportSpec passport;
-
 	@Singular
 	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = TokenSpec.EmptyObjectFilter.class)
 	private List<TokenSpec> tokens;
