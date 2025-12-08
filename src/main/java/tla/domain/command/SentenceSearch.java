@@ -29,9 +29,9 @@ public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
 	
 	private String revisionState;
 	
-	private String transcription;
+	private TranscriptionSpec transcription;
 	
-	private String glyphs;
+	private GlyphsSpec glyphs;
 	
 	@Getter
 	@Setter
