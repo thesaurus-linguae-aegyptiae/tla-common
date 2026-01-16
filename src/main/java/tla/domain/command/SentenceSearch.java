@@ -33,6 +33,8 @@ public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
 	
 	private GlyphsSpec glyphs;
 	
+	private PassportSpec passport;
+	
 	@Getter
 	@Setter
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
