@@ -28,5 +28,5 @@ public class ObjectReferenceLemmaExtended extends ObjectReference {
 	private int attestedSentencesCount;
 	private TimeSpan timeSpan;
 	private List<String> bibliography;
-	
+	private String sortKey;	
 }
