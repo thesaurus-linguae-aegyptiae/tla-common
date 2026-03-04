@@ -63,6 +63,8 @@ public class LemmaDto extends NamedDocumentDto {
 	
 	private Nominal nominal;
 
+	private List<ObjectReferenceLemmaExtended> extended;
+
 	public static class Spelling {
 		@Setter
 		@Getter
