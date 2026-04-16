@@ -29,9 +29,11 @@ public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
 	
 	private String revisionState;
 	
-	private String transcription;
+	private TranscriptionSpec transcription;
 	
-	private String glyphs;
+	private GlyphsSpec glyphs;
+	
+	private PassportSpec passport;
 	
 	@Getter
 	@Setter
@@ -86,8 +88,6 @@ public class SentenceSearch extends MultiLingSearchCommand<SentenceDto> {
 	 */
 	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = TypeSpec.EmptyObjectFilter.class)
 	private TypeSpec type;
-
-	private PassportSpec passport;
 
 	@Singular
 	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = TokenSpec.EmptyObjectFilter.class)

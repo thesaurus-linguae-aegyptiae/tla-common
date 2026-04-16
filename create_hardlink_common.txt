@@ -1,0 +1,5 @@
+mklink /D "C:\DEV\tla-es-DEV\src\main\java\tla\domain" "C:\DEV\tla-common\src\main\java\tla\domain"
+mklink /D "C:\DEV\tla-web-DEV\src\main\java\tla\domain" "C:\DEV\tla-common\src\main\java\tla\domain"
+
+symbolische Verknüpfung erstellt für 
+C:\DEV\tla-web-DEV\src\main\java\tla\domain <<===>> C:\DEV\tla-common\src\main\java\tla\domain

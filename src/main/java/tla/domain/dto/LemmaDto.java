@@ -27,6 +27,7 @@ import tla.domain.model.Nominal;
 import tla.domain.model.SentenceToken;
 import tla.domain.model.SentenceToken.Glyphs;
 import tla.domain.model.SentenceToken.Lemmatization;
+import tla.domain.model.ObjectReferenceLemmaExtended;
 import tla.domain.model.meta.BTSeClass;
 
 /**
@@ -62,6 +63,8 @@ public class LemmaDto extends NamedDocumentDto {
 	private TimeSpan timeSpan;
 	
 	private Nominal nominal;
+
+	private List<ObjectReferenceLemmaExtended> extended;
 
 	public static class Spelling {
 		@Setter
