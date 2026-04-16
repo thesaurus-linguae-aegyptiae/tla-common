@@ -56,7 +56,7 @@ import tla.domain.model.meta.Resolvable;
         @Type(value = CorpusObjectDto.class, name = "BTSTCObject"),
         @Type(value = CommentDto.class, name = "BTSComment"),
         @Type(value = SentenceDto.class, name = "BTSSentence"),
-        @Type(value = CollocationDto.class, name = "BTSCollocation")
+        @Type(value = CollocationMatchDto.class, name = "BTSCollocation")
     }
 )
 public abstract class AbstractDto extends AbstractBTSBaseClass implements Relatable<SortedSet<Resolvable>> {
