@@ -1,66 +1,39 @@
 package tla.domain.command;
 
-import java.util.Collection;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Singular;
-import tla.domain.dto.CollocationDto;
-import tla.domain.dto.TextDto;
 import tla.domain.model.meta.BTSeClass;
 import tla.domain.model.meta.TLADTO;
+import tla.domain.dto.CollocationMatchDto;
 
 @Getter
 @Setter
-@BTSeClass("CollocationText")
-@TLADTO(CollocationDto.class)
+@BTSeClass("BTSCollocation")
+@TLADTO(CollocationMatchDto.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CollocationSearch extends SearchCommand<CollocationDto> {
+public class CollocationSearch extends SearchCommand<CollocationMatchDto> {
 
 	private String sort;
 
-	@Singular
-	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Token.EmptyObjectFilter.class)
-	private List<Token> tokens; // CollocationToken
+	private String lemmaId1;
 
-	private int maxDistance;
+	private String lemmaId2;
 
-	private String sequence = "false";
+	private Integer distance;
 
-	private String collocation_scope = "text";
-
-	@Getter
-	@Setter
-	@NoArgsConstructor
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	public static class Token {
-		private String lemmaId;
-
-		private String btsGloss;
-
-		private String lingGloss;
-
-		@JsonIgnore
-		public boolean isEmpty() {
-			return (this.lemmaId == null) && (this.btsGloss == null || this.lingGloss.isEmpty());
-		}
-
-		public static class EmptyObjectFilter {
-			@Override
-			public boolean equals(Object o) {
-				if (o != null && o instanceof Collection) {
-					return ((Collection<?>) o).stream()
-							.allMatch(item -> item == null || (item instanceof Token && ((Token) item).isEmpty()));
-				}
-				return true;
-			}
-		}
+	public String getLemmaId1() {
+		return lemmaId1;
+	}
+	
+	public String getLemmaId2() {
+		return lemmaId2;
+	}
+	
+	public Integer getDistance() {
+		return distance;
 	}
 }

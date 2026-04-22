@@ -21,7 +21,7 @@ import lombok.Singular;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import tla.domain.dto.AnnotationDto;
-import tla.domain.dto.CollocationDto;
+import tla.domain.dto.CollocationMatchDto;
 import tla.domain.dto.CommentDto;
 import tla.domain.dto.CorpusObjectDto;
 import tla.domain.dto.LemmaDto;
@@ -56,7 +56,7 @@ import tla.domain.model.meta.Resolvable;
         @Type(value = CorpusObjectDto.class, name = "BTSTCObject"),
         @Type(value = CommentDto.class, name = "BTSComment"),
         @Type(value = SentenceDto.class, name = "BTSSentence"),
-        @Type(value = CollocationDto.class, name = "BTSCollocation")
+        @Type(value = CollocationMatchDto.class, name = "BTSCollocation")
     }
 )
 public abstract class AbstractDto extends AbstractBTSBaseClass implements Relatable<SortedSet<Resolvable>> {
