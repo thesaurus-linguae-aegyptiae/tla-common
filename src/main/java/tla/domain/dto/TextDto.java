@@ -35,6 +35,7 @@ public class TextDto extends NamedNodeDto {
      */
     private WordCount wordCount;
     
+	private Boolean hasGlyphs;  
 
     @Getter
     @Setter
