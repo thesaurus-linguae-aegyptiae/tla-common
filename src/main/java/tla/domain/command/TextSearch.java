@@ -30,4 +30,6 @@ public class TextSearch extends SearchCommand<TextDto> implements Expandable {
     private String[] rootIds;
     
     private String bibliography;
+    
+    private boolean hasGlyphs;
 }

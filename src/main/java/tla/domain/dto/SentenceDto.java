@@ -34,6 +34,8 @@ public class SentenceDto extends AbstractDto {
     private SentenceContext context;
 
     private String type;
+    
+	private Boolean hasGlyphs;
 
     @Singular
     private SortedMap<Language, List<String>> translations;
