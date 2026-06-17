@@ -15,7 +15,7 @@ plugins {
     id 'com.github.dawnwords.jacoco.badge' version '0.2.4'
 }
 
-group = 'com.github.jkatzwinkel'
+group = 'com.github.thesaurus-linguae-aegyptiae'
 version = '0.0.905'
 sourceCompatibility = '11'
 

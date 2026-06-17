@@ -40,11 +40,6 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
 	 */
 
 	private String id;
-	/**
-	 * The TLA document's eclass. Must not be null.
-	 *
-	 */
-	private String _class;
 
 	@NonNull
 	private String eclass;
@@ -77,7 +72,6 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
 	 * Default constructor.
 	 *
 	 * @param id     TLA document ID
-	 * @param _class
 	 * @param eclass TLA document eclass
 	 * @param type   TLA document type
 	 * @param name   TLA document name
@@ -86,7 +80,6 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
 	 */
 	@JsonCreator
 	public ObjectReference(@JsonProperty(value = "id", required = false) String id,
-			@JsonProperty(value = "_class", required = false) String _class,
 			@JsonProperty(value = "eclass", required = true) String eclass,
 			@JsonProperty(value = "type", required = false) String type,
 			@JsonProperty(value = "name", required = false) String name,
@@ -97,13 +90,12 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
 			this.id = id;
 		else
 			this.id = "composed";
-		this._class = _class;
-		this.eclass = eclass;
-		this.type = type;
-		this.name = name;
-		this.pos = pos;
-		this.variants = variants;
-		this.ranges = ranges;
+			this.eclass = eclass;
+			this.type = type;
+			this.name = name;
+			this.pos = pos;
+			this.variants = variants;
+			this.ranges = ranges;
 	}
 
 	@Override
@@ -143,7 +135,7 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
 	 */
 	public static ObjectReference from(SentenceDto object) {
 
-		return new ObjectReference(object.getId(), null, object.getEclass(), object.getType(), null,
+		return new ObjectReference(object.getId(), object.getEclass(), object.getType(), null,
 				"" + object.getContext().getPosition(), "" + object.getContext().getVariants(), null);
 
 	}
@@ -151,11 +143,10 @@ public class ObjectReference implements Comparable<Resolvable>, Resolvable {
 	public static ObjectReference from(DocumentDto object) {
 
 		if (object instanceof NamedDocumentDto) {
-			return new ObjectReference(object.getId(), null, object.getEclass(), ((NamedDocumentDto) object).getType(),
+			return new ObjectReference(object.getId(), object.getEclass(), ((NamedDocumentDto) object).getType(),
 					((NamedDocumentDto) object).getName(), null, null, null);
 		} else {
-			return new ObjectReference(object.getId(), null, object.getEclass(), null, null, null, null, null);
+			return new ObjectReference(object.getId(), object.getEclass(), null, null, null, null, null);
 		}
 	}
-
 }
