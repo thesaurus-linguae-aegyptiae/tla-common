@@ -3,6 +3,7 @@ package tla.domain.command;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tla.domain.dto.CorpusObjectDto;
 import tla.domain.model.meta.BTSeClass;
@@ -32,4 +33,14 @@ public class CorpusObjectSearch extends SearchCommand<CorpusObjectDto> implement
     private String name;
     
     private String bibliography;
+    
+    private DateRange range;
+    
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public static class DateRange {
+        private String start;
+        private String end;
+    }
 }
