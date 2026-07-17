@@ -5,12 +5,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.SortedMap;
 
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +24,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Singular;
 import lombok.experimental.SuperBuilder;
+import tla.backend.es.model.LemmaEntity;
+import tla.backend.es.model.LemmaEntity.Headword;
+import tla.backend.es.model.LemmaEntity.Variant;
 import tla.domain.command.TypeSpec;
 import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.Language;
@@ -61,10 +68,14 @@ public class LemmaDto extends NamedDocumentDto {
 
 	@JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = TimeSpan.EmptyObjectFilter.class)
 	private TimeSpan timeSpan;
-	
+
 	private Nominal nominal;
 
 	private List<ObjectReferenceLemmaExtended> extended;
+
+	private Headword headword;
+
+	private Collection<Variant> variants;
 
 	public static class Spelling {
 		@Setter
@@ -86,7 +97,7 @@ public class LemmaDto extends NamedDocumentDto {
 		@Setter
 		@Getter
 		private String[] tokenIds;
-		
+
 		@Setter
 		@Getter
 		private boolean emended;
@@ -102,11 +113,11 @@ public class LemmaDto extends NamedDocumentDto {
 		@Setter
 		@Getter
 		private Integer notAfter;
-		
+
 		public boolean isEmpty() {
-	        return notBefore == null && notAfter == null;
+			return notBefore == null && notAfter == null;
 		}
-		
+
 		public static class EmptyObjectFilter {
 			@Override
 			public boolean equals(Object obj) {
@@ -123,6 +134,34 @@ public class LemmaDto extends NamedDocumentDto {
 		this.transcription = new Transcription();
 		this.translations = Collections.emptySortedMap();
 		this.words = Collections.emptyList();
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	@JsonInclude(Include.NON_EMPTY)
+	public static class Headword {
+
+		private List<String> egyForm;
+
+		private String latinTranscription;
+
+		private String lemmaComment;
+
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	@JsonInclude(Include.NON_EMPTY)
+	public static class Variant {
+
+		private String variantForm;
+
+		private String variantComment;
+
+		private String variantType;
+
 	}
 
 	@Getter
