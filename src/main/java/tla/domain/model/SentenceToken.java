@@ -86,7 +86,7 @@ public class SentenceToken {
         /**
          * BTS Flexcode
          */
-        private Long numeric;
+        private String numeric;
         /**
          * BTS glossing
          */
@@ -103,7 +103,7 @@ public class SentenceToken {
                 if (obj != null && obj instanceof Flexion) {
                     Flexion f = (Flexion) obj;
                     return (f.btsGloss == null || f.btsGloss.isBlank()) &&
-                        (f.numeric == null || f.numeric == 0) &&
+                        (f.numeric == null || f.numeric.equals("0")) &&
                         (f.lingGloss == null || f.lingGloss.isBlank());
                 }
                 return true;
