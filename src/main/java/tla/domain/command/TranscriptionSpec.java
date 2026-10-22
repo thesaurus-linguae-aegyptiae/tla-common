@@ -20,7 +20,7 @@ public class TranscriptionSpec {
 
     @JsonIgnore
     public boolean isEmpty() {
-        return this.text == null;
+        return this.text == null && (this.enc == null || this.enc.length == 0);
     }
 
     public static class EmptyObjectFilter {
