@@ -22,18 +22,10 @@ public class CollocationSearch extends SearchCommand<CollocationMatchDto> {
 	private String lemmaId1;
 
 	private String lemmaId2;
+	
+	private Boolean lemmaId1Extended;
+	
+	private Boolean lemmaId2Extended;
 
 	private Integer distance;
-
-	public String getLemmaId1() {
-		return lemmaId1;
-	}
-	
-	public String getLemmaId2() {
-		return lemmaId2;
-	}
-	
-	public Integer getDistance() {
-		return distance;
-	}
 }
