@@ -345,7 +345,6 @@ public class Passport {
     private ObjectReference toThsReference() {
         return new ObjectReference(
             this.thsValueCache.get("id"),
-            null,
             this.thsValueCache.get("eclass"),
             this.thsValueCache.get("type"),
             this.thsValueCache.get("name"),
